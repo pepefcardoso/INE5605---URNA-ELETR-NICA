@@ -1,22 +1,25 @@
-from abstract_tela import Tela
+from limite.abstract_tela import Tela
 
 class TelaChapa(Tela):
 
-    def mostra_tela(self):
+    def mostra_tela_chapas(self):
         print('CHAPA')
-        print('1 - Lista de Chapas.')
-        print('2 - Adicionar Chapa.')
-        print('3 - Remove Chapa.')
+        print('1 - Lista de Chapas')
+        print('2 - Adicionar Chapa')
+        print('3 - Remove Chapa')
+        print('0 - Retornar ao Menu Principal')
+        opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 0])
+        return opcao
 
-    def checa_numero(self, mensagem: str = '', inteiros_validos: [] = None):
+    def pega_opcao(self, mensagem: str = "", opcoes_validas = None):
         while True:
-            valor_lido = int(input(mensagem))
+            valor_lido = input(mensagem)
             try:
-                if valor_lido not in inteiros_validos:
+                opcao = int(valor_lido)
+                if opcoes_validas and opcao not in opcoes_validas:
                     raise ValueError
-                return valor_lido
+                return opcao
             except ValueError:
-            #parei aqui muito sono
-
-    def pega_opcao(self):
-        pass
+                print("Opção indisponível, tente uma opção válida.")
+                if opcoes_validas:
+                    print('Opções válidas: ', opcoes_validas)
