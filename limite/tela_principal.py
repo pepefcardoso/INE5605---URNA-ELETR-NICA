@@ -4,17 +4,19 @@ from limite.abstract_tela import Tela
 class TelaPrincipal(Tela):
 
     def mostra_tela_inicial(self):
-        print('-' * 20)
-        print('Urna Eletrônica UFSC')
-        print('-' * 20)
+        print(('-' * 5), ' Urna Eletrônica UFSC ', ('-' * 5))
+        print()
         print('1 - Eleitores')
         print('2 - Candidatos')
-        print('3 - Turno e Homologação')
+        print('3 - Chapas')
+        print('4 - Cargos')
+        print('5 - Registros')
+        print('6 - Configurações')
         print('0 - Sair')
-        opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 0])
+        opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 5, 6, 0])
         return opcao
     
-    def pega_opcao(self, mensagem: str = "", opcoes_validas: [] = None):
+    def pega_opcao(self, mensagem: str = "", opcoes_validas = None):
         while True:
             valor_lido = input(mensagem)
             try:
