@@ -7,7 +7,7 @@ class TelaChapa(Tela):
         print('1 - Lista de Chapas')
         print('2 - Adicionar Chapa')
         print('3 - Remover Chapa')
-        print('4 - Remover Chapa')
+        print('4 - Alterar Chapa')
         print('0 - Retornar ao Menu Principal')
         opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
         return opcao

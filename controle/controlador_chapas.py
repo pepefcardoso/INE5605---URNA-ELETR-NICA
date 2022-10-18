@@ -20,10 +20,16 @@ class ControladorChapas():
             if chapa.nome == nova_chapa.nome:
                 self.__tela_chapa.mostra_mensagem("\nJá existe uma chapa cadastrada com este nome!\n")
                 return None
+        self.__tela_chapa.mostra_mensagem("\nChapa adicionada com sucesso!\n")
         self.__chapas.append(nova_chapa)
 
     def remove_chapa(self):
-        pass
+        chapa_removida = self.__tela_chapa.pega_nome_chapa()
+        for chapa in self.__chapas:
+            if chapa.nome == chapa_removida:
+                self.__chapas.remove(chapa)
+                return self.__tela_chapa.mostra_mensagem("\nChapa removida com sucesso!\n")
+        return self.__tela_chapa.mostra_mensagem("\nNão existem chapas com este nome!\n")
 
     def altera_chapa(self):
         pass
