@@ -36,7 +36,7 @@ class TelaChapa(Tela):
             leitura = input("Insira o nome da Chapa: ")
             try:
                 nome = str(leitura)
-                if not isinstance(nome, str):
+                if not isinstance(nome, str) or (len(leitura) < 1):
                     raise ValueError
                 return nome
             except ValueError:
