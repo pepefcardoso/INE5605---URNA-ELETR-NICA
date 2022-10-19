@@ -20,7 +20,7 @@ class ControladorPrincipal:
         self.__controlador_candidatos.mostra_tela_opcoes()
 
     def inicia_chapas(self):
-        self.__controlador_chapas.mostra_tela_opcoes()
+        self.__controlador_chapas.mostra_tela()
 
     def inicia_config(self):
         pass
