@@ -3,7 +3,7 @@ from limite.abstract_tela import Tela
 
 class TelaEleitores(Tela):
 
-    def mostra_tela_eleitores(self):
+    def mostra_tela(self):
         print('-' * 20)
         print('Eleitores')
         print('-' * 20)

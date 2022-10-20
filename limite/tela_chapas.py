@@ -2,8 +2,13 @@ from limite.abstract_tela import Tela
 
 class TelaChapa(Tela):
 
-    def mostra_tela(self):
-        super().mostra_tela()
+    def mostra_menu_inicial(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
+        print(f'----- {nome_menu} -----\n')
+        i = 1
+        for opcao in opcoes_menu:
+            print(f'{i} - {opcao}')
+            i += 1
+        print(f'0 - {msg_saida}')
         opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
         return opcao
 

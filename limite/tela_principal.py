@@ -3,7 +3,7 @@ from limite.abstract_tela import Tela
 
 class TelaPrincipal(Tela):
 
-    def mostra_tela_inicial(self):
+    def mostra_tela(self):
         print(('-' * 5), ' Urna Eletrônica UFSC ', ('-' * 5))
         print()
         print('1 - Eleitores')

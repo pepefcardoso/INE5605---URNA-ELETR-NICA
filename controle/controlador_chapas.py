@@ -38,7 +38,9 @@ class ControladorChapas():
         opcoes = {1: self.lista_chapas, 2: self.adiciona_chapa,
                 3:self.remove_chapa, 4:self.altera_chapa}
         while True:
-            opcao = self.__tela_chapa.mostra_tela()
+            opcao = self.__tela_chapa.mostra_menu_inicial('CHAPAS',
+                                                          ['Lista das Chapas', 'Adicionar Chapas', 'Remover Chapas', 'Alterar Chapas'], 
+                                                          'Voltar ao menu inicial')
             if opcao == 0:
                 break
             opcoes[opcao]()
