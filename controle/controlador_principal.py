@@ -27,6 +27,9 @@ class ControladorPrincipal:
     def inicia_cargos(self):
         self.__controlador_cargos.abre_tela()
 
+    def inicia_registros(self):
+        pass
+
     def inicia_config(self):
         pass
 
@@ -34,7 +37,10 @@ class ControladorPrincipal:
         sys.exit()
 
     def inicia(self):
-        opcoes = {1: self.inicia_eleitores, 2: self.inicia_candidatos, 3: self.inicia_chapas, 4: self.inicia_cargos, 0: self.finaliza}
+        opcoes = {1: self.inicia_eleitores, 2: self.inicia_candidatos,
+                  3: self.inicia_chapas, 4: self.inicia_cargos,
+                  5: self.inicia_registros, 6: self.inicia_config, 
+                  0: self.finaliza}
         while True:
             opcao = self.__tela_principal.mostra_tela()
             opcoes[opcao]()

@@ -8,7 +8,7 @@ class TelaChapa(Tela):
         for opcao in opcoes_menu:
             print(f'{i} - {opcao}')
             i += 1
-        print(f'0 - {msg_saida}')
+        print(f'0 - {msg_saida}\n')
         opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
         return opcao
 
