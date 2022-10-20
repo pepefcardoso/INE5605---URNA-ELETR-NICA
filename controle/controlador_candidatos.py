@@ -11,7 +11,7 @@ class ControladorCandidatos:
 
     def mostra_tela_opcoes(self):
         opcoes = {1: self.lista_candidatos, 2: self.adiciona_candidato,
-                3:self.remove_candidato, 4: self.maximo_candidatos}
+                  3:self.remove_candidato, 4: self.maximo_candidatos}
         while True:
             opcao = self.__tela_candidatos.mostra_tela_candidatos()
             if opcao == 0:
