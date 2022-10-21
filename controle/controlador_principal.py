@@ -13,7 +13,11 @@ class ControladorPrincipal:
         self.__controlador_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
         self.__controlador_chapas = ControladorChapas(self)
+<<<<<<< Updated upstream
         self.__controlador_cargos = ControladorCargo(self)
+=======
+        self.__controlador_cargo = ControladorCargo(self)
+>>>>>>> Stashed changes
 
     def inicia_eleitores(self):
         self.__controlador_eleitores.mostra_tela_opcoes()
@@ -32,6 +36,12 @@ class ControladorPrincipal:
 
     def inicia_config(self):
         pass
+
+    def inicia_cargo(self):
+        self.__controlador_cargo.abre_tela()
+
+    def seleciona_cargo(self):
+
 
     def finaliza(self):
         sys.exit()

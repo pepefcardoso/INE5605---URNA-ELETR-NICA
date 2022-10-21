@@ -36,6 +36,18 @@ class ControladorCargo():
     def retorna_controlador_principal(self):
         pass
 
+    def selecionar_cargo(self):
+        while True:
+            self.lista_cargo()
+            dado = self.__tela_cargo.pega_dado()
+            for x in self.__lista_cargo:
+                if dado.lower() == x:
+
+                    break
+            self.__tela_cargo.mostra_mensagem(f'CARGO {dado} NÃO PRESENTE NA LISTA!!!')
+            self.__tela_cargo.mostra_mensagem('Selecione uma cargo dentro os EXISTENTES!!!')
+
+
     def abre_tela(self):
         lista_opcao = {1: self.lista_cargo,
                        2: self.add_cargo,
