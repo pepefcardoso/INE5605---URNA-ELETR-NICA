@@ -22,8 +22,6 @@ class ControladorCargo():
                 self.__tela_cargo.mostra_mensagem(msg=f'Cargo {x.name} selecionado.')
                 return x
 
-
-
     def abre_tela(self):
         lista_opcao = {1: self.lista_cargo,
                        0: self.retorna_controlador_principal}

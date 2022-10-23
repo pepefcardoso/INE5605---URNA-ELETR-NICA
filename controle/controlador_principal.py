@@ -33,6 +33,10 @@ class ControladorPrincipal:
     def controlador_cargo(self):
         return self.__controlador_cargo
 
+    @property
+    def controlador_categoria(self):
+        return self.__controlador_categoria
+
     def inicia_eleitores(self):
         self.__controlador_eleitores.mostra_tela_opcoes()
 

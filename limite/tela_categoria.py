@@ -27,9 +27,9 @@ class TelaCategoria(Tela):
 
     def pega_dado(self):
         while True:
-            cargo = int(input('Número do Cargo: '))
-            if cargo in [1, 2, 3, 4]:
-                return {"cargo": cargo}
+            categoria = int(input('Número do Cargo: '))
+            if categoria in [1, 2, 3]:
+                return {"categoria": categoria}
 
     def mostra_mensagem(self, msg):
         print(msg)

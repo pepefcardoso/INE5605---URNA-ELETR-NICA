@@ -31,9 +31,10 @@ class ControladorCandidatos:
     def adiciona_candidato(self):
         dados = self.__tela_candidatos.pega_dado()
         cargo = self.__controlador_principal.controlador_cargo.selecionar_cargo()
+        categoria = self.__controlador_principal.controlador_categoria.selecionar_categoria()
         candidato = Candidato(nome=dados['nome'],
                               cpf=dados['cpf'],
-                              categoria=dados['categoria'],
+                              categoria=categoria,
                               numero=dados['numero'],
                               chapa=dados['chapa'],
                               cargo=cargo)

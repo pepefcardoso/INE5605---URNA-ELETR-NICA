@@ -15,7 +15,6 @@ class ControladorCategoria():
         self.__controlador_sistema.inicia()
 
     def selecionar_categoria(self):
-
         self.lista_categoria()
         dado = self.__tela_categoria.pega_dado()
         for x in self.__lista_categoria:

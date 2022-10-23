@@ -18,7 +18,7 @@ class TelaCandidatos(Tela):
     def mostra_candidato(self, dados_candidato):
         print(f"Nome: {dados_candidato['nome']}")
         print(f"Cpf: {dados_candidato['cpf']}")
-        print(f"Categoria: {dados_candidato['categoria']}")
+        print(f"Categoria: {dados_candidato['categoria'].name}")
         print(f"Número: {dados_candidato['numero']}")
         print(f"Chapa: {dados_candidato['chapa']}")
         print(f"Cargo: {dados_candidato['cargo'].name}")
@@ -26,13 +26,12 @@ class TelaCandidatos(Tela):
     def pega_dado(self):
         nome = str(input('Nome do Candidato: '))
         cpf = int(input('CPF do Candidato: '))
-        categoria = str(input('Categoria do Candidato: '))
         while True:
             numero = int(input('Número do Candidato: '))
             if numero <= 98 and numero >= 1:
                 break
         chapa = str(input('Chapa do Candidato: '))
-        return {'nome': nome, 'cpf': cpf, 'categoria': categoria, 'numero': numero, 'chapa': chapa}
+        return {'nome': nome, 'cpf': cpf, 'numero': numero, 'chapa': chapa}
 
     def numero_candidato(self):
         while True:
