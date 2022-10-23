@@ -21,7 +21,30 @@ class TelaCandidatos(Tela):
         print(f"Categoria: {dados_candidato['categoria']}")
         print(f"Número: {dados_candidato['numero']}")
         print(f"Chapa: {dados_candidato['chapa']}")
-        print(f"Cargo: {dados_candidato['cargo']}")
+        print(f"Cargo: {dados_candidato['cargo'].name}")
+
+    def pega_dado(self):
+        nome = str(input('Nome do Candidato: '))
+        cpf = int(input('CPF do Candidato: '))
+        categoria = str(input('Categoria do Candidato: '))
+        while True:
+            numero = int(input('Número do Candidato: '))
+            if numero <= 98 and numero >= 1:
+                break
+        chapa = str(input('Chapa do Candidato: '))
+        return {'nome': nome, 'cpf': cpf, 'categoria': categoria, 'numero': numero, 'chapa': chapa}
+
+    def numero_candidato(self):
+        while True:
+            numero = input("Números de Candidatos a cadastrar: ")
+            try:
+                dado = int(numero)
+                if not dado >= 1:
+                    raise Exception
+                return dado
+            except Exception:
+                print('Valor Inválido, informe um número maior que 1.')
+
 
     def pega_opcao(self, mensagem: str = "", opcoes_validas: [] = None):
         while True:

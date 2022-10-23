@@ -1,16 +1,16 @@
 from limite.abstract_tela import Tela
 
-class TelaCargos(Tela):
+class TelaCategoria(Tela):
 
     def mostra_tela(self):
-        print(('-' * 5), ' Cargos ', ('-' * 5))
-        print('1 - Ver Lista de Cargos')
+        print(('-' * 5), ' Categoria ', ('-' * 5))
+        print('1 - Ver Lista de Categorai')
         print('0 - Voltar ao Menu Principal')
         opcao = self.pega_opcao('Escolha uma opção: ', [1, 0])
         return opcao
 
-    def mostra_cargo(self, dados_cargo):
-        print(f"{dados_cargo.value} : {dados_cargo.name}")
+    def mostra_categoria(self, dados_categoria):
+        print(f"{dados_categoria.value} : {dados_categoria.name}")
 
     def pega_opcao(self, mensagem: str = "", opcoes_validas = None):
         while True:

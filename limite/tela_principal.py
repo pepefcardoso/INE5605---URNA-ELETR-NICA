@@ -12,8 +12,9 @@ class TelaPrincipal(Tela):
         print('4 - Cargos')
         print('5 - Registros')
         print('6 - Configurações')
+        print('7 - Categoria Eleitor')
         print('0 - Sair')
-        opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 5, 6, 0])
+        opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 5, 6, 7, 0])
         return opcao
     
     def pega_opcao(self, mensagem: str = "", opcoes_validas = None):

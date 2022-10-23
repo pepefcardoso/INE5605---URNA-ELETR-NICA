@@ -13,21 +13,35 @@ class ControladorCandidatos:
         opcoes = {1: self.lista_candidatos, 2: self.adiciona_candidato,
                   3:self.remove_candidato, 4: self.maximo_candidatos}
         while True:
-            opcao = self.__tela_candidatos.mostra_tela_candidatos()
+            opcao = self.__tela_candidatos.mostra_tela()
             if opcao == 0:
                 break
             opcoes[opcao]()
 
     def lista_candidatos(self):
         for candidato in self.__candidatos:
-            dados_candidato = {'nome': candidato.__nome,'cpf': candidato.__nome,'categoria': candidato.__categoria, 'numero': candidato.__numero, 'chapa': candidato.__chapa, 'cargo': candidato.__cargo}
+            dados_candidato = {'nome': candidato.nome,
+                               'cpf': candidato.cpf,
+                               'categoria': candidato.categoria,
+                               'numero': candidato.numero,
+                               'chapa': candidato.chapa,
+                               'cargo': candidato.cargo}
             self.__tela_candidatos.mostra_candidato(dados_candidato)
 
     def adiciona_candidato(self):
-        pass
+        dados = self.__tela_candidatos.pega_dado()
+        cargo = self.__controlador_principal.controlador_cargo.selecionar_cargo()
+        candidato = Candidato(nome=dados['nome'],
+                              cpf=dados['cpf'],
+                              categoria=dados['categoria'],
+                              numero=dados['numero'],
+                              chapa=dados['chapa'],
+                              cargo=cargo)
+        self.__candidatos.append(candidato)
 
     def remove_candidato(self):
         pass
 
     def maximo_candidatos(self):
-        pass
+        numero = self.__tela_candidatos.numero_candidato()
+        self.__max_candidatos = numero
