@@ -13,11 +13,23 @@ class ControladorPrincipal:
         self.__controlador_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
         self.__controlador_chapas = ControladorChapas(self)
-<<<<<<< Updated upstream
-        self.__controlador_cargos = ControladorCargo(self)
-=======
         self.__controlador_cargo = ControladorCargo(self)
->>>>>>> Stashed changes
+
+    @property
+    def controlador_eleitores(self):
+        return self.__controlador_eleitores
+
+    @property
+    def controlador_candidatos(self):
+        return self.__controlador_candidatos
+
+    @property
+    def controlador_chapas(self):
+        return self.__controlador_chapas
+
+    @property
+    def controlador_cargo(self):
+        return self.__controlador_cargo
 
     def inicia_eleitores(self):
         self.__controlador_eleitores.mostra_tela_opcoes()
@@ -29,7 +41,7 @@ class ControladorPrincipal:
         self.__controlador_chapas.mostra_tela_opcoes()
 
     def inicia_cargos(self):
-        self.__controlador_cargos.abre_tela()
+        self.__controlador_cargo.abre_tela()
 
     def inicia_registros(self):
         pass
