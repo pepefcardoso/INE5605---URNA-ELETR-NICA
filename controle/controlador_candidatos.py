@@ -41,8 +41,18 @@ class ControladorCandidatos:
         self.__candidatos.append(candidato)
 
     def remove_candidato(self):
-        pass
+            pass
 
     def maximo_candidatos(self):
         numero = self.__tela_candidatos.numero_candidato()
         self.__max_candidatos = numero
+
+    def verdadeiro_falso(self, entrada, subclasse):
+        for candidato in self.__candidatos:
+            if entrada == candidato[subclasse]:
+                return True
+        return False
+
+if __name__ == '__main__':
+    catcandidato = ControladorCandidatos(123)
+    #print(catcandidato.verdadeiro_falso(123, 'cpf'))

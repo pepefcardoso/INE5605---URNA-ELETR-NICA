@@ -23,6 +23,9 @@ class TelaCandidatos(Tela):
         print(f"Chapa: {dados_candidato['chapa']}")
         print(f"Cargo: {dados_candidato['cargo'].name}")
 
+    def mostra_mensagem(self, msg):
+        print(msg)
+
     def pega_dado(self):
         nome = str(input('Nome do Candidato: '))
         cpf = int(input('CPF do Candidato: '))

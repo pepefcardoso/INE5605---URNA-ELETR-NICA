@@ -1,10 +1,12 @@
 from entidade.eleitor import Eleitor
+from entidade.cargo import Cargo
+from entidade.categoria import Categoria
 
 
 class Candidato(Eleitor):
 
-    def __init__(self, nome: str, cpf: int, categoria: str,
-                 numero: int, chapa: str, cargo: str):
+    def __init__(self, nome: str, cpf: int, categoria: Categoria,
+                 numero: int, chapa: str, cargo: Cargo):
         super().__init__(nome, cpf, categoria)
         self.__numero = numero
         self.__chapa = chapa
@@ -33,6 +35,6 @@ class Candidato(Eleitor):
             self.__chapa = chapa
 
     @cargo.setter
-    def cargo(self, cargo: str):
-        if isinstance(cargo, str):
+    def cargo(self, cargo: Cargo):
+        if isinstance(cargo, Cargo):
             self.__cargo = cargo
