@@ -1,6 +1,4 @@
-from limite.abstract_tela import Tela
-
-class TelaCargos(Tela):
+class TelaCargos():
 
     def mostra_tela(self):
         print(('-' * 5), ' Cargos ', ('-' * 5))

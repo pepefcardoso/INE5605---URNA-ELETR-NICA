@@ -9,13 +9,15 @@ class ControladorEleitores:
         self.__eleitores = []
         self.__max_eleitores = 0
 
-    def mostra_tela(self):
+    def mostra_tela_inicial(self):
         opcoes = {1: self.lista_eleitores, 2: self.adiciona_eleitor,
-                  3:self.remove_eleitor, 4: self.maximo_eleitores}
+                  3: self.remove_eleitor, 4: self.altera_eleitor}
         while True:
-            opcao = self.__tela_eleitores.mostra_tela_eleitores()
+            opcao = self.__tela_eleitores.mostra_menu_opcoes()
+            print(opcao)
             if opcao == 0:
                 break
+            print(opcao)
             opcoes[opcao]()
 
     def lista_eleitores(self):
@@ -34,5 +36,5 @@ class ControladorEleitores:
     def remove_eleitor(self):
         pass
 
-    def maximo_eleitores(self):
+    def altera_eleitor(self):
         pass

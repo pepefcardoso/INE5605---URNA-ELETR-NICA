@@ -1,7 +1,4 @@
-from limite.abstract_tela import Tela
-
-
-class TelaCandidatos(Tela):
+class TelaCandidatos():
 
     def mostra_tela(self):
         print('-' * 20)

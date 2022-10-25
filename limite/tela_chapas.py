@@ -1,8 +1,6 @@
-from limite.abstract_tela import Tela
+class TelaChapa():
 
-class TelaChapa(Tela):
-
-    def mostra_menu_inicial(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
+    def mostra_menu_opcoes(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
         print(f'----- {nome_menu} -----\n')
         i = 1
         for opcao in opcoes_menu:

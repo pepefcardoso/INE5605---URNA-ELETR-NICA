@@ -38,7 +38,7 @@ class ControladorPrincipal:
         return self.__controlador_categoria
 
     def inicia_eleitores(self):
-        self.__controlador_eleitores.mostra_tela_opcoes()
+        self.__controlador_eleitores.mostra_tela_inicial()
 
     def inicia_candidatos(self):
         self.__controlador_candidatos.mostra_tela_opcoes()
