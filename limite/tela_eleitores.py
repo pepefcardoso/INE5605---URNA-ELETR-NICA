@@ -22,4 +22,5 @@ class TelaEleitores(TelaAbstrata):
         return {'nome': nome, 'cpf': cpf, 'categoria': categoria}
 
     def pega_opcao(self):
-        super(TelaEleitores, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
+        opcao = super(TelaEleitores, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
+        return opcao

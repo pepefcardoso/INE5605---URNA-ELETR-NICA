@@ -13,11 +13,10 @@ class ControladorEleitores:
         opcoes = {1: self.lista_eleitores, 2: self.adiciona_eleitor,
                   3: self.remove_eleitor, 4: self.altera_eleitor}
         while True:
-            opcao = self.__tela_eleitores.mostra_menu_opcoes()
-            print(opcao)
+            self.__tela_eleitores.mostra_menu_opcoes()
+            opcao = self.__tela_eleitores.pega_opcao()
             if opcao == 0:
                 break
-            print(opcao)
             opcoes[opcao]()
 
     def lista_eleitores(self):

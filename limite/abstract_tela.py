@@ -11,11 +11,9 @@ class TelaAbstrata(ABC):
             print(f'{i} - {opcao}')
             i += 1
         print(f'0 - {msg_saida}\n')
-        opcao = self.pega_opcao()
-        return opcao
 
     @abstractmethod
-    def pega_opcao(self, mensagem: str = "", opcoes_validas: [] = None):
+    def pega_opcao(self, mensagem: str = "", opcoes_validas = None):
         while True:
             valor_lido = input(mensagem)
             try:
