@@ -13,7 +13,7 @@ class TelaAbstrata(ABC):
         print(f'0 - {msg_saida}\n')
 
     @abstractmethod
-    def pega_opcao(self, mensagem: str = "", opcoes_validas = None):
+    def pega_opcao(self, mensagem: str = "", opcoes_validas: [] = None):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -23,3 +23,9 @@ class TelaAbstrata(ABC):
                 return opcao
             except ValueError:
                 print("Opção indisponível, tente uma opção válida.")
+
+    @abstractmethod
+    def mostra_entidade(self, dados_entidade: {} = None):
+        print("\n")
+        for key in dados_entidade:
+            print(f'{key}: {dados_entidade[key]}')

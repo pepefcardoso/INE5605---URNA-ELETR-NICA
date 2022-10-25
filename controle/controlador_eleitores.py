@@ -21,8 +21,8 @@ class ControladorEleitores:
 
     def lista_eleitores(self):
         for eleitor in self.__eleitores:
-            dados_eleitor = {'nome': eleitor.nome,'cpf': eleitor.cpf,'categoria': eleitor.categoria}
-            self.__tela_eleitores.mostra_eleitor(dados_eleitor)
+            dados_eleitor = {'Nome': eleitor.nome,'CPF': eleitor.cpf,'Categoria': eleitor.categoria}
+            self.__tela_eleitores.mostra_entidade(dados_eleitor)
 
     def adiciona_eleitor(self):
         dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
