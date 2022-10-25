@@ -29,7 +29,19 @@ class ControladorCandidatos:
             self.__tela_candidatos.mostra_candidato(dados_candidato)
 
     def adiciona_candidato(self):
-        dados = self.__tela_candidatos.pega_dado()
+        cont = 0
+        while True:
+            dados = self.__tela_candidatos.pega_dado()
+            for candidato in self.__candidatos:
+                if dados['cpf'] == candidato.cpf:
+                    self.__tela_candidatos.mostra_mensagem(f'CPF: {dados["cpf"]} já está cadastrado!!!')
+                    cont += 1
+                elif dados['numero'] == candidato.numero:
+                    self.__tela_candidatos.mostra_mensagem(f'Número {dados["numero"]} já cadastado! Por favor, escolher outro número!')
+                    cont += 1
+            if cont == 0:
+                break
+            cont = 0
         cargo = self.__controlador_principal.controlador_cargo.selecionar_cargo()
         categoria = self.__controlador_principal.controlador_categoria.selecionar_categoria()
         candidato = Candidato(nome=dados['nome'],
