@@ -33,6 +33,10 @@ class TelaCandidatos():
         chapa = str(input('Chapa do Candidato: '))
         return {'nome': nome, 'cpf': cpf, 'numero': numero, 'chapa': chapa}
 
+    def pega_dado_cpf(self):
+        cpf = int(input('CPF do Candidato para excluir: '))
+        return cpf
+
     def numero_candidato(self):
         while True:
             numero = input("Números de Candidatos a cadastrar: ")

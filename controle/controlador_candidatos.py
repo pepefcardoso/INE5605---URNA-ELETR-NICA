@@ -30,7 +30,8 @@ class ControladorCandidatos:
 
     def adiciona_candidato(self):
         cont = 0
-        while True:
+        bool = True
+        while bool:
             dados = self.__tela_candidatos.pega_dado()
             for candidato in self.__candidatos:
                 if dados['cpf'] == candidato.cpf:
@@ -40,7 +41,7 @@ class ControladorCandidatos:
                     self.__tela_candidatos.mostra_mensagem(f'Número {dados["numero"]} já cadastado! Por favor, escolher outro número!')
                     cont += 1
             if cont == 0:
-                break
+                bool = False
             cont = 0
         cargo = self.__controlador_principal.controlador_cargo.selecionar_cargo()
         categoria = self.__controlador_principal.controlador_categoria.selecionar_categoria()
@@ -53,17 +54,29 @@ class ControladorCandidatos:
         self.__candidatos.append(candidato)
 
     def remove_candidato(self):
-            pass
+        bool = True
+        while bool:
+            cpf = self.__tela_candidatos.pega_dado_cpf()
+            cont = 0
+            for candidato in self.__candidatos:
+                if cpf == candidato.cpf:
+                    self.__candidatos.remove(candidato)
+                    self.__tela_candidatos.mostra_mensagem('-' * 20)
+                    self.__tela_candidatos.mostra_mensagem(f'Candidato {candidato.nome} excluído!')
+                    self.__tela_candidatos.mostra_mensagem('-' * 20)
+                    cont += 1
+            if cont == 0:
+                self.__tela_candidatos.mostra_mensagem(f'CPF não presente na lista.')
+                self.__tela_candidatos.mostra_mensagem('-' * 20)
+                self.__tela_candidatos.mostra_mensagem('Caso queira sair voltar ao menu inicial, insira o valor de 0.')
+                self.__tela_candidatos.mostra_mensagem('-' * 20)
+            if cont > 0 or cpf == 0:
+                bool = False
 
     def maximo_candidatos(self):
         numero = self.__tela_candidatos.numero_candidato()
         self.__max_candidatos = numero
 
-    def verdadeiro_falso(self, entrada, subclasse):
-        for candidato in self.__candidatos:
-            if entrada == candidato[subclasse]:
-                return True
-        return False
 
 if __name__ == '__main__':
     catcandidato = ControladorCandidatos(123)
