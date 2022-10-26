@@ -46,4 +46,12 @@ class ControladorEleitores:
         self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTE ELEITOR CADASTRADO COM O CPF CONSULTADO!\n')
 
     def altera_eleitor(self):
-        pass
+        cpf_eleitor = self.__tela_eleitores.pega_cpf_eleitor()
+        for eleitor in self.__eleitores:
+            if eleitor.cpf == cpf_eleitor:
+                dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
+                eleitor.nome = dados_eleitor['nome']
+                eleitor.cpf = dados_eleitor['cpf']
+                eleitor.categoria = dados_eleitor['categoria']
+                return self.__tela_eleitores.mostra_mensagem('\nELEITOR ALTERADO COM SUCESSO\n')
+        self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTE ELEITOR CADASTRADO COM O CPF CONSULTADO!\n')
