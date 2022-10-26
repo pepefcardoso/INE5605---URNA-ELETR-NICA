@@ -14,6 +14,7 @@ import sys
 class ControladorUrna:
     def __init__(self):
         self.__tela_urna = TelaUrna()
+        self.__urna = Urna
         self.__controlador_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
         self.__controlador_chapas = ControladorChapas(self)
@@ -21,6 +22,10 @@ class ControladorUrna:
         self.__controlador_categoria = ControladorCategoria(self)
         self.__controlador_registro = ControladorRegistro(self)
         self.__controlador_config = ControladorConfig(self)
+
+    @property
+    def urna(self):
+        return self.__urna
 
     @property
     def controlador_eleitores(self):
@@ -49,6 +54,10 @@ class ControladorUrna:
     @property
     def controlador_config(self):
         return self.__controlador_config
+    
+    @urna.setter
+    def urna(self, urna):
+        self.__urna = urna
 
     def inicia_eleitores(self):
         self.__controlador_eleitores.mostra_tela_inicial()
