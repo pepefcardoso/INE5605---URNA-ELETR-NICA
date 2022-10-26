@@ -20,20 +20,30 @@ class ControladorEleitores:
             opcoes[opcao]()
 
     def lista_eleitores(self):
-        for eleitor in self.__eleitores:
-            dados_eleitor = {'Nome': eleitor.nome,'CPF': eleitor.cpf,'Categoria': eleitor.categoria}
-            self.__tela_eleitores.mostra_entidade(dados_eleitor)
+        if self.__eleitores == []:
+            self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTEM ELEITORES CADASTRADOSs!\n')
+        else:
+            for eleitor in self.__eleitores:
+                dados_eleitor = {'Nome': eleitor.nome,'CPF': eleitor.cpf,'Categoria': eleitor.categoria}
+                self.__tela_eleitores.mostra_entidade(dados_eleitor)
 
     def adiciona_eleitor(self):
         dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
         novo_eleitor = Eleitor(dados_eleitor['nome'], dados_eleitor['cpf'], dados_eleitor['categoria'])
         for eleitor in self.__eleitores:
             if eleitor.cpf == novo_eleitor.cpf:
-                return False
+                self.__tela_eleitores.mostra_mensagem("\nJÁ EXISTE ELEITOR CADASTRADO COM ESTE CPF!!\n")
+                return None
+        self.__tela_eleitores.mostra_mensagem("\nELEITOR CADSTRADO COM SUCESSO!\n")
         self.__eleitores.append(novo_eleitor)
 
     def remove_eleitor(self):
-        pass
+        cpf_eleitor = self.__tela_eleitores.pega_cpf_eleitor()
+        for eleitor in self.__eleitores:
+            if eleitor.cpf == cpf_eleitor:
+                self.__eleitores.remove(eleitor)
+                return self.__tela_eleitores.mostra_mensagem('\nELEITOR REMOVIDO COM SUCESSO\n')
+        self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTE ELEITOR CADASTRADO COM O CPF CONSULTADO!\n')
 
     def altera_eleitor(self):
         pass

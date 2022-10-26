@@ -29,3 +29,6 @@ class TelaAbstrata(ABC):
         print("\n")
         for key in dados_entidade:
             print(f'{key}: {dados_entidade[key]}')
+
+    def mostra_mensagem(self, mensagem: str):
+            print(mensagem)
