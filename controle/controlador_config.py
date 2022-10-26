@@ -21,9 +21,14 @@ class ControladorConfig:
 
     def lista_config(self):
         codigo = self.__controlador_urna.urna.codigo
-        print(codigo)
         turno = self.__controlador_urna.urna.turno
-        print(turno)
+        max_eleitores = self.__controlador_urna.urna.max_eleitores
+        max_candidatos = self.__controlador_urna.urna.max_candidatos
+        dados_urna = {'codigo': codigo,
+                      'turno': turno,
+                      'max_eleitores': max_eleitores,
+                      'max_candidatos': max_candidatos}
+        self.__tela_config.mostra_entidade(dados_urna)
 
     def altera_codigo(self):
         pass
