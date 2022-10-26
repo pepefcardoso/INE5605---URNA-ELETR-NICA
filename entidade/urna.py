@@ -1,4 +1,3 @@
-
 class Urna():
     def __init__(self,
                  codigo: int,

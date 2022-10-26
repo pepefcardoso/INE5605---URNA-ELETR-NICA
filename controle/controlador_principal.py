@@ -4,6 +4,7 @@ from controle.controlador_candidatos import ControladorCandidatos
 from controle.controlador_chapas import ControladorChapas
 from controle.controlador_cargo import ControladorCargo
 from controle.controlador_categoria_eleitor import ControladorCategoria
+from controle.controlador_config import ControladorConfig
 import sys
 
 
@@ -16,6 +17,7 @@ class ControladorPrincipal:
         self.__controlador_chapas = ControladorChapas(self)
         self.__controlador_cargo = ControladorCargo(self)
         self.__controlador_categoria = ControladorCategoria(self)
+        self.__controlador_config = ControladorConfig(self)
 
     @property
     def controlador_eleitores(self):
@@ -56,7 +58,7 @@ class ControladorPrincipal:
         pass
 
     def inicia_config(self):
-        pass
+        self.__controlador_config.mostra_tela_config()
 
     def inicia_cargo(self):
         self.__controlador_cargo.abre_tela()
@@ -76,7 +78,3 @@ class ControladorPrincipal:
         while True:
             opcao = self.__tela_principal.mostra_tela()
             opcoes[opcao]()
-
-if __name__ == '__main__':
-    exemplo = ControladorPrincipal()
-    exemplo.inicia()
