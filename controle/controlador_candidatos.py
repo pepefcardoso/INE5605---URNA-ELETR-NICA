@@ -3,17 +3,16 @@ from entidade.candidato import Candidato
 
 class ControladorCandidatos:
 
-    def __init__(self, controlador_principal):
-        self.__controlador_principal = controlador_principal
+    def __init__(self, controlador_urna):
+        self.__controlador_urna = controlador_urna
         self.__tela_candidatos = TelaCandidatos()
         self.__candidatos = []
-        self.__max_candidatos = 0
 
-    def mostra_tela_opcoes(self):
+    def mostra_tela_inicial(self):
         opcoes = {1: self.lista_candidatos, 2: self.adiciona_candidato,
                   3:self.remove_candidato, 4: self.maximo_candidatos}
         while True:
-            opcao = self.__tela_candidatos.mostra_tela()
+            opcao = self.__tela_candidatos.abre_tela_inicial()
             if opcao == 0:
                 break
             opcoes[opcao]()

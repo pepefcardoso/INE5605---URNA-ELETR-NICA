@@ -2,8 +2,8 @@ from limite.tela_cargos import TelaCargos
 from entidade.cargo import Cargo
 
 class ControladorCargo():
-    def __init__(self, controlador_sistema):
-        self.__controlador_sistema = controlador_sistema
+    def __init__(self, controlador_urna):
+        self.__controlador_urna = controlador_urna
         self.__lista_cargo = Cargo
         self.__tela_cargo = TelaCargos()
 
@@ -12,7 +12,7 @@ class ControladorCargo():
             self.__tela_cargo.mostra_cargo(dados_cargo=cargo)
 
     def retorna_controlador_principal(self):
-        self.__controlador_sistema.inicia()
+        self.__controlador_urna.inicia_sistema()
 
     def selecionar_cargo(self):
         self.lista_cargo()
@@ -22,13 +22,13 @@ class ControladorCargo():
                 self.__tela_cargo.mostra_mensagem(msg=f'Cargo {x.name} selecionado.')
                 return x
 
-    def abre_tela(self):
+    def mostra_tela_inicial(self):
         lista_opcao = {1: self.lista_cargo,
                        0: self.retorna_controlador_principal}
 
         bool = True
         while bool:
-            opcao = self.__tela_cargo.mostra_tela()
+            opcao = self.__tela_cargo.abre_tela_inicial()
             lista_opcao[opcao]()
 
 if __name__ == '__main__':

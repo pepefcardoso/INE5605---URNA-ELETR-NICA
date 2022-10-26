@@ -3,8 +3,8 @@ from entidade.eleitor import Eleitor
 
 class ControladorEleitores:
 
-    def __init__(self, controlador_principal):
-        self.__controlador_principal = controlador_principal
+    def __init__(self, controlador_urna):
+        self.__controlador_urna = controlador_urna
         self.__tela_eleitores = TelaEleitores()
         self.__eleitores = []
 
@@ -12,7 +12,7 @@ class ControladorEleitores:
         opcoes = {1: self.lista_eleitores, 2: self.adiciona_eleitor,
                   3: self.remove_eleitor, 4: self.altera_eleitor}
         while True:
-            self.__tela_eleitores.mostra_menu_opcoes()
+            self.__tela_eleitores.abre_tela_inicial()
             opcao = self.__tela_eleitores.pega_opcao()
             if opcao == 0:
                 break

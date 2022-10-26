@@ -1,6 +1,6 @@
 class TelaCargos():
 
-    def mostra_tela(self):
+    def abre_tela_inicial(self):
         print(('-' * 5), ' Cargos ', ('-' * 5))
         print('1 - Ver Lista de Cargos')
         print('0 - Voltar ao Menu Principal')

@@ -2,8 +2,8 @@ from entidade.categoria import Categoria
 from limite.tela_categoria import TelaCategoria
 
 class ControladorCategoria():
-    def __init__(self, controlador_sistema):
-        self.__controlador_sistema = controlador_sistema
+    def __init__(self, controlador_urna):
+        self.__controlador_urna = controlador_urna
         self.__lista_categoria = Categoria
         self.__tela_categoria = TelaCategoria()
 
@@ -12,7 +12,7 @@ class ControladorCategoria():
             self.__tela_categoria.mostra_categoria(dados_categoria=categoria)
 
     def retorna_controlador_principal(self):
-        self.__controlador_sistema.inicia()
+        self.__controlador_urna.inicia_sistema()
 
     def selecionar_categoria(self):
         self.lista_categoria()
@@ -22,12 +22,12 @@ class ControladorCategoria():
                 self.__tela_categoria.mostra_mensagem(msg=f'Categoria {x.name} selecionado.')
                 return x
 
-    def abre_tela(self):
+    def mostra_tela_inicial(self):
         lista_opcao = {1: self.lista_categoria,
                        0: self.retorna_controlador_principal}
         bool = True
         while bool:
-            opcao = self.__tela_categoria.mostra_tela()
+            opcao = self.__tela_categoria.abre_tela_inicial()
             lista_opcao[opcao]()
 
 

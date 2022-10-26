@@ -1,6 +1,6 @@
 class TelaCandidatos():
 
-    def mostra_tela(self):
+    def abre_tela_inicial(self):
         print('-' * 20)
         print('Candidatos')
         print('-' * 20)

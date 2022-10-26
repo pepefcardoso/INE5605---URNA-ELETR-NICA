@@ -34,8 +34,8 @@ class TelaUrna(TelaAbstrata):
             except ValueError:
                 print('\nA CONFIGURAÇÃO FOI FEITA INCORRETAMENTE, TENTE NOVAMENTE\n')
 
-    def mostra_menu_opcoes(self):
-        super(TelaUrna, self).mostra_menu_opcoes('URNA ELETRÔNICA UFSC',
+    def abre_tela_inicial(self):
+        super(TelaUrna, self).abre_tela_inicial('URNA ELETRÔNICA UFSC',
                                                       ['ELEITORES', 'CANDIDATOS', 'CHAPAS', 'CARGOS', 'CATEGORIAS', 'REGISTROS', 'CONFIGURAÇÕES'],
                                                       'ENCERRAR SESSÃO')
 

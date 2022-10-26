@@ -2,8 +2,8 @@ from limite.tela_chapas import TelaChapa
 from entidade.chapa import Chapa
 
 class ControladorChapas():
-    def __init__(self, controlador_principal):
-        self.__controlador_principal = controlador_principal
+    def __init__(self, controlador_urna):
+        self.__controlador_urna = controlador_urna
         self.__tela_chapa = TelaChapa()
         self.__chapas = []
 
@@ -11,7 +11,7 @@ class ControladorChapas():
         opcoes = {1: self.lista_chapas, 2: self.adiciona_chapa,
                   3: self.remove_chapa, 4: self.altera_chapa}
         while True:
-            self.__tela_chapa.mostra_menu_opcoes()
+            self.__tela_chapa.abre_tela_inicial()
             opcao = self.__tela_chapa.pega_opcao()
             if opcao == 0:
                 break

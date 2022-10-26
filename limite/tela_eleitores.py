@@ -3,8 +3,8 @@ from limite.abstract_tela import TelaAbstrata
 
 class TelaEleitores(TelaAbstrata):
 
-    def mostra_menu_opcoes(self):
-        super(TelaEleitores, self).mostra_menu_opcoes('ELEITORES',
+    def abre_tela_inicial(self):
+        super(TelaEleitores, self).abre_tela_inicial('ELEITORES',
                                                       ['LISTA DE ELEITORES', 'ADICIONAR ELEITORES', 'REMOVER ELEITORES', 'ALTERAR ELEITOR'],
                                                       'VOLTAR AO MENU INICIAL')
 

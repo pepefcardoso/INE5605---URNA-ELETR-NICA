@@ -3,8 +3,8 @@ from limite.abstract_tela import TelaAbstrata
 
 class TelaChapa(TelaAbstrata):
 
-    def mostra_menu_opcoes(self):
-        super(TelaChapa, self).mostra_menu_opcoes('CHAPAS',
+    def abre_tela_inicial(self):
+        super(TelaChapa, self).abre_tela_inicial('CHAPAS',
                                                       ['LISTA DE CHAPAS', 'ADICIONAR CHAPA', 'REMOVER CHAPA', 'ALTERAR CHAPA'],
                                                       'VOLTAR AO MENU INICIAL')
 
