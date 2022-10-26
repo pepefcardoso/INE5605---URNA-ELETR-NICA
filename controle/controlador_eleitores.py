@@ -33,7 +33,7 @@ class ControladorEleitores:
             if eleitor.cpf == novo_eleitor.cpf:
                 self.__tela_eleitores.mostra_mensagem("\nJÁ EXISTE ELEITOR CADASTRADO COM ESTE CPF!!\n")
                 return None
-        self.__tela_eleitores.mostra_mensagem("\nELEITOR CADSTRADO COM SUCESSO!\n")
+        self.__tela_eleitores.mostra_mensagem("\nELEITOR CADASTRADO COM SUCESSO!\n")
         self.__eleitores.append(novo_eleitor)
 
     def remove_eleitor(self):

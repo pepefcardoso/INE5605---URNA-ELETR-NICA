@@ -27,28 +27,26 @@ class ControladorChapas():
 
     def adiciona_chapa(self):
         nome_chapa = self.__tela_eleitores.pega_nome_chapa()
-        for chapa in self.__eleitores:
-            if eleitor.cpf == novo_eleitor.cpf:
-                self.__tela_eleitores.mostra_mensagem("\nJÁ EXISTE ELEITOR CADASTRADO COM ESTE CPF!!\n")
+        for chapa in self.__chapas:
+            if chapa.nome == nome_chapa:
+                self.__tela_chapa.mostra_mensagem("\nJÁ EXISTE CHAPA CADASTRADA COM ESTE NOME!\n")
                 return None
-        self.__tela_eleitores.mostra_mensagem("\nELEITOR CADSTRADO COM SUCESSO!\n")
-        self.__eleitores.append(novo_eleitor)
+        self.__tela_chapa.mostra_mensagem("\nCHAPA CADASTRADA COM SUCESSO!\n")
+        self.__eleitores.append(Chapa(nome_chapa))
 
-    def remove_eleitor(self):
-        cpf_eleitor = self.__tela_eleitores.pega_cpf_eleitor()
-        for eleitor in self.__eleitores:
-            if eleitor.cpf == cpf_eleitor:
-                self.__eleitores.remove(eleitor)
-                return self.__tela_eleitores.mostra_mensagem('\nELEITOR REMOVIDO COM SUCESSO\n')
-        self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTE ELEITOR CADASTRADO COM O CPF CONSULTADO!\n')
+    def remove_chapa(self):
+        nome_chapa = self.__tela_eleitores.pega_nome_chapa()
+        for chapa in self.__chapas:
+            if chapa.nome == nome_chapa:
+                self.__chapas.remove(chapa)
+                return self.__tela_chapa.mostra_mensagem("\nCHAPA REMOVIDA COM SUCESSO!\n")
+        self.__tela_chapa.mostra_mensagem("\nNÃO EXISTE CHAPA CADASTRADA COM ESTE NOME!\n")
 
-    def altera_eleitor(self):
-        cpf_eleitor = self.__tela_eleitores.pega_cpf_eleitor()
-        for eleitor in self.__eleitores:
-            if eleitor.cpf == cpf_eleitor:
-                dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
-                eleitor.nome = dados_eleitor['nome']
-                eleitor.cpf = dados_eleitor['cpf']
-                eleitor.categoria = dados_eleitor['categoria']
-                return self.__tela_eleitores.mostra_mensagem('\nELEITOR ALTERADO COM SUCESSO\n')
-        self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTE ELEITOR CADASTRADO COM O CPF CONSULTADO!\n')
+    def altera_chapa(self):
+        nome_chapa = self.__tela_eleitores.pega_nome_chapa()
+        for chapa in self.__chapas:
+            if chapa.nome == nome_chapa:
+                nova_chapa = self.__tela_eleitores.pega_nome_chapa()
+                chapa.nome = nova_chapa
+                return self.__tela_eleitores.mostra_mensagem('\nCHAPA ALTERADA COM SUCESSO\n')
+        self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTE CHAPA CADASTRADA COM ESTE NOME!\n')
