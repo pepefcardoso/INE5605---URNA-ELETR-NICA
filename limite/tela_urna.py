@@ -3,7 +3,7 @@ from limite.abstract_tela import TelaAbstrata
 
 class TelaUrna(TelaAbstrata):
 
-    def tela_pega_config(self):
+    def pega_config(self):
         print('\n----- CONFIGURAÇÃO URNA UFSC -----\n')
         print('----- REGRAS DE CONFIGURAÇÃO -----\n')
         print(' - O CÓDIGO DA URNA DEVE SER UM Nº INTEIRO ENTRE 1 E 99')

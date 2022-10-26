@@ -5,12 +5,14 @@ from controle.controlador_chapas import ControladorChapas
 from controle.controlador_cargo import ControladorCargo
 from controle.controlador_categoria_eleitor import ControladorCategoria
 from controle.controlador_config import ControladorConfig
+from entidade.urna import Urna
 import sys
 
 
-class ControladorPrincipal:
+class ControladorUrna:
 
     def __init__(self):
+        self.__urna = Urna
         self.__tela_urna = TelaUrna()
         self.__controlador_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
@@ -66,7 +68,15 @@ class ControladorPrincipal:
     def finaliza(self):
         sys.exit()
 
-    def inicia(self):
+    def inicializa_urna(self):
+        dados_urna = self.__tela_urna.pega_config()
+        self.__urna = Urna(dados_urna['codigo'], 
+                           dados_urna['turno'], 
+                           dados_urna['max_eleitores'], 
+                           dados_urna['max_candidatos'])
+        ControladorUrna().inicia_sistema()
+
+    def inicia_sistema(self):
         opcoes = {1: self.inicia_eleitores,
                   2: self.inicia_candidatos,
                   3: self.inicia_chapas,

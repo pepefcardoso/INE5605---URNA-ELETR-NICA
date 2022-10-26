@@ -1,4 +1,3 @@
-from controle.controlador_principal import ControladorPrincipal
-
+from controle.controlador_urna import ControladorUrna
 if __name__ == '__main__':
-    ControladorPrincipal().inicia()
+    ControladorUrna().inicializa_urna()
