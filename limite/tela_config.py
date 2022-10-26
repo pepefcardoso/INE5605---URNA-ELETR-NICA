@@ -7,10 +7,10 @@ class TelaConfig:
         print(' - O TURNO DA ELEIÇÃO DEVE SER 1 OU 2')
         print(' - O Nº MÁXIMO DE ELEITORES E CANDIDATOS DEVE SER UM INTEIRO MAIOR QUE 0\n')
         while True:
-            codigo_lido = str(input('Insira o código da urna: '))
-            turno_lido = int(input('Insira o turno da eleição: '))
-            max_eleitores_lido = int(input('Insira o Nº máximo de eleitores permitido: '))
-            max_candidatos_lido = int(input('Insira o Nº máximo de candidato permitido: '))
+            codigo_lido = input('Insira o código da urna: ')
+            turno_lido = input('Insira o turno da eleição: ')
+            max_eleitores_lido = input('Insira o Nº máximo de eleitores permitido: ')
+            max_candidatos_lido = input('Insira o Nº máximo de candidato permitido: ')
             try:
                 codigo = int(codigo_lido)
                 turno = int(turno_lido)
