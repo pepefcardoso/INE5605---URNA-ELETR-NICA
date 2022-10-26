@@ -32,7 +32,7 @@ class TelaEleitores(TelaAbstrata):
                     not isinstance(cpf, str) or 
                     not isinstance(categoria, str) or 
                     len(nome_lido) < 1 or 
-                    len(cpf_lido) < 11 or 
+                    len(cpf_lido) != 11 or 
                     len(categoria_lida) < 1):
                     raise ValueError
                 return {'nome': nome, 'cpf': cpf, 'categoria': categoria}

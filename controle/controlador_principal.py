@@ -44,7 +44,7 @@ class ControladorPrincipal:
         self.__controlador_candidatos.mostra_tela_opcoes()
 
     def inicia_chapas(self):
-        self.__controlador_chapas.mostra_tela_opcoes()
+        self.__controlador_chapas.mostra_tela_inicial()
 
     def inicia_cargos(self):
         self.__controlador_cargo.abre_tela()

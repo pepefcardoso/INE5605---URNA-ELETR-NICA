@@ -7,7 +7,6 @@ class ControladorEleitores:
         self.__controlador_principal = controlador_principal
         self.__tela_eleitores = TelaEleitores()
         self.__eleitores = []
-        self.__max_eleitores = 0
 
     def mostra_tela_inicial(self):
         opcoes = {1: self.lista_eleitores, 2: self.adiciona_eleitor,
