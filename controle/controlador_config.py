@@ -8,3 +8,4 @@ class ControladorConfig:
 
     def mostra_tela_config(self):
         dados_config = self.__tela_config.tela_pega_config()
+

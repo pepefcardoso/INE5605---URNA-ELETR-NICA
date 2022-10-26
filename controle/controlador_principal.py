@@ -1,4 +1,4 @@
-from limite.tela_principal import TelaPrincipal
+from limite.tela_urna import TelaUrna
 from controle.controlador_eleitores import ControladorEleitores
 from controle.controlador_candidatos import ControladorCandidatos
 from controle.controlador_chapas import ControladorChapas
@@ -11,7 +11,7 @@ import sys
 class ControladorPrincipal:
 
     def __init__(self):
-        self.__tela_principal = TelaPrincipal()
+        self.__tela_urna = TelaUrna()
         self.__controlador_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
         self.__controlador_chapas = ControladorChapas(self)
@@ -71,10 +71,11 @@ class ControladorPrincipal:
                   2: self.inicia_candidatos,
                   3: self.inicia_chapas,
                   4: self.inicia_cargos,
-                  5: self.inicia_registros,
-                  6: self.inicia_config,
-                  7: self.inicia_categoria,
+                  5: self.inicia_categoria,
+                  6: self.inicia_registros,
+                  7: self.inicia_config,
                   0: self.finaliza}
         while True:
-            opcao = self.__tela_principal.mostra_tela()
+            self.__tela_urna.mostra_menu_opcoes()
+            opcao = self.__tela_urna.pega_opcao()
             opcoes[opcao]()
