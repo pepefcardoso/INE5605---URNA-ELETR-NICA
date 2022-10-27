@@ -29,3 +29,16 @@ class TelaChapa(TelaAbstrata):
                 return nome_chapa
             except ValueError:
                 print('Chapa inválida, tente novamente!')
+
+    def pega_chapa_num(self, dict_chapas: {} = None, opcoes_validas: [] = None):
+        for key in dict_chapas:
+            print(f'{key} - {dict_chapas[key]}')
+        while True:
+            num_chapa_lido = input('Insira o Nº da Chapa escolhida: ')
+            try:
+                num_chapa = int(num_chapa_lido)
+                if opcoes_validas and num_chapa not in opcoes_validas:
+                    raise ValueError
+                return num_chapa
+            except ValueError:
+                print("\nOpção indisponível, tente uma opção válida.\n")

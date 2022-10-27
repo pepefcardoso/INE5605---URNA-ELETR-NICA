@@ -50,3 +50,22 @@ class ControladorChapas():
                 chapa.nome = nova_chapa
                 return self.__tela_chapa.mostra_mensagem('\nCHAPA ALTERADA COM SUCESSO\n')
         self.__tela_chapa.mostra_mensagem('\nNÃO EXISTE CHAPA CADASTRADA COM ESTE NOME!\n')
+
+    def seleciona_chapa(self):
+        opcoes = self.lista_chapas_enum()
+        opcoes[0] = 'Sair'
+        while True:
+            opcao = self.__tela_chapa.pega_chapa_num(opcoes, list(opcoes.keys()))
+            if opcao == 0:
+                break
+            for chapa in self.__chapas:
+                if opcoes[opcao] == chapa.nome:
+                    return chapa
+
+    def lista_chapas_enum(self):
+        dict_chapas = {}
+        i = 1
+        for chapa in self.__chapas:
+            dict_chapas[i] = chapa.nome
+            i +=1
+        return dict_chapas
