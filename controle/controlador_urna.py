@@ -89,7 +89,7 @@ class ControladorUrna:
                            dados_urna['turno'], 
                            dados_urna['max_eleitores'], 
                            dados_urna['max_candidatos'])
-        ControladorUrna().inicia_sistema()
+        self.inicia_sistema()
 
     def inicia_sistema(self):
         opcoes = {1: self.inicia_eleitores,
