@@ -14,7 +14,7 @@ import sys
 class ControladorUrna:
     def __init__(self):
         self.__tela_urna = TelaUrna()
-        self.__urna = Urna
+        self.__urna = None
         self.__controlador_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
         self.__controlador_chapas = ControladorChapas(self)
