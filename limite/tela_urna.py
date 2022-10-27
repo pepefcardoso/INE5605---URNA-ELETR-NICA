@@ -36,11 +36,14 @@ class TelaUrna(TelaAbstrata):
 
     def abre_tela_inicial(self):
         super(TelaUrna, self).abre_tela_inicial('URNA ELETRÔNICA UFSC',
-                                                      ['ELEITORES', 'CANDIDATOS', 'CHAPAS', 'CARGOS', 'CATEGORIAS', 'REGISTROS', 'CONFIGURAÇÕES'],
-                                                      'ENCERRAR SESSÃO')
+                                                ['ELEITORES', 'CANDIDATOS',
+                                                'CHAPAS', 'CARGOS',
+                                                'CATEGORIAS', 'REGISTROS',
+                                                'CONFIGURAÇÕES', 'VOTAÇÃO'],
+                                                'ENCERRAR SESSÃO')
 
     def pega_opcao(self):
-        opcao = super(TelaUrna, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 5, 6, 7, 0])
+        opcao = super(TelaUrna, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 5, 6, 7, 8, 0])
         return opcao
 
     def mostra_entidade(self, dados_eleitor):
@@ -48,3 +51,17 @@ class TelaUrna(TelaAbstrata):
 
     def mostra_mensagem(self, mensagem):
         super(TelaUrna, self).mostra_mensagem(mensagem)
+
+    def mostra_eleicao(self):
+        print('-' * 20)
+        print('MODO VOTAÇÃO')
+        print('-' * 20)
+        print('1 - CPF PARA VOTAR')
+        print('2 - ENCERRA VOTAÇÃO')
+        print()
+        opcao = super(TelaUrna, self).pega_opcao('Escolha uma opção: ', [1, 2])
+        return opcao
+
+    def pegar_cpf(self):
+        cpf = int(input('CPF DO ELEITOR: '))
+        return cpf

@@ -61,3 +61,6 @@ class TelaCandidatos():
                 print("Opção indisponível, tente uma opção válida.")
                 if opcoes_validas:
                     print('Opções válidas: ', opcoes_validas)
+
+    def mostra_opcao(self, numero: int, nome: str):
+        print(f'CANDIDATO: {nome}, NÚMERO: {numero}')

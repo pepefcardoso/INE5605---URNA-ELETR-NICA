@@ -8,6 +8,10 @@ class ControladorEleitores:
         self.__tela_eleitores = TelaEleitores()
         self.__eleitores = []
 
+    @property
+    def eleitores(self):
+        return self.__eleitores
+
     def mostra_tela_inicial(self):
         opcoes = {1: self.lista_eleitores, 2: self.adiciona_eleitor,
                   3: self.remove_eleitor, 4: self.altera_eleitor}

@@ -7,6 +7,7 @@ from controle.controlador_cargo import ControladorCargo
 from controle.controlador_categoria_eleitor import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.controlador_config import ControladorConfig
+from controle.controlador_voto import ControladorVoto
 
 import sys
 
@@ -22,6 +23,7 @@ class ControladorUrna:
         self.__controlador_categoria = ControladorCategoria(self)
         self.__controlador_registro = ControladorRegistro(self)
         self.__controlador_config = ControladorConfig(self)
+        self.__controlador_voto = ControladorVoto(self)
 
     @property
     def urna(self):
@@ -54,6 +56,10 @@ class ControladorUrna:
     @property
     def controlador_config(self):
         return self.__controlador_config
+
+    @property
+    def controlador_voto(self):
+        return self.__controlador_voto
     
     @urna.setter
     def urna(self, urna):
@@ -80,6 +86,9 @@ class ControladorUrna:
     def inicia_config(self):
         self.__controlador_config.mostra_tela_inicial()
 
+    def inicia_voto(self):
+        self.__controlador_voto.mostra_tela_inicial()
+
     def finaliza(self):
         sys.exit()
 
@@ -99,6 +108,7 @@ class ControladorUrna:
                   5: self.inicia_categoria,
                   6: self.inicia_registros,
                   7: self.inicia_config,
+                  8: self.inicia_voto,
                   0: self.finaliza}
         while True:
             self.__tela_urna.abre_tela_inicial()

@@ -8,6 +8,10 @@ class ControladorCandidatos:
         self.__tela_candidatos = TelaCandidatos()
         self.__candidatos = []
 
+    @property
+    def candidatos(self):
+        return self.__candidatos
+
     def mostra_tela_inicial(self):
         opcoes = {1: self.lista_candidatos, 2: self.adiciona_candidato,
                   3:self.remove_candidato, 4: self.maximo_candidatos}
@@ -75,6 +79,62 @@ class ControladorCandidatos:
     def maximo_candidatos(self):
         numero = self.__tela_candidatos.numero_candidato()
         self.__max_candidatos = numero
+
+    def candidatos_reitor(self):
+        lista_numero = []
+        self.__tela_candidatos.mostra_mensagem('CANDIDATOS PARA REITOR: ')
+        for candidato in self.__candidatos:
+            if candidato.cargo.value == 1:
+                self.__tela_candidatos.mostra_opcao(numero=candidato.numero, nome=candidato.nome)
+                lista_numero.append(candidato.numero)
+                self.__tela_candidatos.mostra_mensagem('-'*20)
+        lista_numero.append(99)
+        voto_reitor = self.__tela_candidatos.pega_opcao(mensagem='NÚMERO DO SEU CANDIDATO OU 99 PARA ANULAR: ',
+                                                        opcoes_validas=lista_numero)
+        self.__tela_candidatos.mostra_mensagem('-' * 20)
+        return voto_reitor
+
+    def candidatos_reitor_graduacao(self):
+        lista_numero = []
+        self.__tela_candidatos.mostra_mensagem('CANDIDATOS PARA REITOR DE GRADUAÇÃO: ')
+        for candidato in self.__candidatos:
+            if candidato.cargo.value == 2:
+                self.__tela_candidatos.mostra_opcao(numero=candidato.numero, nome=candidato.nome)
+                lista_numero.append(candidato.numero)
+                self.__tela_candidatos.mostra_mensagem('-' * 20)
+        lista_numero.append(99)
+        voto_reitor_graduacao = self.__tela_candidatos.pega_opcao(mensagem='NÚMERO DO SEU CANDIDATO OU 99 PARA ANULAR: ',
+                                                                  opcoes_validas=lista_numero)
+        self.__tela_candidatos.mostra_mensagem('-' * 20)
+        return voto_reitor_graduacao
+
+    def candidatos_reitor_pesquisa(self):
+        lista_numero = []
+        self.__tela_candidatos.mostra_mensagem('CANDIDATOS PARA REITOR DE PESQUISA: ')
+        for candidato in self.__candidatos:
+            if candidato.cargo.value == 3:
+                self.__tela_candidatos.mostra_opcao(numero=candidato.numero, nome=candidato.nome)
+                lista_numero.append(candidato.numero)
+                self.__tela_candidatos.mostra_mensagem('-' * 20)
+        lista_numero.append(99)
+        voto_reitor_pesquisa = self.__tela_candidatos.pega_opcao(mensagem='NÚMERO DO SEU CANDIDATO OU 99 PARA ANULAR: ',
+                                                                  opcoes_validas=lista_numero)
+        self.__tela_candidatos.mostra_mensagem('-' * 20)
+        return voto_reitor_pesquisa
+
+    def candidatos_reitor_extensao(self):
+        lista_numero = []
+        self.__tela_candidatos.mostra_mensagem('CANDIDATOS PARA REITOR DE EXTENSÃO: ')
+        for candidato in self.__candidatos:
+            if candidato.cargo.value == 4:
+                self.__tela_candidatos.mostra_opcao(numero=candidato.numero, nome=candidato.nome)
+                lista_numero.append(candidato.numero)
+                self.__tela_candidatos.mostra_mensagem('-' * 20)
+        lista_numero.append(99)
+        voto_reitor_extensao = self.__tela_candidatos.pega_opcao(mensagem='NÚMERO DO SEU CANDIDATO OU 99 PARA ANULAR: ',
+                                                                 opcoes_validas=lista_numero)
+        self.__tela_candidatos.mostra_mensagem('-' * 20)
+        return voto_reitor_extensao
 
 
 if __name__ == '__main__':
