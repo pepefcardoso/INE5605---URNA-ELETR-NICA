@@ -31,14 +31,18 @@ class ControladorEleitores:
                 self.__tela_eleitores.mostra_entidade(dados_eleitor)
 
     def adiciona_eleitor(self):
-        dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
-        novo_eleitor = Eleitor(dados_eleitor['nome'], dados_eleitor['cpf'], dados_eleitor['categoria'])
-        for eleitor in self.__eleitores:
-            if eleitor.cpf == novo_eleitor.cpf:
-                self.__tela_eleitores.mostra_mensagem("\nJÁ EXISTE ELEITOR CADASTRADO COM ESTE CPF!!\n")
-                return None
-        self.__tela_eleitores.mostra_mensagem("\nELEITOR CADASTRADO COM SUCESSO!\n")
-        self.__eleitores.append(novo_eleitor)
+        if len(self.__eleitores) == self.__controlador_urna.urna.max_eleitores:
+            self.__tela_eleitores.mostra_mensagem("\nO Nº MÁXIMO DE ELEITORES FOI ATINGIDO, NÃO É POSSIVEL ADICIONAR NOVO ELEITOR!\n")
+            return
+        else:
+            dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
+            novo_eleitor = Eleitor(dados_eleitor['nome'], dados_eleitor['cpf'], dados_eleitor['categoria'])
+            for eleitor in self.__eleitores:
+                if eleitor.cpf == novo_eleitor.cpf:
+                    self.__tela_eleitores.mostra_mensagem("\nJÁ EXISTE ELEITOR CADASTRADO COM ESTE CPF!!\n")
+                    return
+            self.__tela_eleitores.mostra_mensagem("\nELEITOR CADASTRADO COM SUCESSO!\n")
+            self.__eleitores.append(novo_eleitor)
 
     def remove_eleitor(self):
         cpf_eleitor = self.__tela_eleitores.pega_cpf_eleitor()

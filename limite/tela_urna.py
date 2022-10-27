@@ -23,8 +23,8 @@ class TelaUrna(TelaAbstrata):
                     not isinstance(turno, int) or
                     not isinstance(max_eleitores, int) or
                     not isinstance(max_candidatos, int) or
-                    (codigo < 1 or codigo > 99) or
-                    (turno < 1 or turno > 2) or
+                    (codigo not in range(1, 100)) or
+                    (turno not in range(1, 3)) or
                     max_eleitores < 1 or
                     max_candidatos < 1):
                     raise ValueError
