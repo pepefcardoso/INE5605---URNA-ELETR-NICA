@@ -31,13 +31,30 @@ class ControladorConfig:
         self.__tela_config.mostra_entidade(dados_urna)
 
     def altera_codigo(self):
-        pass
+        valor = self.__tela_config.pega_atributo('Código', 
+                                         self.__controlador_urna.urna.codigo, 
+                                         range(1, 100))
+        self.__tela_config.mostra_mensagem('\nCÓDIGO ALTERADO COM SUCESSC\n')
+        self.__controlador_urna.urna.codigo = valor
 
     def altera_turno(self):
-        pass
+        valor = self.__tela_config.pega_atributo('Turno', 
+                                         self.__controlador_urna.urna.turno, 
+                                         range(1, 3))
+        self.__tela_config.mostra_mensagem('\nTURNO ALTERADO COM SUCESSC\n')
+        self.__controlador_urna.urna.turno = valor
 
     def altera_max_eleitores(self):
-        pass
+        valor = self.__tela_config.pega_atributo('Nº Máximo de Eleitores', 
+                                         self.__controlador_urna.urna.max_eleitores, 
+                                         range(1, 100000))
+        self.__tela_config.mostra_mensagem('\nNº MÁXIMO DE ELEITORES ALTERADO COM SUCESSC\n')
+        self.__controlador_urna.urna.max_eleitores = valor
+
 
     def altera_max_candidatos(self):
-        pass
+        valor = self.__tela_config.pega_atributo('Nº Máximo de Candidatos', 
+                                         self.__controlador_urna.urna.max_candidatos, 
+                                         range(1, 100000))
+        self.__tela_config.mostra_mensagem('\nNº MÁXIMO DE CANDIDATOS ALTERADO COM SUCESSC\n')
+        self.__controlador_urna.urna.max_candidatos = valor

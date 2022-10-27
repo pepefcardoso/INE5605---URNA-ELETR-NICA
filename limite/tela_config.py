@@ -20,3 +20,15 @@ class TelaConfig(TelaAbstrata):
 
     def mostra_mensagem(self, mensagem):
         super(TelaConfig, self).mostra_mensagem(mensagem)
+
+    def pega_atributo(self, atributo, valor_atributo_atual, opcoes_validas):
+        print(f'{atributo} atual: {valor_atributo_atual}')
+        while True:
+            valor_lido = input(f'Insira o novo valor de {atributo}: ')
+            try:
+                opcao = int(valor_lido)
+                if opcoes_validas and opcao not in opcoes_validas:
+                    raise ValueError
+                return opcao
+            except ValueError:
+                print("Opção indisponível, tente uma opção válida.")
