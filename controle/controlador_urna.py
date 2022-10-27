@@ -114,3 +114,10 @@ class ControladorUrna:
             self.__tela_urna.abre_tela_inicial()
             opcao = self.__tela_urna.pega_opcao()
             opcoes[opcao]()
+
+    
+
+
+
+
+
