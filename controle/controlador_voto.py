@@ -17,21 +17,21 @@ class ControladorVotos():
                 self.votar()
 
     def votar(self):
-        eleitor = self.__tela_voto.seleciona_eleitor()
+        eleitor = self.seleciona_eleitor()
         if eleitor == False:
             return
         
 
     def seleciona_eleitor(self):
         while True:
-            cpf_eleitor = self.__tela_voto.abre_tela_inicial()
+            cpf_eleitor = self.__tela_voto.pegar_cpf_eleitor()
             for eleitor in self.__controlador_urna.controlador_eleitores.eleitores:
                 if eleitor.cpf == cpf_eleitor:
                     self.__tela_voto.mostra_mensagem(f'\nBem vindo {eleitor.nome}!\n')
                     return eleitor
-                elif cpf_eleitor == False:
+                else:
                     self.__tela_voto.mostra_mensagem(f'\nCPF inválido!\n')
                     self.__tela_voto.mostra_mensagem(f'\nDigite 1 para tentar novamente ou 0 para encerrar tentativa!\n')
                     opcao = self.__tela_voto.pega_opcao()
                     if opcao == 0:
-                        return False
+                        break

@@ -7,7 +7,7 @@ from controle.controlador_cargo import ControladorCargo
 from controle.controlador_categoria_eleitor import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.controlador_config import ControladorConfig
-from controle.controlador_voto import ControladorVoto
+from controle.controlador_voto import ControladorVotos
 
 import sys
 
@@ -23,7 +23,7 @@ class ControladorUrna:
         self.__controlador_categoria = ControladorCategoria(self)
         self.__controlador_registro = ControladorRegistro(self)
         self.__controlador_config = ControladorConfig(self)
-        self.__controlador_voto = ControladorVoto(self)
+        self.__controlador_voto = ControladorVotos(self)
 
     @property
     def urna(self):
@@ -115,7 +115,7 @@ class ControladorUrna:
             opcao = self.__tela_urna.pega_opcao()
             opcoes[opcao]()
 
-    
+
 
 
 
