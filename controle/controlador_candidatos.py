@@ -42,8 +42,8 @@ class ControladorCandidatos:
             if cont == 0:
                 bool = False
             cont = 0
-        cargo = self.__controlador_principal.controlador_cargo.selecionar_cargo()
-        categoria = self.__controlador_principal.controlador_categoria.selecionar_categoria()
+        cargo = self.__controlador_urna.controlador_cargo.selecionar_cargo()
+        categoria = self.__controlador_urna.controlador_categoria.selecionar_categoria()
         candidato = Candidato(nome=dados['nome'],
                               cpf=dados['cpf'],
                               categoria=categoria,
