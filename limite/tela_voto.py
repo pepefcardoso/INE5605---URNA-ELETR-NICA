@@ -26,10 +26,13 @@ class TelaVoto(TelaAbstrata):
         return
 
     def pega_voto(self, nome_cargo):
-        valor = input(f'\nInsira o seu voto para {nome_cargo}: ')
-        if valor in range(1,99):
-            return valor
-        elif valor == None:
-            return 00
-        else:
-            return 99
+        while True:
+            num_voto_lido = input(f'\nInsira o seu voto para {nome_cargo}: ')
+            try:
+                num_voto = int(num_voto_lido)
+                if num_voto in range(1, 99):
+                    return num_voto
+                else:
+                    return 99
+            except ValueError:
+                return 00

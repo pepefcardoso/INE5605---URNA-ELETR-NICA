@@ -21,8 +21,10 @@ class ControladorVotos():
     def votar(self):
         eleitor = self.seleciona_eleitor()
         if isinstance(eleitor, Eleitor):
-            num_voto = self.seleciona_voto(Cargo(1))
-            print(num_voto)
+            candidato_voto_reitor = self.seleciona_voto(Cargo(1))
+            candidato_voto_grad = self.seleciona_voto(Cargo(2))
+            candidato_voto_pesq = self.seleciona_voto(Cargo(3))
+            candidato_voto_ext = self.seleciona_voto(Cargo(4))
         else:
             print('estou em votar nas deu errado')
             return
@@ -49,19 +51,26 @@ class ControladorVotos():
                 opcao = self.__tela_voto.pega_opcao()
                 if opcao == 1:
                     return num_voto
-            elif num_voto == 0:
+            elif num_voto == 00:
                 self.__tela_voto.mostra_mensagem(f'Seu voto será branco, digite 1 para confirmar ou 0 para corrigir')
                 opcao = self.__tela_voto.pega_opcao()
                 if opcao == 1:
                     return num_voto
-            else:
-                for candidato in self.__controlador_urna.controlador_candidatos.candidatos:
-                    if (candidato.numero == num_voto and candidato.cargo.name == cargo.name):
-                        self.__tela_voto.mostra_mensagem(f'Seu voto será {candidato.nome}, digite 1 para confirmar ou 0 para corrigir')
-                        opcao = self.__tela_voto.pega_opcao()
-                        if opcao == 1:
-                            return candidato
+            elif self.testa_numero_valido(num_voto, cargo) == False:
                 self.__tela_voto.mostra_mensagem(f'Seu voto será nulo, digite 1 para confirmar ou 0 para corrigir')
                 opcao = self.__tela_voto.pega_opcao()
                 if opcao == 1:
                     return 99
+            else:
+                candidato = self.testa_numero_valido(num_voto, cargo)
+                self.__tela_voto.mostra_mensagem(f'Seu voto será {candidato.nome}, digite 1 para confirmar ou 0 para corrigir')
+                opcao = self.__tela_voto.pega_opcao()
+                if opcao == 1:
+                    return candidato
+                
+
+    def testa_numero_valido(self, num_voto, cargo):
+        for candidato in self.__controlador_urna.controlador_candidatos.candidatos:
+            if (candidato.numero == num_voto and candidato.cargo.name == cargo.name):
+                return candidato
+        return False
