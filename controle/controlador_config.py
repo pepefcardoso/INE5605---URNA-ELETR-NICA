@@ -11,8 +11,7 @@ class ControladorConfig:
                  2: self.altera_codigo, 
                  3: self.altera_turno, 
                  4: self.altera_max_eleitores, 
-                 5: self.altera_max_candidatos,
-                 6: self.__controlador_urna.inicia_voto()}
+                 5: self.altera_max_candidatos}
         while True:
             self.__tela_config.abre_tela_inicial()
             opcao = self.__tela_config.pega_opcao()

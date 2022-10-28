@@ -20,5 +20,7 @@ class TelaVoto(TelaAbstrata):
 
     def pegar_cpf_eleitor(self):
         print('\n----- ELEIÇÕES UFSC -----\n')
-        cpf_lido = input('Insira o CPF do Eleitor: ')
-        return cpf_lido
+        valor = input('Insira o CPF do Eleitor: ')
+        if (len(valor) == 11 and isinstance(valor, str)):
+            return valor
+        return

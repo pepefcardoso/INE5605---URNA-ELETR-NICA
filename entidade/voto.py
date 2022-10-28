@@ -2,12 +2,13 @@ from entidade.categoria import Categoria
 
 
 class Voto:
-    def __init__(self, voto_reitor: int, voto_grad: int, voto_pesq: int, voto_ext: int, categoria: Categoria):
+    def __init__(self, voto_reitor: int, voto_grad: int, voto_pesq: int, voto_ext: int, categoria: Categoria, turno: int):
         self.__voto_reitor = voto_reitor
         self.__voto_grad = voto_grad
         self.__voto_pesq = voto_pesq
         self.__voto_ext = voto_ext
         self.__categoria = categoria
+        self.__turno = turno
 
     @property
     def voto_reitor(self):
@@ -28,6 +29,10 @@ class Voto:
     @property
     def categoria(self):
         return self.__categoria
+
+    @property
+    def turno(self):
+        return self.__turno
 
     @voto_reitor.setter
     def voto_reitor(self, voto_reitor: int):
@@ -53,3 +58,8 @@ class Voto:
     def categoria(self, categoria: Categoria):
         if isinstance(categoria, Categoria):
             self.__categoria = categoria
+
+    @turno.setter
+    def turno(self, turno: int):
+        if isinstance(turno, int):
+            self.__turno = turno

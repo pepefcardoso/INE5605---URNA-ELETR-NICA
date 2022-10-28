@@ -8,8 +8,7 @@ class TelaConfig(TelaAbstrata):
                                                        'ALTERAR CÓDIGO DA URNA', 
                                                        'ALTERAR TURNO DE ELEIÇÃO', 
                                                        'ALTERAR Nº MÁXIMO DE ELEITORES', 
-                                                       'ALTERAR Nº MÁXIMO DE CANDIDATOS',
-                                                       'INICIAR ELEIÇÃO'],
+                                                       'ALTERAR Nº MÁXIMO DE CANDIDATOS'],
                                                       'VOLTAR AO MENU INICIAL')
 
     def pega_opcao(self):

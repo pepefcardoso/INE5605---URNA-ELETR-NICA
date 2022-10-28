@@ -1,5 +1,6 @@
 from limite.tela_voto import TelaVoto
 from entidade.voto import Voto
+from entidade.eleitor import Eleitor
 
 
 class ControladorVotos():
@@ -18,7 +19,9 @@ class ControladorVotos():
 
     def votar(self):
         eleitor = self.seleciona_eleitor()
-        if eleitor == False:
+        if isinstance(eleitor, Eleitor):
+            print('deu certo estou no método votar')
+        else:
             return
         
 
@@ -29,9 +32,8 @@ class ControladorVotos():
                 if eleitor.cpf == cpf_eleitor:
                     self.__tela_voto.mostra_mensagem(f'\nBem vindo {eleitor.nome}!\n')
                     return eleitor
-                else:
-                    self.__tela_voto.mostra_mensagem(f'\nCPF inválido!\n')
-                    self.__tela_voto.mostra_mensagem(f'\nDigite 1 para tentar novamente ou 0 para encerrar tentativa!\n')
-                    opcao = self.__tela_voto.pega_opcao()
-                    if opcao == 0:
-                        break
+            self.__tela_voto.mostra_mensagem(f'\nCPF inválido!')
+            self.__tela_voto.mostra_mensagem(f'Digite 1 para tentar novamente ou 0 para encerrar tentativa!\n')
+            opcao = self.__tela_voto.pega_opcao()
+            if opcao == 0:
+                return
