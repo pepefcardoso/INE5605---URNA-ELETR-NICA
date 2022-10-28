@@ -27,7 +27,7 @@ class ControladorEleitores:
             self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTEM ELEITORES CADASTRADOSs!\n')
         else:
             for eleitor in self.__eleitores:
-                dados_eleitor = {'Nome': eleitor.nome,'CPF': eleitor.cpf,'Categoria': eleitor.categoria}
+                dados_eleitor = {'Nome': eleitor.nome,'CPF': eleitor.cpf,'Categoria': eleitor.categoria.name}
                 self.__tela_eleitores.mostra_entidade(dados_eleitor)
 
     def adiciona_eleitor(self):
@@ -36,6 +36,7 @@ class ControladorEleitores:
             return
         else:
             dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
+            dados_eleitor['categoria'] = self.__controlador_urna.controlador_categoria.selecionar_categoria()
             novo_eleitor = Eleitor(dados_eleitor['nome'], dados_eleitor['cpf'], dados_eleitor['categoria'])
             for eleitor in self.__eleitores:
                 if eleitor.cpf == novo_eleitor.cpf:

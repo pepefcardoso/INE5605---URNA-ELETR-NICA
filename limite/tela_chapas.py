@@ -41,4 +41,4 @@ class TelaChapa(TelaAbstrata):
                     raise ValueError
                 return num_chapa
             except ValueError:
-                print("\nOpção indisponível, tente uma opção válida.\n")
+                print("\nTente uma opção válida ou digite 0 para sair!.\n")

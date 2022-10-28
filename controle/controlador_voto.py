@@ -20,15 +20,21 @@ class ControladorVotos():
 
     def votar(self):
         eleitor = self.seleciona_eleitor()
-        if isinstance(eleitor, Eleitor):
-            candidato_voto_reitor = self.seleciona_voto(Cargo(1))
-            candidato_voto_grad = self.seleciona_voto(Cargo(2))
-            candidato_voto_pesq = self.seleciona_voto(Cargo(3))
-            candidato_voto_ext = self.seleciona_voto(Cargo(4))
+        if eleitor in self.__controlador_urna.urna.lista_eleitores_votantes:
+            self.__tela_voto.mostra_mensagem(f'\nO ELEITOR SELECIONADO JÁ VOTOU NESTA ELEIÇÃO!\n')
+            return False
+        elif eleitor == False:
+            return False
         else:
-            print('estou em votar nas deu errado')
-            return
-        
+            voto_reitor = self.seleciona_voto(Cargo(1))
+            voto_grad = self.seleciona_voto(Cargo(2))
+            voto_pesq = self.seleciona_voto(Cargo(3))
+            voto_ext = self.seleciona_voto(Cargo(4))
+            voto = Voto(voto_reitor, voto_grad, voto_pesq, voto_ext, eleitor.categoria, self.__controlador_urna.urna.turno)
+            self.__controlador_urna.urna.lista_votos.append(voto)
+            self.__controlador_urna.urna.lista_eleitores_votantes.append(eleitor)
+            self.__tela_voto.mostra_mensagem(f'\nSEUS VOTOS FORAM COMPUTADOS, OBRIGADO!\n')
+            return True
 
     def seleciona_eleitor(self):
         while True:
@@ -41,7 +47,7 @@ class ControladorVotos():
             self.__tela_voto.mostra_mensagem(f'Digite 1 para tentar novamente ou 0 para encerrar tentativa!\n')
             opcao = self.__tela_voto.pega_opcao()
             if opcao == 0:
-                return
+                return False
 
     def seleciona_voto(self, cargo):
         while True:
@@ -66,8 +72,7 @@ class ControladorVotos():
                 self.__tela_voto.mostra_mensagem(f'Seu voto será {candidato.nome}, digite 1 para confirmar ou 0 para corrigir')
                 opcao = self.__tela_voto.pega_opcao()
                 if opcao == 1:
-                    return candidato
-                
+                    return candidato.numero
 
     def testa_numero_valido(self, num_voto, cargo):
         for candidato in self.__controlador_urna.controlador_candidatos.candidatos:

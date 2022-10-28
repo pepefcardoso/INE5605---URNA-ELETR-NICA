@@ -23,19 +23,15 @@ class TelaEleitores(TelaAbstrata):
         while True:
             nome_lido = input('Nome: ')
             cpf_lido = input('CPF: ')
-            categoria_lida = input('Categoria: ')
             try:
                 nome = str(nome_lido)
                 cpf = str(cpf_lido)
-                categoria = str(categoria_lida)
                 if (not isinstance(nome, str) or 
                     not isinstance(cpf, str) or 
-                    not isinstance(categoria, str) or 
                     len(nome_lido) < 1 or 
-                    len(cpf_lido) != 11 or 
-                    len(categoria_lida) < 1):
+                    len(cpf_lido) != 11):
                     raise ValueError
-                return {'nome': nome, 'cpf': cpf, 'categoria': categoria}
+                return {'nome': nome, 'cpf': cpf}
             except ValueError:
                 print('Dados incorretos, tente novamente!')
 

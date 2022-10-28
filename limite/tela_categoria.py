@@ -25,7 +25,7 @@ class TelaCategoria():
 
     def pega_dado(self):
         while True:
-            categoria = int(input('Número do Cargo: '))
+            categoria = int(input('Insira o Nº da Categoria: '))
             if categoria in [1, 2, 3]:
                 return {"categoria": categoria}
 

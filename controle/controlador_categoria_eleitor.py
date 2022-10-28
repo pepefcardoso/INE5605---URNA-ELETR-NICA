@@ -29,12 +29,3 @@ class ControladorCategoria():
         while bool:
             opcao = self.__tela_categoria.abre_tela_inicial()
             lista_opcao[opcao]()
-
-
-if __name__ == '__main__':
-    #ControladorCategoria(123).lista_categoria()
-    from controle.controlador_urna import ControladorPrincipal
-    centralizador = ControladorPrincipal().inicia()
-    #controlador = ControladorCategoria(123)
-    #controlador.abre_tela()
-    #controlador.selecionar_categoria()

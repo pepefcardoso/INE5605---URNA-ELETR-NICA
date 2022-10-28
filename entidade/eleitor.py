@@ -2,7 +2,7 @@ from entidade.categoria import Categoria
 
 class Eleitor:
 
-    def __init__(self, nome: str, cpf: str, categoria: str):
+    def __init__(self, nome: str, cpf: str, categoria: Categoria):
         self.__nome = nome
         self.__cpf = cpf
         self.__categoria = categoria
@@ -30,6 +30,6 @@ class Eleitor:
             self.__cpf = cpf
 
     @categoria.setter
-    def categoria(self, categoria: str):
-        if isinstance(categoria, str):
+    def categoria(self, categoria: Categoria):
+        if isinstance(categoria, Categoria):
             self.__categoria = categoria
