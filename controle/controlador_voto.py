@@ -1,6 +1,7 @@
 from limite.tela_voto import TelaVoto
 from entidade.voto import Voto
 from entidade.eleitor import Eleitor
+from entidade.cargo import Cargo
 
 
 class ControladorVotos():
@@ -20,8 +21,10 @@ class ControladorVotos():
     def votar(self):
         eleitor = self.seleciona_eleitor()
         if isinstance(eleitor, Eleitor):
-            print('deu certo estou no método votar')
+            num_voto = self.seleciona_voto(Cargo(1))
+            print(num_voto)
         else:
+            print('estou em votar nas deu errado')
             return
         
 
@@ -37,3 +40,28 @@ class ControladorVotos():
             opcao = self.__tela_voto.pega_opcao()
             if opcao == 0:
                 return
+
+    def seleciona_voto(self, cargo):
+        while True:
+            num_voto = self.__tela_voto.pega_voto(cargo.name)
+            if num_voto == 99:
+                self.__tela_voto.mostra_mensagem(f'Seu voto será nulo, digite 1 para confirmar ou 0 para corrigir')
+                opcao = self.__tela_voto.pega_opcao()
+                if opcao == 1:
+                    return num_voto
+            elif num_voto == 0:
+                self.__tela_voto.mostra_mensagem(f'Seu voto será branco, digite 1 para confirmar ou 0 para corrigir')
+                opcao = self.__tela_voto.pega_opcao()
+                if opcao == 1:
+                    return num_voto
+            else:
+                for candidato in self.__controlador_urna.controlador_candidatos.candidatos:
+                    if (candidato.numero == num_voto and candidato.cargo.name == cargo.name):
+                        self.__tela_voto.mostra_mensagem(f'Seu voto será {candidato.nome}, digite 1 para confirmar ou 0 para corrigir')
+                        opcao = self.__tela_voto.pega_opcao()
+                        if opcao == 1:
+                            return candidato
+                self.__tela_voto.mostra_mensagem(f'Seu voto será nulo, digite 1 para confirmar ou 0 para corrigir')
+                opcao = self.__tela_voto.pega_opcao()
+                if opcao == 1:
+                    return 99

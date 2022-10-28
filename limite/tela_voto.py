@@ -24,3 +24,12 @@ class TelaVoto(TelaAbstrata):
         if (len(valor) == 11 and isinstance(valor, str)):
             return valor
         return
+
+    def pega_voto(self, nome_cargo):
+        valor = input(f'\nInsira o seu voto para {nome_cargo}: ')
+        if valor in range(1,99):
+            return valor
+        elif valor == None:
+            return 00
+        else:
+            return 99
