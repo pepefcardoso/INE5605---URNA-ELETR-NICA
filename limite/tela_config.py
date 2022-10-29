@@ -5,14 +5,12 @@ class TelaConfig(TelaAbstrata):
     def abre_tela_inicial(self):
         super(TelaConfig, self).abre_tela_inicial('CONFIGURAÇÃO',
                                                       ['VER CONFIGURAÇÕES', 
-                                                       'ALTERAR CÓDIGO DA URNA', 
-                                                       'ALTERAR TURNO DE ELEIÇÃO', 
                                                        'ALTERAR Nº MÁXIMO DE ELEITORES', 
                                                        'ALTERAR Nº MÁXIMO DE CANDIDATOS'],
                                                       'VOLTAR AO MENU INICIAL')
 
     def pega_opcao(self):
-        opcao = super(TelaConfig, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 5, 6, 0])
+        opcao = super(TelaConfig, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 0])
         return opcao
 
     def mostra_entidade(self, dados_urna):

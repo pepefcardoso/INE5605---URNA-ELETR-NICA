@@ -7,30 +7,26 @@ class TelaUrna(TelaAbstrata):
         print('\n----- CONFIGURAÇÃO URNA UFSC -----\n')
         print('----- REGRAS DE CONFIGURAÇÃO -----\n')
         print(' - O CÓDIGO DA URNA DEVE SER UM Nº INTEIRO ENTRE 1 E 99')
-        print(' - O TURNO DA ELEIÇÃO DEVE SER 1 OU 2')
-        print(' - O Nº MÁXIMO DE ELEITORES E CANDIDATOS DEVE SER UM INTEIRO MAIOR QUE 0\n')
+        print(' - O CÓDIGO DA URNA NÃO PODERÁ SER ALTERADO APÓS ESTA CONFIGURAÇÃO!')
+        print(' - O Nº MÁXIMO DE ELEITORES E CANDIDATOS DEVE SER UM Nº INTEIRO ENTRE 1 E 100000\n')
         while True:
             codigo_lido = input('Insira o código da urna: ')
-            turno_lido = input('Insira o turno da eleição: ')
             max_eleitores_lido = input('Insira o Nº máximo de eleitores permitido: ')
             max_candidatos_lido = input('Insira o Nº máximo de candidato permitido: ')
             try:
                 codigo = int(codigo_lido)
-                turno = int(turno_lido)
                 max_eleitores = int(max_eleitores_lido)
                 max_candidatos = int(max_candidatos_lido)
                 if (not isinstance(codigo, int) or
-                    not isinstance(turno, int) or
                     not isinstance(max_eleitores, int) or
                     not isinstance(max_candidatos, int) or
                     (codigo not in range(1, 100)) or
-                    (turno not in range(1, 3)) or
-                    max_eleitores < 1 or
-                    max_candidatos < 1):
+                    (max_eleitores not in range(1, 100001)) or
+                    (max_candidatos not in range(1, 100001))):
                     raise ValueError
                 else:
                     print('\nURNA CONFIGURADA COM SUCESSO!\n')
-                    return {'codigo': codigo, 'turno': turno, 'max_eleitores': max_eleitores, 'max_candidatos': max_candidatos}
+                    return {'codigo': codigo, 'turno': 1, 'max_eleitores': max_eleitores, 'max_candidatos': max_candidatos}
             except ValueError:
                 print('\nA CONFIGURAÇÃO FOI FEITA INCORRETAMENTE, TENTE NOVAMENTE\n')
 
@@ -51,17 +47,3 @@ class TelaUrna(TelaAbstrata):
 
     def mostra_mensagem(self, mensagem):
         super(TelaUrna, self).mostra_mensagem(mensagem)
-
-    def mostra_eleicao(self):
-        print('-' * 20)
-        print('MODO VOTAÇÃO')
-        print('-' * 20)
-        print('1 - CPF PARA VOTAR')
-        print('2 - ENCERRA VOTAÇÃO')
-        print()
-        opcao = super(TelaUrna, self).pega_opcao('Escolha uma opção: ', [1, 2])
-        return opcao
-
-    def pegar_cpf(self):
-        cpf = int(input('CPF DO ELEITOR: '))
-        return cpf

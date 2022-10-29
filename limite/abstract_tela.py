@@ -5,7 +5,7 @@ class TelaAbstrata(ABC):
 
     @abstractmethod
     def abre_tela_inicial(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
-        print(f'----- {nome_menu} -----\n')
+        print(f'\n----- {nome_menu} -----\n')
         i = 1
         for opcao in opcoes_menu:
             print(f'{i} - {opcao}')
@@ -26,7 +26,6 @@ class TelaAbstrata(ABC):
 
     @abstractmethod
     def mostra_entidade(self, dados_entidade: {} = None):
-        print("\n")
         for key in dados_entidade:
             print(f'{key}: {dados_entidade[key]}')
 

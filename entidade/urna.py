@@ -11,15 +11,20 @@ class Urna():
         self.__max_eleitores = max_eleitores
         self.__max_candidatos = max_candidatos
         self.__lista_votos = []
-        self.__lista_eleitores_votantes = []
+        self.__votantes_1_turno = []
+        self.__votantes_2_turno = []
 
     @property
     def lista_votos(self):
         return self.__lista_votos
 
     @property
-    def lista_eleitores_votantes(self):
-        return self.__lista_eleitores_votantes
+    def votantes_1_turno(self):
+        return self.__votantes_1_turno
+
+    @property
+    def votantes_2_turno(self):
+        return self.__votantes_2_turno
 
     @property
     def codigo(self):

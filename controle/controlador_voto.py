@@ -11,17 +11,26 @@ class ControladorVotos():
 
     def mostra_tela_inicial(self):
         while True:
+            if self.__controlador_urna.urna.turno == 0:
+                self.__tela_voto.mostra_mensagem('\nAS ELEIÇÕES JÁ FORAM ENCERRADAS!')
+                break
             self.__tela_voto.abre_tela_inicial()
             opcao = self.__tela_voto.pega_opcao()
             if opcao == 0:
-                break
+                if self.encerra_votação() == 1:
+                    self.__tela_voto.mostra_mensagem(f'\n{self.__controlador_urna.urna.turno}º TURNO DA ELEIÇÃO ENCERRADO')
+                    if self.__controlador_urna.urna.turno == 1:
+                        self.__controlador_urna.urna.turno = 2
+                    elif self.__controlador_urna.urna.turno == 2:
+                        self.__controlador_urna.urna.turno = 0
+                    break                    
             elif opcao == 1:
                 self.votar()
 
     def votar(self):
         eleitor = self.seleciona_eleitor()
-        if eleitor in self.__controlador_urna.urna.lista_eleitores_votantes:
-            self.__tela_voto.mostra_mensagem(f'\nO ELEITOR SELECIONADO JÁ VOTOU NESTA ELEIÇÃO!\n')
+        turno = self.__controlador_urna.urna.turno
+        if not self.testar_eleitor_votante(eleitor):
             return False
         elif eleitor == False:
             return False
@@ -32,8 +41,11 @@ class ControladorVotos():
             voto_ext = self.seleciona_voto(Cargo(4))
             voto = Voto(voto_reitor, voto_grad, voto_pesq, voto_ext, eleitor.categoria, self.__controlador_urna.urna.turno)
             self.__controlador_urna.urna.lista_votos.append(voto)
-            self.__controlador_urna.urna.lista_eleitores_votantes.append(eleitor)
-            self.__tela_voto.mostra_mensagem(f'\nSEUS VOTOS FORAM COMPUTADOS, OBRIGADO!\n')
+            if turno == 1:
+                self.__controlador_urna.urna.votantes_1_turno.append(eleitor)
+            elif turno == 2:
+                self.__controlador_urna.urna.votantes_2_turno.append(eleitor)
+            self.__tela_voto.mostra_mensagem(f'\nSEUS VOTOS FORAM COMPUTADOS, OBRIGADO!')
             return True
 
     def seleciona_eleitor(self):
@@ -41,7 +53,7 @@ class ControladorVotos():
             cpf_eleitor = self.__tela_voto.pegar_cpf_eleitor()
             for eleitor in self.__controlador_urna.controlador_eleitores.eleitores:
                 if eleitor.cpf == cpf_eleitor:
-                    self.__tela_voto.mostra_mensagem(f'\nBem vindo {eleitor.nome}!\n')
+                    self.__tela_voto.mostra_mensagem(f'\nBem vindo {eleitor.nome}!')
                     return eleitor
             self.__tela_voto.mostra_mensagem(f'\nCPF inválido!')
             self.__tela_voto.mostra_mensagem(f'Digite 1 para tentar novamente ou 0 para encerrar tentativa!\n')
@@ -79,3 +91,25 @@ class ControladorVotos():
             if (candidato.numero == num_voto and candidato.cargo.name == cargo.name):
                 return candidato
         return False
+
+    def encerra_votação(self):
+        while True:
+            self.__tela_voto.mostra_mensagem(f'\n1 - ENCERRAR O {self.__controlador_urna.urna.turno}º TURNO')
+            self.__tela_voto.mostra_mensagem(f'\n0 - CONTINUAR A ELEIÇÃO\n')
+            opcao = self.__tela_voto.pega_opcao()
+            return opcao
+
+    def testar_eleitor_votante(self, eleitor):
+        turno = self.__controlador_urna.urna.turno
+        if turno == 1:
+            if eleitor in self.__controlador_urna.urna.votantes_1_turno:
+                self.__tela_voto.mostra_mensagem(f'\nO ELEITOR SELECIONADO JÁ VOTOU NESTA ELEIÇÃO!')
+                return False
+            else:
+                return True
+        elif turno == 2:
+            if eleitor in self.__controlador_urna.urna.votantes_2_turno:
+                self.__tela_voto.mostra_mensagem(f'\nO ELEITOR SELECIONADO JÁ VOTOU NESTA ELEIÇÃO!')
+                return False
+            else:
+                return True
