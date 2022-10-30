@@ -10,9 +10,8 @@ class ControladorRegistro:
         self.__tela_registros = TelaRegistros()
 
     def mostra_tela_inicial(self):
-        opcoes = {1: self.abre_registros_geral, 
-                  2: self.abre_registros_1_turno,
-                  3: self.abre_registros_2_turno}
+        opcoes = {1: self.abre_registros_1_turno,
+                  2: self.abre_registros_2_turno}
         while True:
             self.__tela_registros.abre_tela_inicial()
             opcao = self.__tela_registros.pega_opcao()
@@ -20,14 +19,21 @@ class ControladorRegistro:
                 break
             opcoes[opcao]()
 
-    def mostra_tela_registros(self):
-        pass
-
     def abre_registros_1_turno(self):
-        pass
+        while True:
+            self.__tela_registros.abre_tela_registros(1)
+            opcao = self.__tela_registros.pega_opcao_registro()
+            if opcao == 0:
+                break
+            self.mostra_resultados_gerais(1)
 
     def abre_registros_2_turno(self):
-        pass
+        while True:
+            self.__tela_registros.abre_tela_registros(2)
+            opcao = self.__tela_registros.pega_opcao_registro()
+            if opcao == 0:
+                break
+            self.mostra_resultados_gerais(2)
 
-    def abre_registros_geral(self):
-        pass
+    def mostra_resultados_gerais(self, turno):
+        self.__tela_registros.mostra_mensagem('cheguei aqui')
