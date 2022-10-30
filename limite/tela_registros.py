@@ -36,3 +36,21 @@ class TelaRegistros(TelaAbstrata):
                 return opcao
             except ValueError:
                 print("Opção indisponível, tente uma opção válida.")
+
+    def abre_tela_resultados_gerais(self, turno, dados_reitor, dados_grad, dados_pesq, dados_ext):
+        if turno == 1:
+            print('\n----- RESULTADOS 1º TURNO -----\n')
+        elif turno == 2:
+            print('\n----- RESULTADOS 2º TURNO -----\n')
+        else:
+            print('TURNO INVÁLIDO')
+            return
+        print('----- RESULTADOS REITOR -----\n')
+        for key in dados_reitor:
+            print(f'{key} - {dados_reitor[key][1]} ({dados_reitor[key][0]}) - {dados_reitor[key][2]} VOTOS')
+        print('\n----- RESULTADOS PRÓ-REITOR GRADUAÇÃO -----\n')
+        print(f'{key} - {dados_grad[key][1]} ({dados_grad[key][0]}) - {dados_grad[key][2]} VOTOS')
+        print('\n----- RESULTADOS PRÓ-REITOR PESQUISA -----\n')
+        print(f'{key} - {dados_pesq[key][1]} ({dados_pesq[key][0]}) - {dados_pesq[key][2]} VOTOS')
+        print('\n----- RESULTADOS PRÓ-REITOR EXTENSÃO -----\n')
+        print(f'{key} - {dados_ext[key][1]} ({dados_ext[key][0]}) - {dados_ext[key][2]} VOTOS')

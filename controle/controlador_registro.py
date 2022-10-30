@@ -36,4 +36,50 @@ class ControladorRegistro:
             self.mostra_resultados_gerais(2)
 
     def mostra_resultados_gerais(self, turno):
-        self.__tela_registros.mostra_mensagem('cheguei aqui')
+        dados_reitor = self.calcula_resultados(turno, Cargo(1))
+        dados_grad = self.calcula_resultados(turno, Cargo(2))
+        dados_pesq = self.calcula_resultados(turno, Cargo(3))
+        dados_ext = self.calcula_resultados(turno, Cargo(4))
+        self.__tela_registros.abre_tela_resultados_gerais(turno, dados_reitor, dados_grad, dados_pesq, dados_ext)
+
+    def calcula_resultados(self, turno, cargo):
+        dados_eleicao = {}
+        i = 0
+        for candidato in self.__controlador_urna.controlador_candidatos.candidatos:
+            if candidato.cargo == cargo:
+                candidatos_cargo[i][0].append(candidato.numero)
+                candidatos_cargo[i][1].append(candidato.nome)
+                n_votos = self.conta_votos(candidato.numero, turno, cargo)
+                candidatos_cargo[i][2].append(n_votos)
+                i += 1
+        n_votos_brancos = self.conta_votos(00, turno, cargo)
+        candidatos_cargo[i].append([00, 'BRANCOS', n_votos_brancos])
+        i += 1
+        n_votos_nulos = self.conta_votos(99, turno, cargo)
+        candidatos_cargo[i].append([99, 'NULOS', n_votos_nulos])
+        return dados_eleicao
+
+    def conta_votos(self, n_candidato, turno, cargo):
+        n_votos = 0
+        if cargo == Cargo(1):
+            for voto in self.__controlador_urna.urna.lista_votos:
+                if (voto.voto_reitor == n_candidato) and (voto.turno == turno):
+                    n_votos += 1
+            return n_votos
+        elif cargo == Cargo(2):
+            for voto in self.__controlador_urna.urna.lista_votos:
+                if (voto.voto_grad == n_candidato) and (voto.turno == turno):
+                    n_votos += 1
+            return n_votos
+        elif cargo == Cargo(3):
+            for voto in self.__controlador_urna.urna.lista_votos:
+                if (voto.voto_pesq == n_candidato) and (voto.turno == turno):
+                    n_votos += 1
+            return n_votos
+        elif cargo == Cargo(4):
+            for voto in self.__controlador_urna.urna.lista_votos:
+                if (voto.voto_ext == n_candidato) and (voto.turno == turno):
+                    n_votos += 1
+            return n_votos
+        else:
+            return False
