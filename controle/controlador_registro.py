@@ -2,6 +2,8 @@ from limite.tela_registros import TelaRegistros
 from entidade.eleitor import Eleitor
 from entidade.candidato import Candidato
 from entidade.voto import Voto
+from entidade.cargo import Cargo
+from entidade.categoria import Categoria
 
 
 class ControladorRegistro:
@@ -44,19 +46,20 @@ class ControladorRegistro:
 
     def calcula_resultados(self, turno, cargo):
         dados_eleicao = {}
-        i = 0
+        i = 1
         for candidato in self.__controlador_urna.controlador_candidatos.candidatos:
             if candidato.cargo == cargo:
-                candidatos_cargo[i][0].append(candidato.numero)
-                candidatos_cargo[i][1].append(candidato.nome)
+                dados_eleicao[i] = []
+                dados_eleicao[i].insert(0, candidato.numero)
+                dados_eleicao[i].insert(1, candidato.nome)
                 n_votos = self.conta_votos(candidato.numero, turno, cargo)
-                candidatos_cargo[i][2].append(n_votos)
+                dados_eleicao[i].insert(2, n_votos)
                 i += 1
         n_votos_brancos = self.conta_votos(00, turno, cargo)
-        candidatos_cargo[i].append([00, 'BRANCOS', n_votos_brancos])
+        dados_eleicao[i] = [00, 'BRANCOS', n_votos_brancos]
         i += 1
         n_votos_nulos = self.conta_votos(99, turno, cargo)
-        candidatos_cargo[i].append([99, 'NULOS', n_votos_nulos])
+        dados_eleicao[i] = [99, 'NULOS', n_votos_nulos]
         return dados_eleicao
 
     def conta_votos(self, n_candidato, turno, cargo):
