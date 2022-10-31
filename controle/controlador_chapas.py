@@ -53,7 +53,6 @@ class ControladorChapas():
 
     def seleciona_chapa(self):
         opcoes = self.lista_chapas_enum()
-        opcoes[0] = 'Sair'
         if self.__chapas == []:
             self.__tela_chapa.mostra_mensagem('\nNÃO EXISTEM CHAPAS CADASTRADAS!\n')
         while True:

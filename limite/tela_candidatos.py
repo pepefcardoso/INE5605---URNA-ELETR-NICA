@@ -1,14 +1,14 @@
-class TelaCandidatos():
+from limite.abstract_tela import TelaAbstrata
+
+
+class TelaCandidatos(TelaAbstrata):
 
     def abre_tela_inicial(self):
-        print('-' * 20)
-        print('Candidatos')
-        print('-' * 20)
-        print('1 - Ver Lista de Candidatos')
-        print('2 - Adicionar Candidatos')
-        print('3 - Remover Candidatos')
-        print('4 - Definir Máximo de Candidatos')
-        print('0 - Voltar ao Menu Principal')
+        super().abre_tela_inicial(nome_menu='Candidatos', opcoes_menu=['Ver Lista de Candidatos',
+                                                                       'Adicionar Candidatos',
+                                                                       'Remover Candidatos',
+                                                                       'Definir Máximo de Candidatos'],
+                                  msg_saida='Voltar ao Menu Principal')
         opcao = self.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
         return opcao
 
@@ -30,8 +30,7 @@ class TelaCandidatos():
             numero = int(input('Número do Candidato: '))
             if numero <= 98 and numero >= 1:
                 break
-        chapa = str(input('Chapa do Candidato: '))
-        return {'nome': nome, 'cpf': cpf, 'numero': numero, 'chapa': chapa}
+        return {'nome': nome, 'cpf': cpf, 'numero': numero}
 
     def pega_dado_cpf(self):
         cpf = int(input('CPF do Candidato para excluir: '))
@@ -42,7 +41,7 @@ class TelaCandidatos():
             numero = input("Números de Candidatos a cadastrar: ")
             try:
                 dado = int(numero)
-                if not dado >= 1:
+                if not dado >= 1 and isinstance(dado, int):
                     raise Exception
                 return dado
             except Exception:
@@ -61,6 +60,9 @@ class TelaCandidatos():
                 print("Opção indisponível, tente uma opção válida.")
                 if opcoes_validas:
                     print('Opções válidas: ', opcoes_validas)
+
+    def mostra_entidade(self):
+        pass
 
     def mostra_opcao(self, numero: int, nome: str):
         print(f'CANDIDATO: {nome}, NÚMERO: {numero}')

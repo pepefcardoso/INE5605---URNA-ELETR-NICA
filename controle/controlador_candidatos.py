@@ -48,11 +48,12 @@ class ControladorCandidatos:
             cont = 0
         cargo = self.__controlador_urna.controlador_cargo.selecionar_cargo()
         categoria = self.__controlador_urna.controlador_categoria.selecionar_categoria()
+        chapa = self.__controlador_urna.controlador_chapas.seleciona_chapa()
         candidato = Candidato(nome=dados['nome'],
                               cpf=dados['cpf'],
                               categoria=categoria,
                               numero=dados['numero'],
-                              chapa=dados['chapa'],
+                              chapa= chapa,
                               cargo=cargo)
         self.__candidatos.append(candidato)
 
