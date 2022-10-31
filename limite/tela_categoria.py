@@ -1,4 +1,7 @@
-class TelaCategoria():
+from limite.abstract_tela import TelaAbstrata
+
+
+class TelaCategoria(TelaAbstrata):
 
     def abre_tela_inicial(self):
         print(('-' * 5), ' Categoria ', ('-' * 5))
@@ -31,3 +34,6 @@ class TelaCategoria():
 
     def mostra_mensagem(self, msg):
         print(msg)
+
+    def mostra_entidade(self):
+        pass

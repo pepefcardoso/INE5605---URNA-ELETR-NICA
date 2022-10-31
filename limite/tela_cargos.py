@@ -1,4 +1,7 @@
-class TelaCargos():
+from limite.abstract_tela import TelaAbstrata
+
+
+class TelaCargos(TelaAbstrata):
 
     def abre_tela_inicial(self):
         print(('-' * 5), ' Cargos ', ('-' * 5))
@@ -31,3 +34,6 @@ class TelaCargos():
 
     def mostra_mensagem(self, msg):
         print(msg)
+
+    def mostra_entidade(self):
+        pass
