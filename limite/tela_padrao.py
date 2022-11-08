@@ -8,7 +8,7 @@ class TelaPadrao():
             i += 1
         print(f'0 - {msg_saida}\n')
 
-    def pega_opcao(self, mensagem: str = "", opcoes_validas: [] = None):
+    def pega_opcao(self, mensagem: str = "", opcoes_validas: list = []):
         while True:
             valor_lido = input(mensagem)
             try:
@@ -19,7 +19,7 @@ class TelaPadrao():
             except ValueError:
                 print("Opção indisponível, tente uma opção válida.")
 
-    def mostra_entidade(self, dados_entidade: {} = None):
+    def mostra_entidade(self, dados_entidade: dict = {}):
         for key in dados_entidade:
             print(f'{key}: {dados_entidade[key]}')
 

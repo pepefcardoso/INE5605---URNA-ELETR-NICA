@@ -3,20 +3,18 @@ from limite.tela_padrao import TelaPadrao
 
 class TelaChapa(TelaPadrao):
 
-    def abre_tela_inicial(self):
-        super(TelaChapa, self).abre_tela_inicial('CHAPAS',
-                                                      ['LISTA DE CHAPAS', 'ADICIONAR CHAPA', 'REMOVER CHAPA', 'ALTERAR CHAPA'],
-                                                      'VOLTAR AO MENU INICIAL')
+    def abre_tela_inicial(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
+        super().abre_tela_inicial(nome_menu, opcoes_menu, msg_saida)
 
-    def pega_opcao(self):
-        opcao = super(TelaChapa, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
+    def pega_opcao(self, mensagem: str = "", opcoes_validas: list = []):
+        opcao = super().pega_opcao(mensagem, opcoes_validas)
         return opcao
 
     def mostra_entidade(self, nome_chapa):
-        super(TelaChapa, self).mostra_entidade(nome_chapa)
+        super().mostra_entidade(nome_chapa)
 
     def mostra_mensagem(self, mensagem):
-        super(TelaChapa, self).mostra_mensagem(mensagem)
+        super().mostra_mensagem(mensagem)
 
     def pega_nome_chapa(self):
         while True:
@@ -26,11 +24,11 @@ class TelaChapa(TelaPadrao):
                 if (not isinstance(nome_chapa, str) or
                     len(nome_chapa) < 1):
                     raise ValueError
-                return nome_chapa
+                return nome_chapa.title()
             except ValueError:
                 print('Chapa inválida, tente novamente!')
 
-    def pega_chapa_num(self, dict_chapas: {} = None, opcoes_validas: [] = None):
+    def pega_chapa_num(self, dict_chapas: dict = {}, opcoes_validas: list = []):
         for key in dict_chapas:
             print(f'{key} - {dict_chapas[key]}')
         while True:

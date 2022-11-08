@@ -11,15 +11,17 @@ class ControladorChapas():
         opcoes = {1: self.lista_chapas, 2: self.adiciona_chapa,
                   3: self.remove_chapa, 4: self.altera_chapa}
         while True:
-            self.__tela_chapa.abre_tela_inicial()
-            opcao = self.__tela_chapa.pega_opcao()
+            self.__tela_chapa.abre_tela_inicial('CHAPAS', 
+                                                ['LISTA DE CHAPAS', 'ADICIONAR CHAPA', 'REMOVER CHAPA', 'ALTERAR CHAPA'], 
+                                                'VOLTAR AO MENU INICIAL')
+            opcao = self.__tela_chapa.pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
             if opcao == 0:
                 break
             opcoes[opcao]()
 
     def lista_chapas(self):
         if self.__chapas == []:
-            self.__tela_chapa.mostra_mensagem('\nNÃO EXISTEM CHAPAS CADASTRADAS!\n')
+            self.__tela_chapa.mostra_mensagem('\nNÃO EXISTEM CHAPAS CADASTRADAS!')
         else:
             for chapa in self.__chapas:
                 nome_chapa = {'Nome': chapa.nome}
@@ -29,9 +31,9 @@ class ControladorChapas():
         nome_chapa = self.__tela_chapa.pega_nome_chapa()
         for chapa in self.__chapas:
             if chapa.nome == nome_chapa:
-                self.__tela_chapa.mostra_mensagem("\nJÁ EXISTE CHAPA CADASTRADA COM ESTE NOME!\n")
+                self.__tela_chapa.mostra_mensagem("\nJÁ EXISTE CHAPA CADASTRADA COM ESTE NOME!")
                 return None
-        self.__tela_chapa.mostra_mensagem("\nCHAPA CADASTRADA COM SUCESSO!\n")
+        self.__tela_chapa.mostra_mensagem("\nCHAPA CADASTRADA COM SUCESSO!")
         self.__chapas.append(Chapa(nome_chapa))
 
     def remove_chapa(self):
@@ -39,8 +41,8 @@ class ControladorChapas():
         for chapa in self.__chapas:
             if chapa.nome == nome_chapa:
                 self.__chapas.remove(chapa)
-                return self.__tela_chapa.mostra_mensagem("\nCHAPA REMOVIDA COM SUCESSO!\n")
-        self.__tela_chapa.mostra_mensagem("\nNÃO EXISTE CHAPA CADASTRADA COM ESTE NOME!\n")
+                return self.__tela_chapa.mostra_mensagem("\nCHAPA REMOVIDA COM SUCESSO!")
+        self.__tela_chapa.mostra_mensagem("\nNÃO EXISTE CHAPA CADASTRADA COM ESTE NOME!")
 
     def altera_chapa(self):
         nome_chapa = self.__tela_chapa.pega_nome_chapa()
@@ -48,13 +50,13 @@ class ControladorChapas():
             if chapa.nome == nome_chapa:
                 nova_chapa = self.__tela_chapa.pega_nome_chapa()
                 chapa.nome = nova_chapa
-                return self.__tela_chapa.mostra_mensagem('\nCHAPA ALTERADA COM SUCESSO\n')
-        self.__tela_chapa.mostra_mensagem('\nNÃO EXISTE CHAPA CADASTRADA COM ESTE NOME!\n')
+                return self.__tela_chapa.mostra_mensagem('\nCHAPA ALTERADA COM SUCESSO')
+        self.__tela_chapa.mostra_mensagem('\nNÃO EXISTE CHAPA CADASTRADA COM ESTE NOME!')
 
     def seleciona_chapa(self):
         opcoes = self.lista_chapas_enum()
         if self.__chapas == []:
-            self.__tela_chapa.mostra_mensagem('\nNÃO EXISTEM CHAPAS CADASTRADAS!\n')
+            self.__tela_chapa.mostra_mensagem('\nNÃO EXISTEM CHAPAS CADASTRADAS!')
         while True:
             opcao = self.__tela_chapa.pega_chapa_num(opcoes, list(opcoes.keys()))
             if opcao == 0:

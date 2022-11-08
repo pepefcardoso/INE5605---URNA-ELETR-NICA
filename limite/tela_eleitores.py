@@ -6,7 +6,7 @@ class TelaEleitores(TelaPadrao):
     def abre_tela_inicial(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
         super().abre_tela_inicial(nome_menu, opcoes_menu, msg_saida)
 
-    def pega_opcao(self, mensagem: str = "", opcoes_validas: [] = None):
+    def pega_opcao(self, mensagem: str = "", opcoes_validas: list = []):
         opcao = super().pega_opcao(mensagem, opcoes_validas)
         return opcao
 
