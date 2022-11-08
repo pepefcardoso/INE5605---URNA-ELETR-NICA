@@ -16,8 +16,11 @@ class ControladorEleitores:
         opcoes = {1: self.lista_eleitores, 2: self.adiciona_eleitor,
                   3: self.remove_eleitor, 4: self.altera_eleitor}
         while True:
-            self.__tela_eleitores.abre_tela_inicial('ELEITORES',['LISTA DE ELEITORES', 'ADICIONAR ELEITORES', 'REMOVER ELEITORES', 'ALTERAR ELEITOR'],'VOLTAR AO MENU INICIAL')
-            opcao = self.__tela_eleitores.pega_opcao()
+            self.__tela_eleitores.abre_tela_inicial('ELEITORES',
+                                                    ['LISTA DE ELEITORES', 'ADICIONAR ELEITORES', 'REMOVER ELEITORES', 'ALTERAR ELEITOR'],
+                                                    'VOLTAR AO MENU INICIAL')
+            opcao = self.__tela_eleitores.pega_opcao('Escolha uma opção: ',
+                                                     [1, 2, 3, 4, 0])
             if opcao == 0:
                 break
             opcoes[opcao]()

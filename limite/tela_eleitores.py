@@ -6,17 +6,15 @@ class TelaEleitores(TelaPadrao):
     def abre_tela_inicial(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
         super().abre_tela_inicial(nome_menu, opcoes_menu, msg_saida)
 
-#('ELEITORES',['LISTA DE ELEITORES', 'ADICIONAR ELEITORES', 'REMOVER ELEITORES', 'ALTERAR ELEITOR'],'VOLTAR AO MENU INICIAL')
-
-    def pega_opcao(self):
-        opcao = super(TelaEleitores, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])
+    def pega_opcao(self, mensagem: str = "", opcoes_validas: [] = None):
+        opcao = super().pega_opcao(mensagem, opcoes_validas)
         return opcao
 
     def mostra_entidade(self, dados_eleitor):
-        super(TelaEleitores, self).mostra_entidade(dados_eleitor)
+        super().mostra_entidade(dados_eleitor)
 
     def mostra_mensagem(self, mensagem):
-        super(TelaEleitores, self).mostra_mensagem(mensagem)
+        super().mostra_mensagem(mensagem)
 
     def pega_dados_eleitor(self):
         print("\nDados do Eleitor")
@@ -31,7 +29,7 @@ class TelaEleitores(TelaPadrao):
                     len(nome_lido) < 1 or 
                     len(cpf_lido) != 11):
                     raise ValueError
-                return {'nome': nome, 'cpf': cpf}
+                return {'nome': nome.title(), 'cpf': cpf}
             except ValueError:
                 print('Dados incorretos, tente novamente!')
 
