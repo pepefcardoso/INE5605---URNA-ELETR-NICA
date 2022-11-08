@@ -1,7 +1,7 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
 
-class TelaVoto(TelaAbstrata):
+class TelaVoto(TelaPadrao):
     
     def abre_tela_inicial(self):
         super(TelaVoto, self).abre_tela_inicial('ELEIÇÕES UFSC',

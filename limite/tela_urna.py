@@ -1,7 +1,7 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
 
-class TelaUrna(TelaAbstrata):
+class TelaUrna(TelaPadrao):
 
     def pega_config(self):
         print('\n----- CONFIGURAÇÃO URNA UFSC -----\n')

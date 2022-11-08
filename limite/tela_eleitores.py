@@ -1,12 +1,12 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
 
-class TelaEleitores(TelaAbstrata):
+class TelaEleitores(TelaPadrao):
 
-    def abre_tela_inicial(self):
-        super(TelaEleitores, self).abre_tela_inicial('ELEITORES',
-                                                      ['LISTA DE ELEITORES', 'ADICIONAR ELEITORES', 'REMOVER ELEITORES', 'ALTERAR ELEITOR'],
-                                                      'VOLTAR AO MENU INICIAL')
+    def abre_tela_inicial(self, nome_menu: str = '', opcoes_menu: list = [], msg_saida: str = ''):
+        super().abre_tela_inicial(nome_menu, opcoes_menu, msg_saida)
+
+#('ELEITORES',['LISTA DE ELEITORES', 'ADICIONAR ELEITORES', 'REMOVER ELEITORES', 'ALTERAR ELEITOR'],'VOLTAR AO MENU INICIAL')
 
     def pega_opcao(self):
         opcao = super(TelaEleitores, self).pega_opcao('Escolha uma opção: ', [1, 2, 3, 4, 0])

@@ -1,7 +1,7 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
 
-class TelaRegistros(TelaAbstrata):
+class TelaRegistros(TelaPadrao):
     def abre_tela_inicial(self):
         super(TelaRegistros, self).abre_tela_inicial('REGISTROS',
                                                       ['REGISTROS 1º TURNO', 'REGISTROS 2º TURNO'],

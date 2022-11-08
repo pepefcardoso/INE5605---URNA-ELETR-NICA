@@ -1,7 +1,7 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
 
-class TelaCargos(TelaAbstrata):
+class TelaCargos(TelaPadrao):
 
     def abre_tela_inicial(self):
         print(('-' * 5), ' Cargos ', ('-' * 5))

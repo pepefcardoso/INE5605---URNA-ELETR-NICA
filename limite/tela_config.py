@@ -1,6 +1,6 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
-class TelaConfig(TelaAbstrata):
+class TelaConfig(TelaPadrao):
 
     def abre_tela_inicial(self):
         super(TelaConfig, self).abre_tela_inicial('CONFIGURAÇÃO',

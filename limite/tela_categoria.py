@@ -1,7 +1,7 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
 
-class TelaCategoria(TelaAbstrata):
+class TelaCategoria(TelaPadrao):
 
     def abre_tela_inicial(self):
         print(('-' * 5), ' Categoria ', ('-' * 5))

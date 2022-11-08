@@ -1,7 +1,7 @@
-from limite.abstract_tela import TelaAbstrata
+from limite.tela_padrao import TelaPadrao
 
 
-class TelaCandidatos(TelaAbstrata):
+class TelaCandidatos(TelaPadrao):
 
     def abre_tela_inicial(self):
         super().abre_tela_inicial(nome_menu='Candidatos', opcoes_menu=['Ver Lista de Candidatos',
