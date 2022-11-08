@@ -58,6 +58,7 @@ class ControladorEleitores:
         for eleitor in self.__eleitores:
             if eleitor.cpf == cpf_eleitor:
                 dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
+                dados_eleitor['categoria'] = self.__controlador_urna.controlador_categoria.selecionar_categoria()
                 eleitor.nome = dados_eleitor['nome']
                 eleitor.cpf = dados_eleitor['cpf']
                 eleitor.categoria = dados_eleitor['categoria']
