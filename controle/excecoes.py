@@ -33,3 +33,7 @@ class EleitorDuplicadoException(Exception):
 class ListaEleitoresCheiaException(Exception):
     def __init__(self):
         super().__init__("LISTA DE ELEITORES CHEIA!")
+
+class EleitorNaoEncontradoException(Exception):
+    def __init__(self):
+        super().__init__("ELEITOR NÃO ENCONTRADO!")

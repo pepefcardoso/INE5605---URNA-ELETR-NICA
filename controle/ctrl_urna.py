@@ -62,21 +62,9 @@ class ControladorUrna():
     def adiciona_eleitor(self, nome: str, cpf: str, categoria: str):
         if len(self.__urna.eleitores) == self.__urna.max_eleitores:
             raise ListaEleitoresCheiaException
-        if nome is not None:
-            if (len(nome)<1 or 
-                not isinstance(nome, str)or 
-                not all(x.isalpha() or x.isspace() for x in nome)):
-                raise NomeInvalidoException
-        if cpf is not None:
-            if (len(cpf)!=11 or 
-                not isinstance(cpf, str) or 
-                not cpf.isnumeric()):
-                raise CpfInvalidoException
+        self.checa_nome(nome)
+        self.checa_cpf(cpf)
         if categoria is not None:
-            if (len(categoria)<1 or 
-                not isinstance(categoria, str)or 
-                not categoria.isalpha()):
-                raise CategoriaInvalidaException
             categoria = self.busca_categoria_nome(categoria)
         for eleitor in self.__urna.eleitores:
             if eleitor.cpf == cpf:
@@ -91,3 +79,43 @@ class ControladorUrna():
                     return c
             raise CategoriaInvalidaException
         raise CategoriaInvalidaException
+
+    def remove_eleitor(self, cpf: str):
+        if cpf is not None and isinstance(cpf, str):
+            for eleitor in self.__urna.eleitores:
+                if eleitor.cpf == cpf:
+                    self.__urna.eleitores.remove(eleitor)
+                    return True
+            raise CpfInvalidoException
+        raise CpfInvalidoException
+
+    def altera_eleitor(self, nome: str, cpf: str, categoria: str):
+        if cpf is not None and isinstance(cpf, str):
+            for eleitor in self.__urna.eleitores:
+                if eleitor.cpf == cpf:
+                    if self.checa_nome(nome):
+                        if categoria is not None:
+                            categoria = self.busca_categoria_nome(categoria)
+                            eleitor.nome = nome
+                            eleitor.categoria = categoria
+                            return True
+            raise EleitorNaoEncontradoException
+        raise CpfInvalidoException
+
+    def checa_nome(self, nome:str):
+        if nome is not None:
+            if (len(nome)<1 or 
+                not isinstance(nome, str)or 
+                not all(x.isalpha() or x.isspace() for x in nome)):
+                raise NomeInvalidoException
+            return True
+        raise NomeInvalidoException
+
+    def checa_cpf(self, cpf: str):
+        if cpf is not None:
+            if (len(cpf)!=11 or 
+                not isinstance(cpf, str) or 
+                not cpf.isnumeric()):
+                raise CpfInvalidoException
+            return True
+        raise CpfInvalidoException
