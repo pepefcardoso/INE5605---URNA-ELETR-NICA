@@ -29,37 +29,21 @@ class ControladorUrna():
                     codigo = values['codigo']
                     max_eleitores = values['max_eleitores']
                     max_candidatos = values['max_candidatos']
-                    if len(codigo) < 1 or not codigo.isnumeric or int(codigo) not in range(1,99):
+                    if len(codigo) < 1 or not codigo.isnumeric():
                         raise CodigoIncorretoException
-                    if len(max_eleitores) < 1 or not max_eleitores.isnumeric or int(codigo) not in range(1,99):
+                    if int(codigo) not in range(1,99):
+                        raise CodigoIncorretoException
+                    if len(max_eleitores) < 1 or not max_eleitores.isnumeric():
                         raise MaxEleitoresIncorretoException
-                    if len(max_candidatos) < 1 or not max_candidatos.isnumeric or int(codigo) not in range(1,99):
+                    if int(max_eleitores) not in range(1,100001):
+                        raise MaxEleitoresIncorretoException
+                    if len(max_candidatos) < 1 or not max_candidatos.isnumeric():
+                        raise MaxCandidatosIncorretoException
+                    if int(max_candidatos) not in range(1,100001):
                         raise MaxCandidatosIncorretoException
                     self.__tela_urna.mostra_mensagem('SUCESSO', 'URNA CONFIGURADA!')
+                    self.__urna = Urna(codigo, max_eleitores, max_candidatos)
+                    return True
                 except Exception as e:
                     self.__tela_urna.mostra_mensagem('ERRO', e)
-
-
-'''
-    def pega_config(self):
-        while True:
-            codigo_lido = input('Insira o código da urna: ')
-            max_eleitores_lido = input('Insira o Nº máximo de eleitores permitido: ')
-            max_candidatos_lido = input('Insira o Nº máximo de candidato permitido: ')
-            try:
-                codigo = int(codigo_lido)
-                max_eleitores = int(max_eleitores_lido)
-                max_candidatos = int(max_candidatos_lido)
-                if (not isinstance(codigo, int) or
-                    not isinstance(max_eleitores, int) or
-                    not isinstance(max_candidatos, int) or
-                    (codigo not in range(1, 100)) or
-                    (max_eleitores not in range(1, 100001)) or
-                    (max_candidatos not in range(1, 100001))):
-                    raise ValueError
-                else:
-                    print('\nURNA CONFIGURADA COM SUCESSO!\n')
-                    return {'codigo': codigo, 'turno': 1, 'max_eleitores': max_eleitores, 'max_candidatos': max_candidatos}
-            except ValueError:
-                print('\nA CONFIGURAÇÃO FOI FEITA INCORRETAMENTE, TENTE NOVAMENTE\n')
-'''
+        return False
