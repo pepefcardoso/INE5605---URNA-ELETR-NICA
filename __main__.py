@@ -1,5 +1,5 @@
-from controle.controlador_urna import ControladorUrna
+from controle.ctrl_sistema import ControladorSistema
 
 
 if __name__ == '__main__':
-    ControladorUrna().inicializa_urna()
+    ControladorSistema().abre_sistema()

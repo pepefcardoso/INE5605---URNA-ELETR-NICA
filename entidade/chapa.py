@@ -1,12 +1,18 @@
+from entidade.pessoa import Pessoa
 
-class Chapa():
-    def __init__(self, nome: str):
-        self.__nome = nome
+
+class Chapa(Pessoa):
+    def __init__(self, 
+                 codigo: str, 
+                 nome: str):
+        self.__codigo = codigo
+        super().__init__(codigo, nome)
 
     @property
-    def nome(self):
-        return self.__nome
+    def codigo(self):
+        return self.__codigo
 
-    @nome.setter
-    def nome(self, nome: str):
-        self.__nome = nome
+    @codigo.setter
+    def codigo(self, codigo):
+        if isinstance(codigo, str):
+            self.__codigo = codigo

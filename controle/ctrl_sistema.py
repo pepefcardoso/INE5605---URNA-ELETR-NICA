@@ -1,6 +1,5 @@
-from limite.tela_urna import TelaUrna
-from entidade.urna import Urna
-from controle.controlador_eleitores import ControladorEleitores
+from controle.ctrl_urna import ControladorUrna
+from controle.ctrl_eleitor import ControladorEleitores
 from controle.controlador_candidatos import ControladorCandidatos
 from controle.controlador_chapas import ControladorChapas
 from controle.controlador_cargo import ControladorCargo
@@ -8,14 +7,12 @@ from controle.controlador_categoria_eleitor import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.controlador_config import ControladorConfig
 from controle.controlador_voto import ControladorVotos
-
 import sys
 
 
-class ControladorUrna:
+class ControladorSistema:
     def __init__(self):
-        self.__tela_urna = TelaUrna()
-        self.__urna = None
+        self.__ctrl_urna = ControladorUrna(self)
         self.__controlador_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
         self.__controlador_chapas = ControladorChapas(self)
@@ -26,8 +23,8 @@ class ControladorUrna:
         self.__controlador_voto = ControladorVotos(self)
 
     @property
-    def urna(self):
-        return self.__urna
+    def ctrl_urna(self):
+        return self.__ctrl_urna
 
     @property
     def controlador_eleitores(self):
@@ -60,10 +57,6 @@ class ControladorUrna:
     @property
     def controlador_voto(self):
         return self.__controlador_voto
-    
-    @urna.setter
-    def urna(self, urna):
-        self.__urna = urna
 
     def inicia_eleitores(self):
         self.__controlador_eleitores.mostra_tela_inicial()
@@ -92,13 +85,8 @@ class ControladorUrna:
     def finaliza(self):
         sys.exit()
 
-    def inicializa_urna(self):
-        dados_urna = self.__tela_urna.pega_config()
-        self.__urna = Urna(dados_urna['codigo'], 
-                           dados_urna['turno'], 
-                           dados_urna['max_eleitores'], 
-                           dados_urna['max_candidatos'])
-        self.inicia_sistema()
+    def abre_sistema(self):
+        self.__ctrl_urna.configura_urna()
 
     def inicia_sistema(self):
         opcoes = {1: self.inicia_eleitores,
