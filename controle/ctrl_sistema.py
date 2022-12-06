@@ -7,6 +7,8 @@ from controle.controlador_categoria_eleitor import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.controlador_config import ControladorConfig
 from controle.controlador_voto import ControladorVotos
+from limite.tela_sistema import TelaSistema
+import PySimpleGUI as psg
 import sys
 
 
@@ -21,6 +23,7 @@ class ControladorSistema:
         self.__controlador_registro = ControladorRegistro(self)
         self.__controlador_config = ControladorConfig(self)
         self.__controlador_voto = ControladorVotos(self)
+        self.__tela_sistema = TelaSistema()
 
     @property
     def ctrl_urna(self):
@@ -82,30 +85,24 @@ class ControladorSistema:
     def inicia_voto(self):
         self.__controlador_voto.mostra_tela_inicial()
 
-    def finaliza(self):
-        sys.exit()
-
     def abre_sistema(self):
-        self.__ctrl_urna.configura_urna()
+        if not self.__ctrl_urna.configura_urna():
+            return
+        self.abre_menu_inicial()
 
-    def inicia_sistema(self):
-        opcoes = {1: self.inicia_eleitores,
-                  2: self.inicia_candidatos,
-                  3: self.inicia_chapas,
-                  4: self.inicia_cargos,
-                  5: self.inicia_categoria,
-                  6: self.inicia_registros,
-                  7: self.inicia_config,
-                  8: self.inicia_voto,
-                  0: self.finaliza}
+    def abre_menu_inicial(self):
+        self.__tela_sistema.tela_opcoes()
+        opcoes = {'ELEITORES': self.inicia_eleitores,
+                  'CANDIDATOS': self.inicia_candidatos,
+                  'CHAPAS': self.inicia_chapas,
+                  'CARGOS': self.inicia_cargos,
+                  'CATEGORIAS': self.inicia_categoria,
+                  'RELATÓRIOS': self.inicia_registros,
+                  'CONFIGURAÇÕES': self.inicia_config,
+                  'VOTAÇÃO': self.inicia_voto}
         while True:
-            self.__tela_urna.abre_tela_inicial()
-            opcao = self.__tela_urna.pega_opcao()
-            opcoes[opcao]()
-
-
-
-
-
-
-
+            button, values = self.__tela_sistema.abre_tela()
+            if button in (psg.WIN_CLOSED, 'CANCELAR'):
+                break
+            self.__tela_sistema.fecha_tela()
+            return opcoes[button]()

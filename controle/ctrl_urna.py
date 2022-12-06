@@ -43,6 +43,7 @@ class ControladorUrna():
                         raise MaxCandidatosIncorretoException
                     self.__tela_urna.mostra_mensagem('SUCESSO', 'URNA CONFIGURADA!')
                     self.__urna = Urna(codigo, max_eleitores, max_candidatos)
+                    self.__tela_urna.fecha_tela()
                     return True
                 except Exception as e:
                     self.__tela_urna.mostra_mensagem('ERRO', e)
