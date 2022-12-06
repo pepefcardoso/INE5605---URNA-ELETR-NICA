@@ -1,52 +1,47 @@
 from limite.tela_eleitores import TelaEleitores
 from entidade.eleitor import Eleitor
+from entidade.categoria import Categoria
+import PySimpleGUI as psg
+
 
 class ControladorEleitores:
 
-    def __init__(self, controlador_urna):
-        self.__controlador_urna = controlador_urna
+    def __init__(self, ctrl_sistema):
+        self.__ctrl_sistema = ctrl_sistema
         self.__tela_eleitores = TelaEleitores()
-        self.__eleitores = []
-
-    @property
-    def eleitores(self):
-        return self.__eleitores
 
     def mostra_tela_inicial(self):
-        opcoes = {1: self.lista_eleitores, 2: self.adiciona_eleitor,
-                  3: self.remove_eleitor, 4: self.altera_eleitor}
+        self.__tela_eleitores.tela_opcoes(self.__ctrl_sistema.ctrl_urna.lista_eleitores())
+        opcoes = {'ADICIONAR': self.adiciona_eleitor,
+                  'REMOVER': self.remove_eleitor,
+                  'ALTERAR': self.altera_eleitor}
         while True:
-            self.__tela_eleitores.abre_tela_inicial('ELEITORES',
-                                                    ['LISTA DE ELEITORES', 'ADICIONAR ELEITORES', 'REMOVER ELEITORES', 'ALTERAR ELEITOR'],
-                                                    'VOLTAR AO MENU INICIAL')
-            opcao = self.__tela_eleitores.pega_opcao('Escolha uma opção: ',
-                                                     [1, 2, 3, 4, 0])
-            if opcao == 0:
-                break
-            opcoes[opcao]()
-
-    def lista_eleitores(self):
-        if self.__eleitores == []:
-            self.__tela_eleitores.mostra_mensagem('\nNÃO EXISTEM ELEITORES CADASTRADOS!')
-        else:
-            for eleitor in self.__eleitores:
-                dados_eleitor = {'Nome': eleitor.nome,'CPF': eleitor.cpf,'Categoria': eleitor.categoria.name}
-                self.__tela_eleitores.mostra_entidade(dados_eleitor)
+            event, values = self.__tela_eleitores.abre()
+            if event in ('VOLTAR', psg.WIN_CLOSED):
+                self.__tela_eleitores.fecha()
+                return self.__ctrl_sistema.abre_menu_inicial()
+            self.__tela_eleitores.fecha()
+            return opcoes[event]()
 
     def adiciona_eleitor(self):
-        if len(self.__eleitores) == self.__controlador_urna.urna.max_eleitores:
-            self.__tela_eleitores.mostra_mensagem("\nO Nº MÁXIMO DE ELEITORES FOI ATINGIDO, NÃO É POSSIVEL ADICIONAR NOVO ELEITOR!")
-            return
-        else:
-            dados_eleitor = self.__tela_eleitores.pega_dados_eleitor()
-            dados_eleitor['categoria'] = self.__controlador_urna.controlador_categoria.selecionar_categoria()
-            novo_eleitor = Eleitor(dados_eleitor['nome'], dados_eleitor['cpf'], dados_eleitor['categoria'])
-            for eleitor in self.__eleitores:
-                if eleitor.cpf == novo_eleitor.cpf:
-                    self.__tela_eleitores.mostra_mensagem("\nJÁ EXISTE ELEITOR CADASTRADO COM ESTE CPF!!")
-                    return
-            self.__tela_eleitores.mostra_mensagem("\nELEITOR CADASTRADO COM SUCESSO!")
-            self.__eleitores.append(novo_eleitor)
+        self.__tela_eleitores.tela_adiciona_eleitor([c.name for c in Categoria])
+        while True:
+            event, values = self.__tela_eleitores.abre()
+            if event in ('CANCELAR', psg.WIN_CLOSED):
+                self.__tela_eleitores.fecha()
+                return self.mostra_tela_inicial()
+            if event == 'SALVAR':
+                print(values)
+                nome = values['1'].strip().title()
+                cpf = values['2'].strip()
+                categoria = values['3'].strip()
+                try:
+                    if self.__ctrl_sistema.ctrl_urna.adiciona_eleitor(nome, cpf, categoria):
+                        self.__tela_eleitores.mostra_mensagem('SUCESSO', 'ELEITOR ADICIONADO!')
+                        self.__tela_eleitores.fecha()
+                        return self.mostra_tela_inicial()
+                except Exception as e:
+                    self.__tela_eleitores.mostra_mensagem('ERRO', e)
 
     def remove_eleitor(self):
         cpf_eleitor = self.__tela_eleitores.pega_cpf_eleitor()

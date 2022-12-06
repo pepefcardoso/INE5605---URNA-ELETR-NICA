@@ -101,8 +101,9 @@ class ControladorSistema:
                   'CONFIGURAÇÕES': self.inicia_config,
                   'VOTAÇÃO': self.inicia_voto}
         while True:
-            button, values = self.__tela_sistema.abre_tela()
-            if button in (psg.WIN_CLOSED, 'CANCELAR'):
+            button, values = self.__tela_sistema.abre()
+            if button in (psg.WIN_CLOSED, 'SAIR'):
                 break
-            self.__tela_sistema.fecha_tela()
+            self.__tela_sistema.fecha()
             return opcoes[button]()
+        

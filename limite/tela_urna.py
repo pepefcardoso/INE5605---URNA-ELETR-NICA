@@ -18,11 +18,11 @@ class TelaUrna():
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('CONFIGURAÇÃO URNA', size=(1080,720)).Layout(layout)
 
-    def abre_tela(self):
+    def abre(self):
         button, values = self.__window.Read()
         return button, values
 
-    def fecha_tela(self):
+    def fecha(self):
         self.__window.Close()
 
     def mostra_mensagem(self, titulo: str, mensagem: str):

@@ -4,7 +4,7 @@ from entidade.cargo import Cargo
 
 class Urna():
     def __init__(self,
-                 codigo: int,
+                 codigo: str,
                  max_eleitores: int,
                  max_candidatos: int):
         self.__codigo = codigo
@@ -24,7 +24,7 @@ class Urna():
 
     @codigo.setter
     def codigo(self, codigo):
-        if isinstance(codigo, int):
+        if isinstance(codigo, str):
             self.__codigo = codigo
 
     @property
