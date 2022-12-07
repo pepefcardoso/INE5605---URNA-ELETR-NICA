@@ -182,3 +182,36 @@ class ControladorUrna():
                          candidato.cargo.name)
         return lista
 
+    def adiciona_candidato(self, cpf: str, numero: str, chapa: str, cargo: str):
+        eleitor = self.busca_eleitor_cpf(cpf)
+        if len(self.__urna.candidatos) == self.__urna.max_candidatos:
+            raise ListaCandidatosCheiaException
+        self.checa_numero(numero)
+        chapa = self.busca_chapa_nome(chapa)
+        cargo = self.busca_cargo_nome(cargo)
+        if categoria is not None:
+            categoria = self.busca_categoria_nome(categoria)
+        for eleitor in self.__urna.eleitores:
+            if eleitor.cpf == cpf:
+                raise EleitorDuplicadoException
+        self.__urna.eleitores.append(Eleitor(nome, cpf, categoria))
+        return True
+
+    def busca_eleitor_cpf(self, cpf: str):
+        if cpf is not None and isinstance(cpf, str):
+            for eleitor in self.__urna.eleitores:
+                if eleitor.cpf == cpf:
+                    return eleitor
+            raise EleitorNaoEncontradoException
+        raise CpfInvalidoException
+
+    def checa_numero(self, numero: str):
+        if numero is not None and isinstance(numero, str):
+            if(len(numero) not in range(1,3) or
+               not numero.isnumeric()):
+                raise NumeroInvalidoException
+            for candidato in self.__urna.candidatos:
+                if candidato.numero == numero:
+                    raise NumeroDuplicadoException
+            return True
+        raise NumeroInvalidoException

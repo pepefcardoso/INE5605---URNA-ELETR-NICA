@@ -1,6 +1,7 @@
 from limite.tela_candidatos import TelaCandidatos
 from entidade.candidato import Candidato
 from entidade.cargo import Cargo
+from entidade.chapa import Chapa
 import PySimpleGUI as psg
 
 
@@ -31,23 +32,30 @@ class ControladorCandidatos:
                     return opcoes[event](lista[values['LISTA'][0]])
 
     def adiciona_candidato(self):
-        self.__tela_eleitores.tela_adiciona_eleitor([c.name for c in Categoria])
+        chapas = [c.nome for c in self.__ctrl_sistema.ctrl_urna.lista_chapas()]
+        cargos = [c.name for c in Cargo]
+        if chapas[0] == []:
+            self.__tela_candidatos.mostra_mensagem('ERRO', 'SEM CHAPAS CADASTRADAS!')
+            self.__tela_candidatos.fecha()
+            return self.mostra_tela_inicial()
+        self.__tela_candidatos.tela_adiciona_candidato(chapas[0], cargos)
         while True:
-            event, values = self.__tela_eleitores.abre()
+            event, values = self.__tela_candidatos.abre()
             if event in ('CANCELAR', psg.WIN_CLOSED):
-                self.__tela_eleitores.fecha()
+                self.__tela_candidatos.fecha()
                 return self.mostra_tela_inicial()
             if event == 'SALVAR':
-                nome = values['1'].strip().title()
-                cpf = values['2'].strip()
-                categoria = values['3'].strip()
+                cpf = values['1'].strip()
+                numero = values['2'].strip()
+                chapa = values['3'].strip()
+                cargo = values['4'].strip()
                 try:
-                    if self.__ctrl_sistema.ctrl_urna.adiciona_eleitor(nome, cpf, categoria):
-                        self.__tela_eleitores.mostra_mensagem('SUCESSO', 'ELEITOR ADICIONADO!')
-                        self.__tela_eleitores.fecha()
+                    if self.__ctrl_sistema.ctrl_urna.adiciona_candidato(cpf, numero, chapa, cargo):
+                        self.__tela_candidatos.mostra_mensagem('SUCESSO', 'CANDIDATO ADICIONADO!')
+                        self.__tela_candidatos.fecha()
                         return self.mostra_tela_inicial()
                 except Exception as e:
-                    self.__tela_eleitores.mostra_mensagem('ERRO', e)
+                    self.__tela_candidatos.mostra_mensagem('ERRO', e)
 
     def remove_candidato(self, cliente: list):
         if cliente is not None and cliente != []:

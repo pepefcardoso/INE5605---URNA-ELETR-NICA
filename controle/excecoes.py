@@ -53,3 +53,15 @@ class NomeDuplicadoException(Exception):
 class ChapaNaoEncontradaException(Exception):
     def __init__(self):
         super().__init__("CHAPA NÃO ENCONTRADA!")
+
+class ListaCandidatosCheiaException(Exception):
+    def __init__(self):
+        super().__init__("LISTA DE CANDIDATOS CHEIA!")
+
+class NumeroInvalidoException(Exception):
+    def __init__(self):
+        super().__init__("NÚMERO INVÁLIDO!")
+
+class NumeroDuplicadoException(Exception):
+    def __init__(self):
+        super().__init__("NÚMERO DUPLICADO!")

@@ -22,11 +22,13 @@ class TelaCandidatos():
                    psg.Button('VOLTAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - CANDIDATOS', size=(1080,720)).Layout(layout)
 
-    def tela_adiciona_candidato(self, categorias: list):
+    def tela_adiciona_candidato(self, chapas: list, cargos: list):
         psg.ChangeLookAndFeel('Reddit')
-        layout = [[psg.Text('NOME'), psg.InputText(key='1')],
-                  [psg.Text('CPF'), psg.InputText(key='2')],
-                  [psg.Text('CATEGORIA'), psg.Combo(categorias, key='3')],
+        layout = [[psg.Text('- O CANDIDATO DEVE POSSUIR UM ELEITOR CADASTRADO COM SEU CPF')],
+                  [psg.Text('CPF: '), psg.InputText(key='1')],
+                  [psg.Text('NÚMERO: '), psg.InputText(key='2')],
+                  [psg.Text('CHAPA: '), psg.Combo(chapas, key='3')],
+                  [psg.Text('CARGO: '), psg.Combo(cargos, key='4')],
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - ADICIONAR ELEITOR', size=(1080,720)).Layout(layout)
 
