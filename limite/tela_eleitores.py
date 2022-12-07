@@ -41,7 +41,7 @@ class TelaEleitores():
 
     def tela_altera_eleitor(self, cliente:list, categorias:list):
         psg.ChangeLookAndFeel('Reddit')
-        layout = [[psg.Text('CONFIRMAR ALTERAÇÃO DO CLIENTE:')],
+        layout = [[psg.Text('CONFIRMAR ALTERAÇÃO DO ELEITOR:')],
                   [psg.Text('NOME'), psg.InputText(cliente[0], key='1')],
                   [psg.Text(f'CPF: {cliente[1]}')],
                   [psg.Text('CATEGORIA'), psg.Combo(categorias, cliente[2], key='2')],

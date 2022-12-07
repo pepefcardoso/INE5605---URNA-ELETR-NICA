@@ -204,6 +204,20 @@ class ControladorUrna():
             raise CandidatoNaoEncontradoException
         raise CpfInvalidoException
 
+    def altera_candidato(self, cpf: str, numero: str, chapa: str, cargo:str):
+        if cpf is not None and isinstance(cpf, str):
+            for candidato in self.__urna.candidatos:
+                if candidato.cpf == cpf:
+                    self.checa_numero(numero)
+                    chapa = self.busca_chapa_nome(chapa)
+                    cargo = self.busca_cargo_nome(cargo)
+                    candidato.numero = numero
+                    candidato.chapa = chapa
+                    candidato.cargo = cargo
+                    return True
+            raise CandidatoNaoEncontradoException
+        raise CpfInvalidoException
+
     def busca_eleitor_cpf(self, cpf: str):
         if cpf is not None and isinstance(cpf, str):
             for eleitor in self.__urna.eleitores:

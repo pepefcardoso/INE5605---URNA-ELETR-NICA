@@ -75,22 +75,25 @@ class ControladorCandidatos:
                         self.__tela_candidatos.mostra_mensagem('ERRO', e)
         return self.mostra_tela_inicial()
 
-    def altera_candidato(self, cliente: list):
-        if cliente is not None and cliente != []:
-            self.__tela_eleitores.tela_altera_eleitor(cliente, [c.name for c in Categoria])
+    def altera_candidato(self, candidato: list):
+        chapas = [i[1] for i in self.__ctrl_sistema.ctrl_urna.lista_chapas()]
+        cargos = [c.name for c in Cargo]
+        if candidato is not None and candidato != []:
+            self.__tela_candidatos.tela_altera_candidato(candidato, chapas, cargos)
             while True:
-                event, values = self.__tela_eleitores.abre()
+                event, values = self.__tela_candidatos.abre()
                 if event in ('CANCELAR', psg.WIN_CLOSED):
-                    self.__tela_eleitores.fecha()
+                    self.__tela_candidatos.fecha()
                     return self.mostra_tela_inicial()
                 if event == 'SALVAR':
-                    nome = values['1'].strip().title()
-                    categoria = values['2'].strip()
+                    numero = values['1'].strip()
+                    chapa = values['2'].strip()
+                    cargo = values['3'].strip()
                     try:
-                        if self.__ctrl_sistema.ctrl_urna.altera_eleitor(nome, cliente[1], categoria):
-                            self.__tela_eleitores.mostra_mensagem('SUCESSO', 'ELEITOR ALTERADO!')
-                            self.__tela_eleitores.fecha()
+                        if self.__ctrl_sistema.ctrl_urna.altera_candidato(candidato[1], numero, chapa, cargo):
+                            self.__tela_candidatos.mostra_mensagem('SUCESSO', 'CANDIDATO ALTERADO!')
+                            self.__tela_candidatos.fecha()
                             return self.mostra_tela_inicial()
                     except Exception as e:
-                        self.__tela_eleitores.mostra_mensagem('ERRO', e)
+                        self.__tela_candidatos.mostra_mensagem('ERRO', e)
         return self.mostra_tela_inicial()

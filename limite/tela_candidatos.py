@@ -44,14 +44,17 @@ class TelaCandidatos():
                   [psg.Submit('CONFIRMAR'), psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - REMOVER CANDIDATO', size=(1080,720)).Layout(layout)
 
-    def tela_altera_candidato(self, cliente:list, categorias:list):
+    def tela_altera_candidato(self, candidato: str, chapas: list, cargos: list):
         psg.ChangeLookAndFeel('Reddit')
-        layout = [[psg.Text('CONFIRMAR ALTERAÇÃO DO CLIENTE:')],
-                  [psg.Text('NOME'), psg.InputText(cliente[0], key='1')],
-                  [psg.Text(f'CPF: {cliente[1]}')],
-                  [psg.Text('CATEGORIA'), psg.Combo(categorias, cliente[2], key='2')],
+        layout = [[psg.Text('CONFIRMAR ALTERAÇÃO DO CANDIDATO:')],
+                  [psg.Text(f'NOME: {candidato[0]}')],
+                  [psg.Text(f'CPF: {candidato[1]}')],
+                  [psg.Text(f'CATEGORIA: {candidato[2]}')],
+                  [psg.Text('NÚMERO: '), psg.InputText(candidato[3], key='1')],
+                  [psg.Text('CHAPA: '), psg.Combo(chapas, candidato[4], key='2')],
+                  [psg.Text('CARGO: '), psg.Combo(cargos, candidato[5], key='3')],
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ALTERAR ELEITOR', size=(1080,720)).Layout(layout)
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ALTERAR CANDIDATO', size=(1080,720)).Layout(layout)
 
     def abre(self):
         event, values = self.__window.Read()
