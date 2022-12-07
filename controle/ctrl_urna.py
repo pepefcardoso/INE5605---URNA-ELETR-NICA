@@ -1,5 +1,5 @@
 from entidade.urna import Urna
-from entidade.categoria import Categoria
+from entidade.candidato import Candidato
 from entidade.eleitor import Eleitor
 from entidade.chapa import Chapa
 from limite.tela_urna import TelaUrna
@@ -174,12 +174,12 @@ class ControladorUrna():
     def lista_candidatos(self):
         lista = []
         for candidato in self.__urna.candidatos:
-            lista.append(candidato.nome,
+            lista.append([candidato.nome,
                          candidato.cpf,
                          candidato.categoria.name,
                          candidato.numero,
                          candidato.chapa.nome,
-                         candidato.cargo.name)
+                         candidato.cargo.name])
         return lista
 
     def adiciona_candidato(self, cpf: str, numero: str, chapa: str, cargo: str):
@@ -189,12 +189,10 @@ class ControladorUrna():
         self.checa_numero(numero)
         chapa = self.busca_chapa_nome(chapa)
         cargo = self.busca_cargo_nome(cargo)
-        if categoria is not None:
-            categoria = self.busca_categoria_nome(categoria)
-        for eleitor in self.__urna.eleitores:
-            if eleitor.cpf == cpf:
-                raise EleitorDuplicadoException
-        self.__urna.eleitores.append(Eleitor(nome, cpf, categoria))
+        for candidato in self.__urna.candidatos:
+            if candidato.cpf == cpf:
+                raise CandidatoDuplicadoException
+        self.__urna.candidatos.append(Candidato(eleitor.nome,cpf,eleitor.categoria,numero,chapa,cargo))
         return True
 
     def busca_eleitor_cpf(self, cpf: str):
@@ -215,3 +213,20 @@ class ControladorUrna():
                     raise NumeroDuplicadoException
             return True
         raise NumeroInvalidoException
+
+    def busca_chapa_nome(self, nome: str):
+        if nome is not None and isinstance(nome, str):
+            for c in self.__urna.chapas:
+                if c.nome == nome:
+                    return c
+            raise ChapaInvalidaException
+        raise ChapaInvalidaException
+
+    def busca_cargo_nome(self, nome: str):
+        if nome is not None and isinstance(nome, str):
+            for c in self.__urna.cargos:
+                if c.name == nome:
+                    return c
+            raise CargoInvalidoException
+        raise CargoInvalidoException
+

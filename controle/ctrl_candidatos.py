@@ -32,13 +32,13 @@ class ControladorCandidatos:
                     return opcoes[event](lista[values['LISTA'][0]])
 
     def adiciona_candidato(self):
-        chapas = [c.nome for c in self.__ctrl_sistema.ctrl_urna.lista_chapas()]
+        chapas = [i[1] for i in self.__ctrl_sistema.ctrl_urna.lista_chapas()]
         cargos = [c.name for c in Cargo]
-        if chapas[0] == []:
+        if chapas == []:
             self.__tela_candidatos.mostra_mensagem('ERRO', 'SEM CHAPAS CADASTRADAS!')
             self.__tela_candidatos.fecha()
             return self.mostra_tela_inicial()
-        self.__tela_candidatos.tela_adiciona_candidato(chapas[0], cargos)
+        self.__tela_candidatos.tela_adiciona_candidato(chapas, cargos)
         while True:
             event, values = self.__tela_candidatos.abre()
             if event in ('CANCELAR', psg.WIN_CLOSED):

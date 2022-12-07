@@ -65,3 +65,15 @@ class NumeroInvalidoException(Exception):
 class NumeroDuplicadoException(Exception):
     def __init__(self):
         super().__init__("NÚMERO DUPLICADO!")
+
+class ChapaInvalidaException(Exception):
+    def __init__(self):
+        super().__init__("CHAPA INVÁLIDA!")
+
+class CargoInvalidoException(Exception):
+    def __init__(self):
+        super().__init__("CARGO INVÁLIDO!")
+
+class CandidatoDuplicadoException(Exception):
+    def __init__(self):
+        super().__init__("CANDIDATO DUPLICADO!")
