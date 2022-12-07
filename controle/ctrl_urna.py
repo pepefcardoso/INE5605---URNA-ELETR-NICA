@@ -152,3 +152,21 @@ class ControladorUrna():
         self.__urna.chapas.append(Chapa(codigo, nome))
         return True
 
+    def remove_chapa(self, codigo: str):
+        if codigo is not None and isinstance(codigo, str):
+            for chapa in self.__urna.chapas:
+                if chapa.codigo == codigo:
+                    self.__urna.chapas.remove(chapa)
+                    return True
+            raise CodigoIncorretoException
+        raise CodigoIncorretoException
+
+    def altera_chapa(self, codigo: str, nome: str):
+        if codigo is not None and isinstance(codigo, str):
+            for chapa in self.__urna.chapas:
+                if chapa.codigo == codigo:
+                    if self.checa_nome(nome):
+                        chapa.nome = nome
+                        return True
+            raise ChapaNaoEncontradaException
+        raise CodigoIncorretoException

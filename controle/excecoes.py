@@ -49,3 +49,7 @@ class CodigoDuplicadoException(Exception):
 class NomeDuplicadoException(Exception):
     def __init__(self):
         super().__init__("NOME DUPLICADO!")
+
+class ChapaNaoEncontradaException(Exception):
+    def __init__(self):
+        super().__init__("CHAPA NÃO ENCONTRADA!")

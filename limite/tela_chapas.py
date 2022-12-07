@@ -30,21 +30,19 @@ class TelaChapas():
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - ADICIONAR CHAPA', size=(1080,720)).Layout(layout)
 
-    def tela_remove_chapa(self, cliente: list):
+    def tela_remove_chapa(self, chapa: list):
         psg.ChangeLookAndFeel('Reddit')
-        layout = [[psg.Text('CONFIRMAR A REMOÇÃO DO ELEITOR:')],
-                  [psg.Text(f'NOME: {cliente[0]}')],
-                  [psg.Text(f'CPF: {cliente[1]}')],
-                  [psg.Text(f'CATEGORIA: {cliente[2]}')],
+        layout = [[psg.Text('CONFIRMAR A REMOÇÃO DA CHAPA:')],
+                  [psg.Text(f'CODIGO: {chapa[0]}')],
+                  [psg.Text(f'NOME: {chapa[1]}')],
                   [psg.Submit('CONFIRMAR'), psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - REMOVER CHAPA', size=(1080,720)).Layout(layout)
 
-    def tela_altera_chapa(self, cliente:list, categorias:list):
+    def tela_altera_chapa(self, chapa:list):
         psg.ChangeLookAndFeel('Reddit')
-        layout = [[psg.Text('CONFIRMAR ALTERAÇÃO DO CLIENTE:')],
-                  [psg.Text('NOME'), psg.InputText(cliente[0], key='1')],
-                  [psg.Text(f'CPF: {cliente[1]}')],
-                  [psg.Text('CATEGORIA'), psg.Combo(categorias, cliente[2], key='2')],
+        layout = [[psg.Text('CONFIRMAR ALTERAÇÃO DA CHAPA:')],
+                  [psg.Text(f'CODIGO: {chapa[0]}')],
+                  [psg.Text(f'NOME: '), psg.InputText(chapa[1], key='1')],
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - ALTERAR CHAPA', size=(1080,720)).Layout(layout)
 

@@ -47,40 +47,39 @@ class ControladorChapas():
                 except Exception as e:
                     self.__tela_chapas.mostra_mensagem('ERRO', e)
 
-    def remove_chapa(self, cliente: list):
-        if cliente is not None and cliente != []:
-            self.__tela_eleitores.tela_remove_eleitor(cliente)
+    def remove_chapa(self, chapa: list):
+        if chapa is not None and chapa != []:
+            self.__tela_chapas.tela_remove_chapa(chapa)
             while True:
-                event, values = self.__tela_eleitores.abre()
+                event, values = self.__tela_chapas.abre()
                 if event in ('CANCELAR', psg.WIN_CLOSED):
-                    self.__tela_eleitores.fecha()
+                    self.__tela_chapas.fecha()
                     return self.mostra_tela_inicial()
                 if event == 'CONFIRMAR':
                     try:
-                        if self.__ctrl_sistema.ctrl_urna.remove_eleitor(cliente[1]):
-                            self.__tela_eleitores.mostra_mensagem('SUCESSO', 'ELEITOR REMOVIDO!')
-                            self.__tela_eleitores.fecha()
+                        if self.__ctrl_sistema.ctrl_urna.remove_chapa(chapa[0]):
+                            self.__tela_chapas.mostra_mensagem('SUCESSO', 'CHAPA REMOVIDA!')
+                            self.__tela_chapas.fecha()
                             return self.mostra_tela_inicial()
                     except Exception as e:
-                        self.__tela_eleitores.mostra_mensagem('ERRO', e)
+                        self.__tela_chapas.mostra_mensagem('ERRO', e)
         return self.mostra_tela_inicial()
 
-    def altera_chapa(self, cliente: list):
-        if cliente is not None and cliente != []:
-            self.__tela_eleitores.tela_altera_eleitor(cliente, [c.name for c in Categoria])
+    def altera_chapa(self, chapa: list):
+        if chapa is not None and chapa != []:
+            self.__tela_chapas.tela_altera_chapa(chapa)
             while True:
-                event, values = self.__tela_eleitores.abre()
+                event, values = self.__tela_chapas.abre()
                 if event in ('CANCELAR', psg.WIN_CLOSED):
-                    self.__tela_eleitores.fecha()
+                    self.__tela_chapas.fecha()
                     return self.mostra_tela_inicial()
                 if event == 'SALVAR':
                     nome = values['1'].strip().title()
-                    categoria = values['2'].strip()
                     try:
-                        if self.__ctrl_sistema.ctrl_urna.altera_eleitor(nome, cliente[1], categoria):
-                            self.__tela_eleitores.mostra_mensagem('SUCESSO', 'ELEITOR ALTERADO!')
-                            self.__tela_eleitores.fecha()
+                        if self.__ctrl_sistema.ctrl_urna.altera_chapa(chapa[0], nome):
+                            self.__tela_chapas.mostra_mensagem('SUCESSO', 'CHAPA ALTERADO!')
+                            self.__tela_chapas.fecha()
                             return self.mostra_tela_inicial()
                     except Exception as e:
-                        self.__tela_eleitores.mostra_mensagem('ERRO', e)
+                        self.__tela_chapas.mostra_mensagem('ERRO', e)
         return self.mostra_tela_inicial()
