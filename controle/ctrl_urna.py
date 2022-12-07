@@ -170,3 +170,15 @@ class ControladorUrna():
                         return True
             raise ChapaNaoEncontradaException
         raise CodigoIncorretoException
+
+    def lista_candidatos(self):
+        lista = []
+        for candidato in self.__urna.candidatos:
+            lista.append(candidato.nome,
+                         candidato.cpf,
+                         candidato.categoria.name,
+                         candidato.numero,
+                         candidato.chapa.nome,
+                         candidato.cargo.name)
+        return lista
+

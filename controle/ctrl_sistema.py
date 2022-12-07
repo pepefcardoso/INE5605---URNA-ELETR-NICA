@@ -1,6 +1,6 @@
 from controle.ctrl_urna import ControladorUrna
 from controle.ctrl_eleitor import ControladorEleitores
-from controle.controlador_candidatos import ControladorCandidatos
+from controle.ctrl_candidatos import ControladorCandidatos
 from controle.ctrl_chapas import ControladorChapas
 from controle.controlador_cargo import ControladorCargo
 from controle.ctrl_categoria import ControladorCategoria
@@ -16,7 +16,7 @@ class ControladorSistema:
     def __init__(self):
         self.__ctrl_urna = ControladorUrna(self)
         self.__ctrl_eleitores = ControladorEleitores(self)
-        self.__controlador_candidatos = ControladorCandidatos(self)
+        self.__ctrl_candidatos = ControladorCandidatos(self)
         self.__ctrl_chapas = ControladorChapas(self)
         self.__controlador_cargo = ControladorCargo(self)
         self.__ctrl_categoria = ControladorCategoria(self)
@@ -34,8 +34,8 @@ class ControladorSistema:
         return self.__ctrl_eleitores
 
     @property
-    def controlador_candidatos(self):
-        return self.__controlador_candidatos
+    def ctrl_candidatos(self):
+        return self.__ctrl_candidatos
 
     @property
     def ctrl_chapas(self):
@@ -65,7 +65,7 @@ class ControladorSistema:
         self.__ctrl_eleitores.mostra_tela_inicial()
 
     def inicia_candidatos(self):
-        self.__controlador_candidatos.mostra_tela_inicial()
+        self.__ctrl_candidatos.mostra_tela_inicial()
 
     def inicia_chapas(self):
         self.__ctrl_chapas.mostra_tela_inicial()

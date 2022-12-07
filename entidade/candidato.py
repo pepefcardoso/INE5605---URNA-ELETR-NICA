@@ -1,12 +1,18 @@
 from entidade.eleitor import Eleitor
 from entidade.cargo import Cargo
 from entidade.categoria import Categoria
+from entidade.chapa import Chapa
 
 
 class Candidato(Eleitor):
 
-    def __init__(self, nome: str, cpf: int, categoria: Categoria,
-                 numero: int, chapa: str, cargo: Cargo):
+    def __init__(self,
+                 nome: str,
+                 cpf: str,
+                 categoria: Categoria,
+                 numero: str,
+                 chapa: Chapa,
+                 cargo: Cargo):
         super().__init__(nome, cpf, categoria)
         self.__numero = numero
         self.__chapa = chapa
@@ -16,23 +22,23 @@ class Candidato(Eleitor):
     def numero(self):
         return self.__numero
 
+    @numero.setter
+    def numero(self, numero: str):
+        if isinstance(numero, str):
+            self.__numero = numero
+
     @property
     def chapa(self):
         return self.__chapa
 
+    @chapa.setter
+    def chapa(self, chapa: Chapa):
+        if isinstance(chapa, Chapa):
+            self.__chapa = chapa
+
     @property
     def cargo(self):
         return self.__cargo
-
-    @numero.setter
-    def numero(self, numero: int):
-        if isinstance(numero, int):
-            self.__numero = numero
-
-    @chapa.setter
-    def chapa(self, chapa: str):
-        if isinstance(chapa, str):
-            self.__chapa = chapa
 
     @cargo.setter
     def cargo(self, cargo: Cargo):
