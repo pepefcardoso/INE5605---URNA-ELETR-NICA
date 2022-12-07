@@ -1,39 +1,23 @@
-from limite.tela_padrao import TelaPadrao
+import PySimpleGUI as psg
 
 
-class TelaCargos(TelaPadrao):
+class TelaCargos():
+    def __init__(self):
+        self.__window = None
 
-    def abre_tela_inicial(self):
-        print(('-' * 5), ' Cargos ', ('-' * 5))
-        print('1 - Ver Lista de Cargos')
-        print('0 - Voltar ao Menu Principal')
-        opcao = self.pega_opcao('Escolha uma opção: ', [1, 0])
-        return opcao
+    def tela_cargos(self, cargos: list):
+        psg.ChangeLookAndFeel('Reddit')
+        layout = [[psg.Text('CARGOS')],
+                  [psg.Text(f"\n{x}") for x in cargos],
+                  [psg.Button('SAIR')]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - CARGOS', size=(1080,720)).Layout(layout)
 
-    def mostra_cargo(self, dados_cargo):
-        print(f"{dados_cargo.value} : {dados_cargo.name}")
+    def abre(self):
+        button, values = self.__window.Read()
+        return button, values
 
-    def pega_opcao(self, mensagem: str = "", opcoes_validas = None):
-        while True:
-            valor_lido = input(mensagem)
-            try:
-                opcao = int(valor_lido)
-                if opcoes_validas and opcao not in opcoes_validas:
-                    raise ValueError
-                return opcao
-            except ValueError:
-                print("Opção indisponível, tente uma opção válida.")
-                if opcoes_validas:
-                    print('Opções válidas: ', opcoes_validas)
+    def fecha(self):
+        self.__window.Close()
 
-    def pega_dado(self):
-        while True:
-            cargo = int(input('Número do Cargo: '))
-            if cargo in [1, 2, 3, 4]:
-                return {"cargo": cargo}
-
-    def mostra_mensagem(self, msg):
-        print(msg)
-
-    def mostra_entidade(self):
-        pass
+    def mostra_mensagem(self, titulo: str, mensagem: str):
+        psg.Popup(titulo, mensagem)

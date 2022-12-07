@@ -2,7 +2,7 @@ from controle.ctrl_urna import ControladorUrna
 from controle.ctrl_eleitor import ControladorEleitores
 from controle.ctrl_candidatos import ControladorCandidatos
 from controle.ctrl_chapas import ControladorChapas
-from controle.controlador_cargo import ControladorCargo
+from controle.ctrl_cargo import ControladorCargos
 from controle.ctrl_categoria import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.controlador_config import ControladorConfig
@@ -18,7 +18,7 @@ class ControladorSistema:
         self.__ctrl_eleitores = ControladorEleitores(self)
         self.__ctrl_candidatos = ControladorCandidatos(self)
         self.__ctrl_chapas = ControladorChapas(self)
-        self.__controlador_cargo = ControladorCargo(self)
+        self.__ctrl_cargo = ControladorCargos(self)
         self.__ctrl_categoria = ControladorCategoria(self)
         self.__controlador_registro = ControladorRegistro(self)
         self.__controlador_config = ControladorConfig(self)
@@ -42,8 +42,8 @@ class ControladorSistema:
         return self.__ctrl_chapas
 
     @property
-    def controlador_cargo(self):
-        return self.__controlador_cargo
+    def ctrl_cargo(self):
+        return self.__ctrl_cargo
 
     @property
     def ctrl_categoria(self):
@@ -71,7 +71,7 @@ class ControladorSistema:
         self.__ctrl_chapas.mostra_tela_inicial()
 
     def inicia_cargos(self):
-        self.__controlador_cargo.mostra_tela_inicial()
+        self.__ctrl_cargo.mostra_tela_inicial()
 
     def inicia_categoria(self):
         self.__ctrl_categoria.mostra_tela_inicial()
