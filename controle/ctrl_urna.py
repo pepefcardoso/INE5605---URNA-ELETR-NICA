@@ -52,6 +52,19 @@ class ControladorUrna():
                     self.__tela_urna.mostra_mensagem('ERRO', e)
         return False
 
+    def altera_configuracoes(self, max_eleitores: str, max_candidatos: str):
+        if len(max_eleitores) < 1 or not max_eleitores.isnumeric():
+            raise MaxEleitoresIncorretoException
+        if int(max_eleitores) not in range(1,100001):
+            raise MaxEleitoresIncorretoException
+        if len(max_candidatos) < 1 or not max_candidatos.isnumeric():
+            raise MaxCandidatosIncorretoException
+        if int(max_candidatos) not in range(1,100001):
+            raise MaxCandidatosIncorretoException
+        self.__urna.max_eleitores = int(max_eleitores)
+        self.__urna.max_candidatos = int(max_candidatos)
+        return True
+
     def lista_eleitores(self):
         lista = []
         for eleitor in self.__urna.eleitores:

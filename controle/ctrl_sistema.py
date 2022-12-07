@@ -5,7 +5,7 @@ from controle.ctrl_chapas import ControladorChapas
 from controle.ctrl_cargo import ControladorCargos
 from controle.ctrl_categoria import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
-from controle.controlador_config import ControladorConfig
+from controle.ctrl_configuracoes import ControladorConfiguracoes
 from controle.controlador_votacao import ControladorVotacao
 from limite.tela_sistema import TelaSistema
 import PySimpleGUI as psg
@@ -21,7 +21,7 @@ class ControladorSistema:
         self.__ctrl_cargo = ControladorCargos(self)
         self.__ctrl_categoria = ControladorCategoria(self)
         self.__controlador_registro = ControladorRegistro(self)
-        self.__controlador_config = ControladorConfig(self)
+        self.__ctrl_configuracoes = ControladorConfiguracoes(self)
         self.__ctrl_votacao = ControladorVotacao(self)
         self.__tela_sistema = TelaSistema()
 
@@ -54,8 +54,8 @@ class ControladorSistema:
         return self.__controlador_registro
 
     @property
-    def controlador_config(self):
-        return self.__controlador_config
+    def ctrl_configuracoes(self):
+        return self.__ctrl_configuracoes
 
     @property
     def ctrl_votacao(self):
@@ -80,7 +80,7 @@ class ControladorSistema:
         self.__controlador_registro.mostra_tela_inicial()
 
     def inicia_config(self):
-        self.__controlador_config.mostra_tela_inicial()
+        self.__ctrl_configuracoes.mostra_tela_inicial()
 
     def inicia_votacao(self):
         self.__ctrl_votacao.mostra_tela_inicial()
