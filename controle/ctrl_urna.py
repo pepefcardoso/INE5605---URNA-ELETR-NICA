@@ -66,7 +66,7 @@ class ControladorUrna():
         return True
 
     def lista_eleitores(self):
-        lista = []
+        lista = self
         for eleitor in self.__urna.eleitores:
             lista.append([eleitor.nome, 
                           eleitor.cpf, 
