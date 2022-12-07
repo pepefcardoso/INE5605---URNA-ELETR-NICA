@@ -6,7 +6,7 @@ class Chapa(Pessoa):
                  codigo: str, 
                  nome: str):
         self.__codigo = codigo
-        super().__init__(codigo, nome)
+        super().__init__(nome)
 
     @property
     def codigo(self):

@@ -37,3 +37,15 @@ class ListaEleitoresCheiaException(Exception):
 class EleitorNaoEncontradoException(Exception):
     def __init__(self):
         super().__init__("ELEITOR NÃO ENCONTRADO!")
+
+class ListaChapasCheiaException(Exception):
+    def __init__(self):
+        super().__init__("LISTA DE CHAPAS CHEIA!")
+
+class CodigoDuplicadoException(Exception):
+    def __init__(self):
+        super().__init__("CÓDIGO DUPLICADO!")
+
+class NomeDuplicadoException(Exception):
+    def __init__(self):
+        super().__init__("NOME DUPLICADO!")

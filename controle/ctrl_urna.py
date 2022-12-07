@@ -1,6 +1,7 @@
 from entidade.urna import Urna
 from entidade.categoria import Categoria
 from entidade.eleitor import Eleitor
+from entidade.chapa import Chapa
 from limite.tela_urna import TelaUrna
 from controle.excecoes import *
 import PySimpleGUI as psg
@@ -119,3 +120,35 @@ class ControladorUrna():
                 raise CpfInvalidoException
             return True
         raise CpfInvalidoException
+
+    def checa_codigo(self, codigo: str):
+        if codigo is not None:
+            if(len(codigo) not in range(1,3) or
+               not isinstance(codigo, str) or
+               not codigo.isnumeric()):
+                raise CodigoIncorretoException
+            return True
+        raise CodigoIncorretoException
+
+    def lista_chapas(self):
+        lista = []
+        for chapa in self.__urna.chapas:
+            lista.append([chapa.codigo,
+                          chapa.nome])
+        return lista
+
+    def adiciona_chapa(self, codigo: str, nome: str):
+        if len(self.__urna.chapas) == 99:
+            raise ListaChapasCheiaException
+        self.checa_codigo(codigo)
+        if int(codigo) not in range(1,99):
+            raise CodigoIncorretoException
+        self.checa_nome(nome)
+        for chapa in self.__urna.chapas:
+            if chapa.codigo == codigo:
+                raise CodigoDuplicadoException
+            if chapa.nome == nome:
+                raise NomeDuplicadoException
+        self.__urna.chapas.append(Chapa(codigo, nome))
+        return True
+

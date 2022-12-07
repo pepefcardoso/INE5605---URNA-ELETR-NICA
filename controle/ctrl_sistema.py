@@ -1,9 +1,9 @@
 from controle.ctrl_urna import ControladorUrna
 from controle.ctrl_eleitor import ControladorEleitores
 from controle.controlador_candidatos import ControladorCandidatos
-from controle.controlador_chapas import ControladorChapas
+from controle.ctrl_chapas import ControladorChapas
 from controle.controlador_cargo import ControladorCargo
-from controle.controlador_categoria_eleitor import ControladorCategoria
+from controle.ctrl_categoria import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.controlador_config import ControladorConfig
 from controle.controlador_votacao import ControladorVotacao
@@ -17,9 +17,9 @@ class ControladorSistema:
         self.__ctrl_urna = ControladorUrna(self)
         self.__ctrl_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
-        self.__controlador_chapas = ControladorChapas(self)
+        self.__ctrl_chapas = ControladorChapas(self)
         self.__controlador_cargo = ControladorCargo(self)
-        self.__controlador_categoria = ControladorCategoria(self)
+        self.__ctrl_categoria = ControladorCategoria(self)
         self.__controlador_registro = ControladorRegistro(self)
         self.__controlador_config = ControladorConfig(self)
         self.__ctrl_votacao = ControladorVotacao(self)
@@ -38,16 +38,16 @@ class ControladorSistema:
         return self.__controlador_candidatos
 
     @property
-    def controlador_chapas(self):
-        return self.__controlador_chapas
+    def ctrl_chapas(self):
+        return self.__ctrl_chapas
 
     @property
     def controlador_cargo(self):
         return self.__controlador_cargo
 
     @property
-    def controlador_categoria(self):
-        return self.__controlador_categoria
+    def ctrl_categoria(self):
+        return self.__ctrl_categoria
 
     @property
     def controlador_registro(self):
@@ -68,13 +68,13 @@ class ControladorSistema:
         self.__controlador_candidatos.mostra_tela_inicial()
 
     def inicia_chapas(self):
-        self.__controlador_chapas.mostra_tela_inicial()
+        self.__ctrl_chapas.mostra_tela_inicial()
 
     def inicia_cargos(self):
         self.__controlador_cargo.mostra_tela_inicial()
 
     def inicia_categoria(self):
-        self.__controlador_categoria.mostra_tela_inicial()
+        self.__ctrl_categoria.mostra_tela_inicial()
 
     def inicia_registros(self):
         self.__controlador_registro.mostra_tela_inicial()
