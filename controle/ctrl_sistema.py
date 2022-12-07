@@ -6,7 +6,7 @@ from controle.controlador_cargo import ControladorCargo
 from controle.controlador_categoria_eleitor import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.controlador_config import ControladorConfig
-from controle.controlador_voto import ControladorVotos
+from controle.controlador_votacao import ControladorVotacao
 from limite.tela_sistema import TelaSistema
 import PySimpleGUI as psg
 import sys
@@ -15,14 +15,14 @@ import sys
 class ControladorSistema:
     def __init__(self):
         self.__ctrl_urna = ControladorUrna(self)
-        self.__controlador_eleitores = ControladorEleitores(self)
+        self.__ctrl_eleitores = ControladorEleitores(self)
         self.__controlador_candidatos = ControladorCandidatos(self)
         self.__controlador_chapas = ControladorChapas(self)
         self.__controlador_cargo = ControladorCargo(self)
         self.__controlador_categoria = ControladorCategoria(self)
         self.__controlador_registro = ControladorRegistro(self)
         self.__controlador_config = ControladorConfig(self)
-        self.__controlador_voto = ControladorVotos(self)
+        self.__ctrl_votacao = ControladorVotacao(self)
         self.__tela_sistema = TelaSistema()
 
     @property
@@ -30,8 +30,8 @@ class ControladorSistema:
         return self.__ctrl_urna
 
     @property
-    def controlador_eleitores(self):
-        return self.__controlador_eleitores
+    def ctrl_eleitores(self):
+        return self.__ctrl_eleitores
 
     @property
     def controlador_candidatos(self):
@@ -58,11 +58,11 @@ class ControladorSistema:
         return self.__controlador_config
 
     @property
-    def controlador_voto(self):
-        return self.__controlador_voto
+    def ctrl_votacao(self):
+        return self.__ctrl_votacao
 
     def inicia_eleitores(self):
-        self.__controlador_eleitores.mostra_tela_inicial()
+        self.__ctrl_eleitores.mostra_tela_inicial()
 
     def inicia_candidatos(self):
         self.__controlador_candidatos.mostra_tela_inicial()
@@ -82,8 +82,8 @@ class ControladorSistema:
     def inicia_config(self):
         self.__controlador_config.mostra_tela_inicial()
 
-    def inicia_voto(self):
-        self.__controlador_voto.mostra_tela_inicial()
+    def inicia_votacao(self):
+        self.__ctrl_votacao.mostra_tela_inicial()
 
     def abre_sistema(self):
         if not self.__ctrl_urna.configura_urna():
@@ -99,7 +99,7 @@ class ControladorSistema:
                   'CATEGORIAS': self.inicia_categoria,
                   'RELATÓRIOS': self.inicia_registros,
                   'CONFIGURAÇÕES': self.inicia_config,
-                  'VOTAÇÃO': self.inicia_voto}
+                  'VOTAÇÃO': self.inicia_votacao}
         while True:
             button, values = self.__tela_sistema.abre()
             if button in (psg.WIN_CLOSED, 'SAIR'):

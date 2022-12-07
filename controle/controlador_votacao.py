@@ -1,15 +1,37 @@
-from limite.tela_voto import TelaVoto
+from limite.tela_votacao import TelaVotacao
 from entidade.voto import Voto
 from entidade.eleitor import Eleitor
 from entidade.cargo import Cargo
+import PySimpleGUI as psg
 
 
-class ControladorVotos():
-    def __init__(self, controlador_urna):
-        self.__controlador_urna = controlador_urna
-        self.__tela_voto = TelaVoto()
+class ControladorVotacao():
+    def __init__(self, ctrl_sistema):
+        self.__ctrl_sistema = ctrl_sistema
+        self.__tela_votacao = TelaVotacao()
 
     def mostra_tela_inicial(self):
+        self.__tela_votacao.tela_votacao()
+        numero = ''
+        while True:
+            event, values = self.__tela_votacao.abre()
+            if event in (psg.WIN_CLOSED, 'CONFIRMAR'):
+                self.__tela_votacao.fecha()
+                return self.__ctrl_sistema.abre_menu_inicial()
+            if event == 'CORRIGIR':
+                numero = ''
+                self.__tela_votacao.atualiza_numero(numero)
+            if len(numero) <= 1 and event.isnumeric():
+                numero += event
+                self.__tela_votacao.atualiza_numero(numero)
+
+
+
+
+
+
+
+    '''def mostra_tela_inicial(self):
         while True:
             if self.__controlador_urna.urna.turno == 0:
                 self.__tela_voto.mostra_mensagem('\nAS ELEIÇÕES JÁ FORAM ENCERRADAS!')
@@ -112,4 +134,4 @@ class ControladorVotos():
                 self.__tela_voto.mostra_mensagem(f'\nO ELEITOR SELECIONADO JÁ VOTOU NESTA ELEIÇÃO!')
                 return False
             else:
-                return True
+                return True'''
