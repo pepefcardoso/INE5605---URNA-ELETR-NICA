@@ -77,3 +77,7 @@ class CargoInvalidoException(Exception):
 class CandidatoDuplicadoException(Exception):
     def __init__(self):
         super().__init__("CANDIDATO DUPLICADO!")
+
+class CandidatoNaoEncontradoException(Exception):
+    def __init__(self):
+        super().__init__("CANDIDATO NÃO ENCONTRADO!")

@@ -57,22 +57,22 @@ class ControladorCandidatos:
                 except Exception as e:
                     self.__tela_candidatos.mostra_mensagem('ERRO', e)
 
-    def remove_candidato(self, cliente: list):
-        if cliente is not None and cliente != []:
-            self.__tela_eleitores.tela_remove_eleitor(cliente)
+    def remove_candidato(self, candidato: list):
+        if candidato is not None and candidato != []:
+            self.__tela_candidatos.tela_remove_candidato(candidato)
             while True:
-                event, values = self.__tela_eleitores.abre()
+                event, values = self.__tela_candidatos.abre()
                 if event in ('CANCELAR', psg.WIN_CLOSED):
-                    self.__tela_eleitores.fecha()
+                    self.__tela_candidatos.fecha()
                     return self.mostra_tela_inicial()
                 if event == 'CONFIRMAR':
                     try:
-                        if self.__ctrl_sistema.ctrl_urna.remove_eleitor(cliente[1]):
-                            self.__tela_eleitores.mostra_mensagem('SUCESSO', 'ELEITOR REMOVIDO!')
-                            self.__tela_eleitores.fecha()
+                        if self.__ctrl_sistema.ctrl_urna.remove_candidato(candidato[1]):
+                            self.__tela_candidatos.mostra_mensagem('SUCESSO', 'CANDIDATO REMOVIDO!')
+                            self.__tela_candidatos.fecha()
                             return self.mostra_tela_inicial()
                     except Exception as e:
-                        self.__tela_eleitores.mostra_mensagem('ERRO', e)
+                        self.__tela_candidatos.mostra_mensagem('ERRO', e)
         return self.mostra_tela_inicial()
 
     def altera_candidato(self, cliente: list):

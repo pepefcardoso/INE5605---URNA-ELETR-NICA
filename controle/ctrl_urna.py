@@ -195,6 +195,15 @@ class ControladorUrna():
         self.__urna.candidatos.append(Candidato(eleitor.nome,cpf,eleitor.categoria,numero,chapa,cargo))
         return True
 
+    def remove_candidato(self, cpf: str):
+        if cpf is not None and isinstance(cpf, str):
+            for candidato in self.__urna.candidatos:
+                if candidato.cpf == cpf:
+                    self.__urna.candidatos.remove(candidato)
+                    return True
+            raise CandidatoNaoEncontradoException
+        raise CpfInvalidoException
+
     def busca_eleitor_cpf(self, cpf: str):
         if cpf is not None and isinstance(cpf, str):
             for eleitor in self.__urna.eleitores:
