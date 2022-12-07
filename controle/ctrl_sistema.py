@@ -6,7 +6,7 @@ from controle.ctrl_cargo import ControladorCargos
 from controle.ctrl_categoria import ControladorCategoria
 from controle.controlador_registro import ControladorRegistro
 from controle.ctrl_configuracoes import ControladorConfiguracoes
-from controle.controlador_votacao import ControladorVotacao
+from controle.ctrl_votacao import ControladorVotacao
 from limite.tela_sistema import TelaSistema
 import PySimpleGUI as psg
 import sys

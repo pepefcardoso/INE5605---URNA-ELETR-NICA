@@ -5,10 +5,17 @@ class TelaVotacao():
     def __init__(self):
         self.__window = None
 
-    def tela_opcoes(self):
+    def tela_opcoes_inicial(self, turno: int):
         psg.ChangeLookAndFeel('Reddit')
-        layout = []
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - MENU VOTAÇÃO', size=(1080,720)).Layout(layout)
+        layout = [[psg.Button(f'INICIAR VOTAÇÃO DO {turno}º TURNO', key='INICIAR')],
+                  [psg.Button('VOLTAR', key='VOLTAR')]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - VOTAÇÃO', size=(1080,720)).Layout(layout)
+
+    def tela_votacao_encerrada(self, ):
+        psg.ChangeLookAndFeel('Reddit')
+        layout = [[psg.Text('VOTAÇÕES ENCERRADAS!')],
+                  [psg.Button('VOLTAR', key='VOLTAR')]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - VOTAÇÃO', size=(1080,720)).Layout(layout)
 
     def tela_votacao(self):
         psg.ChangeLookAndFeel('Reddit')

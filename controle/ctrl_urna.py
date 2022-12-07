@@ -78,8 +78,7 @@ class ControladorUrna():
             raise ListaEleitoresCheiaException
         self.checa_nome(nome)
         self.checa_cpf(cpf)
-        if categoria is not None:
-            categoria = self.busca_categoria_nome(categoria)
+        categoria = self.busca_categoria_nome(categoria)
         for eleitor in self.__urna.eleitores:
             if eleitor.cpf == cpf:
                 raise EleitorDuplicadoException
@@ -107,12 +106,11 @@ class ControladorUrna():
         if cpf is not None and isinstance(cpf, str):
             for eleitor in self.__urna.eleitores:
                 if eleitor.cpf == cpf:
-                    if self.checa_nome(nome):
-                        if categoria is not None:
-                            categoria = self.busca_categoria_nome(categoria)
-                            eleitor.nome = nome
-                            eleitor.categoria = categoria
-                            return True
+                    self.checa_nome(nome)
+                    categoria = self.busca_categoria_nome(categoria)
+                    eleitor.nome = nome
+                    eleitor.categoria = categoria
+                    return True
             raise EleitorNaoEncontradoException
         raise CpfInvalidoException
 
@@ -220,6 +218,8 @@ class ControladorUrna():
     def altera_candidato(self, cpf: str, numero: str, chapa: str, cargo:str):
         if cpf is not None and isinstance(cpf, str):
             for candidato in self.__urna.candidatos:
+                if candidato.numero == numero and candidato.cpf != cpf:
+                    raise NumeroDuplicadoException
                 if candidato.cpf == cpf:
                     self.checa_numero(numero)
                     chapa = self.busca_chapa_nome(chapa)
@@ -243,10 +243,7 @@ class ControladorUrna():
         if numero is not None and isinstance(numero, str):
             if(len(numero) not in range(1,3) or
                not numero.isnumeric()):
-                raise NumeroInvalidoException
-            for candidato in self.__urna.candidatos:
-                if candidato.numero == numero:
-                    raise NumeroDuplicadoException
+                return False
             return True
         raise NumeroInvalidoException
 
@@ -266,3 +263,8 @@ class ControladorUrna():
             raise CargoInvalidoException
         raise CargoInvalidoException
 
+    def lista_cpf_eleitores(self):
+        lista = []
+        for eleitor in self.__urna.eleitores:
+            lista.append(eleitor.cpf)
+        return lista
