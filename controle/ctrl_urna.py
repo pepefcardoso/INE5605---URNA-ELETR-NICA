@@ -2,6 +2,7 @@ from entidade.urna import Urna
 from entidade.candidato import Candidato
 from entidade.eleitor import Eleitor
 from entidade.chapa import Chapa
+from entidade.cargo import Cargo
 from limite.tela_urna import TelaUrna
 from controle.excecoes import *
 import PySimpleGUI as psg
@@ -66,7 +67,7 @@ class ControladorUrna():
         return True
 
     def lista_eleitores(self):
-        lista = self
+        lista = []
         for eleitor in self.__urna.eleitores:
             lista.append([eleitor.nome, 
                           eleitor.cpf, 
@@ -268,3 +269,15 @@ class ControladorUrna():
         for eleitor in self.__urna.eleitores:
             lista.append(eleitor.cpf)
         return lista
+
+    def busca_candidato_numero_cargo(self, numero: str, cargo: Cargo):
+        if (numero is not None and
+            isinstance(numero, str) and
+            cargo is not None and
+            isinstance(cargo, Cargo)):
+            for candidato in self.__urna.candidatos:
+                if (candidato.numero == numero and 
+                    candidato.cargo == cargo):
+                    return candidato
+                return False
+        return False
