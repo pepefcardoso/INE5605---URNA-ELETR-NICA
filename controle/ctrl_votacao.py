@@ -11,6 +11,9 @@ class ControladorVotacao():
         self.__tela_votacao = TelaVotacao()
 
     def mostra_tela_inicial(self):
+        if self.__ctrl_sistema.ctrl_urna.urna.turno == 3:
+            self.__tela_votacao.mostra_mensagem('AVISO', 'ELEIÇÕES ENCERRADAS')
+            return self.__ctrl_sistema.abre_menu_inicial()
         self.__tela_votacao.tela_opcoes_inicial(self.__ctrl_sistema.ctrl_urna.urna.turno)
         while True:
             event, values = self.__tela_votacao.abre()
@@ -26,6 +29,7 @@ class ControladorVotacao():
         while True:
             event, values = self.__tela_votacao.abre()
             if event in (psg.WIN_CLOSED, 'ENCERRAR'):
+                self.__ctrl_sistema.ctrl_urna.encerra_eleicao()
                 self.__tela_votacao.fecha()
                 return self.__ctrl_sistema.abre_menu_inicial()
             if event == 'INICIAR':

@@ -9,6 +9,9 @@ class ControladorConfiguracoes():
         self.__tela_configuracoes = TelaConfiguracoes()
 
     def mostra_tela_inicial(self):
+        if self.__ctrl_sistema.ctrl_urna.urna.turno == 3:
+            self.__tela_configuracoes.mostra_mensagem('AVISO', 'ELEIÇÕES ENCERRADAS')
+            return self.__ctrl_sistema.abre_menu_inicial()
         max_eleitores = str(self.__ctrl_sistema.ctrl_urna.urna.max_eleitores)
         max_candidatos = str(self.__ctrl_sistema.ctrl_urna.urna.max_candidatos)
         self.__tela_configuracoes.tela_configuracoes(max_eleitores, max_candidatos)

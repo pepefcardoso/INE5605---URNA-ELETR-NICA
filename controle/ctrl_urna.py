@@ -334,3 +334,6 @@ class ControladorUrna():
         for i in lista_votos:
             self.checa_numero(i)
         return True
+
+    def encerra_eleicao(self):
+        self.__urna.turno += 1

@@ -10,6 +10,9 @@ class ControladorChapas():
         self.__tela_chapas = TelaChapas()
 
     def mostra_tela_inicial(self):
+        if self.__ctrl_sistema.ctrl_urna.urna.turno == 3:
+            self.__tela_chapas.mostra_mensagem('AVISO', 'ELEIÇÕES ENCERRADAS')
+            return self.__ctrl_sistema.abre_menu_inicial()
         lista = self.__ctrl_sistema.ctrl_urna.lista_chapas()
         self.__tela_chapas.tela_opcoes(lista)
         opcoes = {'REMOVER': self.remove_chapa,

@@ -11,6 +11,9 @@ class ControladorEleitores:
         self.__tela_eleitores = TelaEleitores()
 
     def mostra_tela_inicial(self):
+        if self.__ctrl_sistema.ctrl_urna.urna.turno == 3:
+            self.__tela_eleitores.mostra_mensagem('AVISO', 'ELEIÇÕES ENCERRADAS')
+            return self.__ctrl_sistema.abre_menu_inicial()
         lista = self.__ctrl_sistema.ctrl_urna.lista_eleitores()
         self.__tela_eleitores.tela_opcoes(lista)
         opcoes = {'REMOVER': self.remove_eleitor,
