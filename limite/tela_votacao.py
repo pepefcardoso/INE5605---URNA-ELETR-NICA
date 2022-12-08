@@ -30,13 +30,23 @@ class TelaVotacao():
                   [psg.Button('VOLTAR', key='VOLTAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - VOTAÇÃO', size=(1080,720)).Layout(layout)
 
-    def tela_seleciona_voto(self):
+    def tela_seleciona_voto(self, cargo: str):
         psg.ChangeLookAndFeel('Reddit')
-        layout = [[psg.Text('', key='NUMERO')],
+        layout = [[psg.Text(f'INSIRA SEU VOTO PARA {cargo}: ')],
+                  [psg.Text('', key='NUMERO')],
                   [psg.Button('1', key='1'),psg.Button('2', key='2'),psg.Button('3', key='3')],
                   [psg.Button('4', key='4'),psg.Button('5', key='5'),psg.Button('6', key='6')],
                   [psg.Button('7', key='7'),psg.Button('8', key='8'),psg.Button('9', key='9')],
                   [psg.Button('0', key='0'),psg.Button('CORRIGIR'),psg.Button('CONFIRMAR')]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - VOTAÇÃO', size=(1080,720)).Layout(layout)
+
+    def tela_confirma_voto(self, cargo: str, num: str, chapa: str, nome: str):
+        psg.ChangeLookAndFeel('Reddit')
+        layout = [[psg.Text(f'CONFIRME SEU VOTO PARA {cargo}: ')],
+                  [psg.Text(f'NÚMERO: {num}')],
+                  [psg.Text(f'CHAPA: {chapa}')],
+                  [psg.Text(f'NOME: {nome}')],
+                  [psg.Submit('CONFIRMAR'),psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - VOTAÇÃO', size=(1080,720)).Layout(layout)
 
     def abre(self):

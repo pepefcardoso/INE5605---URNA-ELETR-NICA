@@ -36,14 +36,15 @@ class ControladorVotacao():
         eleitor = self.selecionar_eleitor()
         if not eleitor:
             return self.mostra_tela_inicial_votacao()
-        voto_1 = self.selecionar_voto(Cargo(1))
-        voto_2 = self.selecionar_voto(Cargo(2))
-        voto_3 = self.selecionar_voto(Cargo(3))
-        voto_4 = self.selecionar_voto(Cargo(4))
-        print(voto_1)
-        print(voto_2)
-        print(voto_3)
-        print(voto_4)
+        votos = []
+        for i in range(1,5):
+            while True:
+                num_voto = self.selecionar_voto(Cargo(i))
+                if self.confirmar_voto(num_voto, Cargo(i)):
+                    votos.append(num_voto)
+                    break
+        print(votos)
+        return votos
 
     def selecionar_eleitor(self):
         self.__tela_votacao.tela_selecao_eleitor()
@@ -62,7 +63,7 @@ class ControladorVotacao():
                     self.__tela_votacao.mostra_mensagem('ERRO', e)
 
     def selecionar_voto(self, cargo: Cargo):
-        self.__tela_votacao.tela_seleciona_voto()
+        self.__tela_votacao.tela_seleciona_voto(cargo.name)
         num = ''
         while True:
             event, values = self.__tela_votacao.abre()
@@ -75,13 +76,23 @@ class ControladorVotacao():
                 num += event
                 self.__tela_votacao.atualiza_numero(num)
             if event == 'CONFIRMAR':
-                try:
-                    candidato = self.__ctrl_sistema.ctrl_urna.busca_candidato_numero_cargo(num, cargo)
-                    if not candidato:
-                        self.__tela_votacao.fecha()
-                        return num
-                    self.__tela_votacao.mostra_mensagem('AVISO', (f'\nNOME: {candidato.nome}\nCHAPA: {candidato.chapa.nome}\nNÚMERO: {candidato.numero}'))
-                    self.__tela_votacao.fecha()
-                    return num
-                except Exception as e:
-                    self.__tela_votacao.mostra_mensagem('AVISO', e)
+                self.__tela_votacao.fecha()
+                return num
+
+    def confirmar_voto(self, num: str, cargo: Cargo):
+        candidato = self.__ctrl_sistema.ctrl_urna.busca_candidato_numero_cargo(num, cargo)
+        if not candidato:
+            self.__tela_votacao.fecha()
+            return False
+        self.__tela_votacao.tela_confirma_voto(cargo.name, 
+                                               num, 
+                                               candidato[0], 
+                                               candidato[1])
+        while True:
+            event, values = self.__tela_votacao.abre()
+            if event in('CANCELAR',psg.WIN_CLOSED):
+                self.__tela_votacao.fecha()
+                return False
+            if event == 'CONFIRMAR':
+                self.__tela_votacao.fecha()
+                return True

@@ -278,6 +278,8 @@ class ControladorUrna():
             for candidato in self.__urna.candidatos:
                 if (candidato.numero == numero and 
                     candidato.cargo == cargo):
-                    return candidato
-                return False
+                    return [candidato.chapa.nome, candidato.nome]
+            if numero == '00':
+                return ['BRANCO', 'BRANCO']
+            return ['NULO', 'NULO']
         return False
