@@ -3,6 +3,7 @@ from entidade.candidato import Candidato
 from entidade.eleitor import Eleitor
 from entidade.chapa import Chapa
 from entidade.cargo import Cargo
+from entidade.voto import Voto
 from limite.tela_urna import TelaUrna
 from controle.excecoes import *
 import PySimpleGUI as psg
@@ -195,7 +196,7 @@ class ControladorUrna():
         return lista
 
     def adiciona_candidato(self, cpf: str, numero: str, chapa: str, cargo: str):
-        eleitor = self.busca_eleitor_cpf(cpf)
+        eleitor = self.retorna_dados_eleitor(cpf)
         if len(self.__urna.candidatos) == self.__urna.max_candidatos:
             raise ListaCandidatosCheiaException
         self.checa_numero(numero)
@@ -204,7 +205,7 @@ class ControladorUrna():
         for candidato in self.__urna.candidatos:
             if candidato.cpf == cpf:
                 raise CandidatoDuplicadoException
-        self.__urna.candidatos.append(Candidato(eleitor.nome,cpf,eleitor.categoria,numero,chapa,cargo))
+        self.__urna.candidatos.append(Candidato(eleitor[0],eleitor[1],eleitor[2],numero,chapa,cargo))
         return True
 
     def remove_candidato(self, cpf: str):
@@ -232,13 +233,12 @@ class ControladorUrna():
             raise CandidatoNaoEncontradoException
         raise CpfInvalidoException
 
-    def busca_eleitor_cpf(self, cpf: str):
-        if cpf is not None and isinstance(cpf, str):
-            for eleitor in self.__urna.eleitores:
-                if eleitor.cpf == cpf:
-                    return eleitor
-            raise EleitorNaoEncontradoException
-        raise CpfInvalidoException
+    def retorna_dados_eleitor(self, cpf: str):
+        self.checa_cpf(cpf)
+        for eleitor in self.__urna.eleitores:
+            if eleitor.cpf == cpf:
+                return [eleitor.nome, eleitor.cpf, eleitor.categoria]
+        raise EleitorNaoEncontradoException
 
     def checa_numero(self, numero: str):
         if numero is not None and isinstance(numero, str):
@@ -283,3 +283,54 @@ class ControladorUrna():
                 return ['BRANCO', 'BRANCO']
             return ['NULO', 'NULO']
         return False
+
+    def checa_eleitor_votacao(self, cpf: str):
+        self.checa_cpf(cpf)
+        turno = self.__urna.turno
+        for eleitor in self.__urna.eleitores:
+            if eleitor.cpf == cpf:
+                if turno == 1:
+                    if eleitor.votou_1t == False:
+                        return True
+                    else:
+                        return False
+                if turno == 2:
+                    if eleitor.votou_2t == False:
+                        return True
+                    else:
+                        return False
+            raise EleitorNaoEncontradoException
+
+    def computa_voto(self, cpf: str, lista_votos: list):
+        turno = self.__urna.turno
+        self.checa_cpf(cpf)
+        self.checa_lista_votos(lista_votos)
+        for eleitor in self.__urna.eleitores:
+            if eleitor.cpf == cpf:
+                if turno == 1:
+                    eleitor.votou_1t = True
+
+                    self.__urna.votos.append(Voto(lista_votos[0],
+                                             lista_votos[1],
+                                             lista_votos[2],
+                                             lista_votos[3],
+                                             eleitor.categoria,
+                                             turno))
+                    return True
+                else:
+                    eleitor.votou_2t = True
+                    self.__urna.votos.append(lista_votos[0],
+                                             lista_votos[1],
+                                             lista_votos[2],
+                                             lista_votos[3],
+                                             eleitor.categoria,
+                                             turno)
+                    return True
+
+    def checa_lista_votos(self, lista_votos: list):
+        if (lista_votos is not None and
+            len(lista_votos) != 4):
+            raise VotosInvalidosException
+        for i in lista_votos:
+            self.checa_numero(i)
+        return True

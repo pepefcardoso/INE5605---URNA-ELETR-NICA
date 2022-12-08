@@ -81,3 +81,11 @@ class CandidatoDuplicadoException(Exception):
 class CandidatoNaoEncontradoException(Exception):
     def __init__(self):
         super().__init__("CANDIDATO NÃO ENCONTRADO!")
+
+class TurnoInvalidoException(Exception):
+    def __init__(self):
+        super().__init__("TURNO INVÁLIDO!")
+
+class VotosInvalidosException(Exception):
+    def __init__(self):
+        super().__init__("VOTOS INVÁLIDOS!")

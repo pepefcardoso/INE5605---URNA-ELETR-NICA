@@ -30,21 +30,27 @@ class ControladorVotacao():
                 return self.__ctrl_sistema.abre_menu_inicial()
             if event == 'INICIAR':
                 self.__tela_votacao.fecha()
-                return self.iniciar_votacao()
+                return self.votacao()
 
-    def iniciar_votacao(self):
-        eleitor = self.selecionar_eleitor()
-        if not eleitor:
+    def votacao(self):
+        cpf_eleitor = self.selecionar_eleitor()
+        if not cpf_eleitor:
             return self.mostra_tela_inicial_votacao()
-        votos = []
+        lista_votos = []
         for i in range(1,5):
             while True:
                 num_voto = self.selecionar_voto(Cargo(i))
                 if self.confirmar_voto(num_voto, Cargo(i)):
-                    votos.append(num_voto)
+                    lista_votos.append(num_voto)
                     break
-        print(votos)
-        return votos
+        try:
+            self.__ctrl_sistema.ctrl_urna.computa_voto(cpf_eleitor, lista_votos)
+            self.__tela_votacao.mostra_mensagem('SUCESSO', 'VOTOS COMPUTADOS')
+            return self.mostra_tela_inicial_votacao()
+        except Exception as e:
+            print(e)
+            self.__tela_votacao.mostra_mensagem('AVISO', 'VOTAÇÃO CANCELADA')
+            return self.mostra_tela_inicial_votacao()
 
     def selecionar_eleitor(self):
         self.__tela_votacao.tela_selecao_eleitor()
@@ -55,10 +61,11 @@ class ControladorVotacao():
                 return False
             if event == 'CONFIRMAR':
                 try:
-                    eleitor = self.__ctrl_sistema.ctrl_urna.busca_eleitor_cpf(values['CPF'])
-                    self.__tela_votacao.mostra_mensagem('AVISO', (f'\nNOME: {eleitor.nome}\nCPF: {eleitor.cpf}\nCATEGORIA: {eleitor.categoria.name}'))
+                    self.__ctrl_sistema.ctrl_urna.checa_eleitor_votacao(values['CPF'])
+                    eleitor = self.__ctrl_sistema.ctrl_urna.retorna_dados_eleitor(values['CPF'])
+                    self.__tela_votacao.mostra_mensagem('AVISO', (f'\nNOME: {eleitor[0]}\nCPF: {eleitor[1]}\nCATEGORIA: {eleitor[2].name}'))
                     self.__tela_votacao.fecha()
-                    return eleitor
+                    return values['CPF']
                 except Exception as e:
                     self.__tela_votacao.mostra_mensagem('ERRO', e)
 
@@ -79,7 +86,7 @@ class ControladorVotacao():
                 self.__tela_votacao.fecha()
                 return num
 
-    def confirmar_voto(self, num: str, cargo: Cargo):
+    def confirmar_voto(self, num: int, cargo: Cargo):
         candidato = self.__ctrl_sistema.ctrl_urna.busca_candidato_numero_cargo(num, cargo)
         if not candidato:
             self.__tela_votacao.fecha()

@@ -24,7 +24,7 @@ class TelaVotacao():
                   [psg.Submit('CONFIRMAR'), psg.Cancel('CANCELAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - VOTAÇÃO', size=(1080,720)).Layout(layout)
 
-    def tela_votacao_encerrada(self, ):
+    def tela_votacao_encerrada(self):
         psg.ChangeLookAndFeel('Reddit')
         layout = [[psg.Text('VOTAÇÕES ENCERRADAS!')],
                   [psg.Button('VOLTAR', key='VOLTAR')]]
@@ -40,7 +40,7 @@ class TelaVotacao():
                   [psg.Button('0', key='0'),psg.Button('CORRIGIR'),psg.Button('CONFIRMAR')]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - VOTAÇÃO', size=(1080,720)).Layout(layout)
 
-    def tela_confirma_voto(self, cargo: str, num: str, chapa: str, nome: str):
+    def tela_confirma_voto(self, cargo: str, num: int, chapa: str, nome: str):
         psg.ChangeLookAndFeel('Reddit')
         layout = [[psg.Text(f'CONFIRME SEU VOTO PARA {cargo}: ')],
                   [psg.Text(f'NÚMERO: {num}')],
