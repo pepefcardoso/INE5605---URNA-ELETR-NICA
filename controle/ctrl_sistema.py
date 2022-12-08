@@ -4,7 +4,7 @@ from controle.ctrl_candidatos import ControladorCandidatos
 from controle.ctrl_chapas import ControladorChapas
 from controle.ctrl_cargo import ControladorCargos
 from controle.ctrl_categoria import ControladorCategoria
-from controle.controlador_registro import ControladorRegistro
+from controle.ctrl_relatorios import ControladorRelatorios
 from controle.ctrl_configuracoes import ControladorConfiguracoes
 from controle.ctrl_votacao import ControladorVotacao
 from limite.tela_sistema import TelaSistema
@@ -20,7 +20,7 @@ class ControladorSistema:
         self.__ctrl_chapas = ControladorChapas(self)
         self.__ctrl_cargo = ControladorCargos(self)
         self.__ctrl_categoria = ControladorCategoria(self)
-        self.__controlador_registro = ControladorRegistro(self)
+        self.__ctrl_relatorios = ControladorRelatorios(self)
         self.__ctrl_configuracoes = ControladorConfiguracoes(self)
         self.__ctrl_votacao = ControladorVotacao(self)
         self.__tela_sistema = TelaSistema()
@@ -50,8 +50,8 @@ class ControladorSistema:
         return self.__ctrl_categoria
 
     @property
-    def controlador_registro(self):
-        return self.__controlador_registro
+    def ctrl_relatorios(self):
+        return self.__ctrl_relatorios
 
     @property
     def ctrl_configuracoes(self):
@@ -76,8 +76,8 @@ class ControladorSistema:
     def inicia_categoria(self):
         self.__ctrl_categoria.mostra_tela_inicial()
 
-    def inicia_registros(self):
-        self.__controlador_registro.mostra_tela_inicial()
+    def inicia_relatorios(self):
+        self.__ctrl_relatorios.mostra_tela_inicial()
 
     def inicia_config(self):
         self.__ctrl_configuracoes.mostra_tela_inicial()
@@ -97,7 +97,7 @@ class ControladorSistema:
                   'CHAPAS': self.inicia_chapas,
                   'CARGOS': self.inicia_cargos,
                   'CATEGORIAS': self.inicia_categoria,
-                  'RELATÓRIOS': self.inicia_registros,
+                  'RELATÓRIOS': self.inicia_relatorios,
                   'CONFIGURAÇÕES': self.inicia_config,
                   'VOTAÇÃO': self.inicia_votacao}
         while True:

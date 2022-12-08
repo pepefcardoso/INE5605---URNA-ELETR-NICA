@@ -245,6 +245,8 @@ class ControladorUrna():
             if(len(numero) not in range(1,3) or
                not numero.isnumeric()):
                 return False
+            if int(numero) not in range(1,99):
+                return False
             return True
         raise NumeroInvalidoException
 
@@ -309,7 +311,6 @@ class ControladorUrna():
             if eleitor.cpf == cpf:
                 if turno == 1:
                     eleitor.votou_1t = True
-
                     self.__urna.votos.append(Voto(lista_votos[0],
                                              lista_votos[1],
                                              lista_votos[2],
@@ -335,5 +336,58 @@ class ControladorUrna():
             self.checa_numero(i)
         return True
 
+    def checa_numero_nulo(self, numero: str):
+        if (numero is not None and isinstance(numero, str)):
+            if(len(numero) not in range(1,3) or
+               not numero.isnumeric()):
+                return False
+            if int(numero) not in range(0,100):
+                return False
+            if numero == '00':
+                return numero
+            for candidato in self.__urna.candidatos:
+                if candidato.numero == numero:
+                    return numero
+            return '99'
+        raise NumeroInvalidoException
+
     def encerra_eleicao(self):
         self.__urna.turno += 1
+
+    def conta_votos_cargo(self, turno: int, cargo: Cargo):
+        dicionario = {}
+        if (turno is not None and
+            isinstance(turno, int) and
+            turno in range(1,3)):
+            if (cargo is not None and isinstance(cargo, Cargo)):
+                for candidato in self.__urna.candidatos:
+                    if candidato.cargo == cargo:
+                        cont = self.conta_votos_candidato(turno, candidato.numero, cargo)
+                        dicionario[candidato.nome] = cont
+                dicionario['NULOS'] = self.conta_votos_candidato(turno, '99', cargo)
+                dicionario['BRANCOS'] = self.conta_votos_candidato(turno, '00', cargo)
+                return dicionario
+            raise CargoInvalidoException
+        raise TurnoInvalidoException
+
+    def conta_votos_candidato(self, turno: int, numero_candidato: str, cargo: Cargo):
+        if (turno is not None and
+            isinstance(turno, int) and
+            turno in range(1,3)):
+            self.checa_numero(numero_candidato)
+            cont = 0
+            for voto in self.__urna.votos:
+                if cargo == Cargo(1):
+                    if voto.voto_reitor == numero_candidato:
+                        cont += 1
+                if cargo == Cargo(2):
+                    if voto.voto_grad == numero_candidato:
+                        cont += 1
+                if cargo == Cargo(3):
+                    if voto.voto_pesq == numero_candidato:
+                        cont += 1
+                if cargo == Cargo(4):
+                    if voto.voto_ext == numero_candidato:
+                        cont += 1
+            return cont
+        raise TurnoInvalidoException

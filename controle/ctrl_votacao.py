@@ -44,6 +44,7 @@ class ControladorVotacao():
         for i in range(1,5):
             while True:
                 num_voto = self.selecionar_voto(Cargo(i))
+                num_voto = self.__ctrl_sistema.ctrl_urna.checa_numero_nulo(num_voto)
                 if self.confirmar_voto(num_voto, Cargo(i)):
                     lista_votos.append(num_voto)
                     break
@@ -52,7 +53,6 @@ class ControladorVotacao():
             self.__tela_votacao.mostra_mensagem('SUCESSO', 'VOTOS COMPUTADOS')
             return self.mostra_tela_inicial_votacao()
         except Exception as e:
-            print(e)
             self.__tela_votacao.mostra_mensagem('AVISO', 'VOTAÇÃO CANCELADA')
             return self.mostra_tela_inicial_votacao()
 
