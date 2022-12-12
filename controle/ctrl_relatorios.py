@@ -18,16 +18,19 @@ class ControladorRelatorios():
                 return self.__ctrl_sistema.abre_menu_inicial()
             if event == '1º TURNO':
                 self.__tela_relatorios.fecha()
-                return self.mostra_relatorios(1, Cargo(1))
+                return self.mostra_relatorios(1)
             if event == '2º TURNO':
                 self.__tela_relatorios.fecha()
-                return self.mostra_relatorios(1, Cargo(1))
+                return self.mostra_relatorios(2)
 
-    def mostra_relatorios(self, turno:int, cargo: Cargo):
+    def mostra_relatorios(self, turno:int):
         try:
-            lista_resultados = self.__ctrl_sistema.ctrl_urna.calcula_lista_resultados_cargo(turno, cargo)
+            resultados_1 = self.__ctrl_sistema.ctrl_urna.calcula_lista_resultados_cargo(turno, Cargo(1))
+            resultados_2 = self.__ctrl_sistema.ctrl_urna.calcula_lista_resultados_cargo(turno, Cargo(2))
+            resultados_3 = self.__ctrl_sistema.ctrl_urna.calcula_lista_resultados_cargo(turno, Cargo(3))
+            resultados_4 = self.__ctrl_sistema.ctrl_urna.calcula_lista_resultados_cargo(turno, Cargo(4))
             while True:
-                self.__tela_relatorios.tela_mostra_relatorios(lista_resultados)
+                self.__tela_relatorios.tela_mostra_relatorios(resultados_1, resultados_2, resultados_3, resultados_4)
                 event, values = self.__tela_relatorios.abre()
                 if event in ('VOLTAR', psg.WIN_CLOSED):
                     self.__tela_relatorios.fecha()

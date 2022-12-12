@@ -393,7 +393,11 @@ class ControladorUrna():
         raise TurnoInvalidoException
 
     def calcula_lista_resultados_cargo(self, turno:int, cargo:Cargo):
-        if len(self.__urna.votos) == 0:
+        qnt = 0
+        for v in self.__urna.votos:
+            if v.turno == turno:
+                qnt += 1
+        if qnt == 0:
             raise SemVotosComputadosException
         resultados = self.conta_votos_cargo(turno, cargo)
         lista = []
@@ -416,3 +420,6 @@ class ControladorUrna():
             nova_lista.sort(reverse=True)
             return nova_lista
         raise ListaInvalidaException
+
+    def lista_candidatos_2t_cargo(self):
+        pass
