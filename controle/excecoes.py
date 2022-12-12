@@ -97,3 +97,7 @@ class SemVotosComputadosException(Exception):
 class ListaInvalidaException(Exception):
     def __init__(self):
         super().__init__("LISTA INVÁLIDA!")
+
+class SemSegundoTurnoException(Exception):
+    def __init__(self):
+        super().__init__("SEM SEGUNDO TURNO!")

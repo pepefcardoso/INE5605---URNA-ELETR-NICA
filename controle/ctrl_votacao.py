@@ -33,10 +33,14 @@ class ControladorVotacao():
                 self.__tela_votacao.fecha()
                 return self.__ctrl_sistema.abre_menu_inicial()
             if event == 'INICIAR':
-                self.__tela_votacao.fecha()
-                return self.votacao()
+                if self.__ctrl_sistema.ctrl_urna.urna.turno == 1:
+                    self.__tela_votacao.fecha()
+                    return self.votacao_1t()
+                if self.__ctrl_sistema.ctrl_urna.urna.turno == 2:
+                    self.__tela_votacao.fecha()
+                    return self.votacao_2t()
 
-    def votacao(self):
+    def votacao_1t(self):
         cpf_eleitor = self.selecionar_eleitor()
         if not cpf_eleitor:
             return self.mostra_tela_inicial_votacao()
@@ -45,6 +49,28 @@ class ControladorVotacao():
             while True:
                 num_voto = self.selecionar_voto(Cargo(i))
                 num_voto = self.__ctrl_sistema.ctrl_urna.checa_numero_nulo(num_voto)
+                if self.confirmar_voto(num_voto, Cargo(i)):
+                    lista_votos.append(num_voto)
+                    break
+        try:
+            self.__ctrl_sistema.ctrl_urna.computa_voto(cpf_eleitor, lista_votos)
+            self.__tela_votacao.mostra_mensagem('SUCESSO', 'VOTOS COMPUTADOS')
+            return self.mostra_tela_inicial_votacao()
+        except Exception as e:
+            self.__tela_votacao.mostra_mensagem('AVISO', 'VOTAÇÃO CANCELADA')
+            return self.mostra_tela_inicial_votacao()
+
+    def votacao_2t(self):
+        cpf_eleitor = self.selecionar_eleitor()
+        if not cpf_eleitor:
+            return self.mostra_tela_inicial_votacao()
+        lista_votos = []
+        for i in range(1,5):
+            while True:
+                if not self.__ctrl_sistema.ctrl_urna.lista_candidatos_2t_cargo(Cargo(i)):
+                    break
+                num_voto = self.selecionar_voto(Cargo(i))
+                num_voto = self.__ctrl_sistema.ctrl_urna.checa_voto_2t(num_voto, Cargo(i))
                 if self.confirmar_voto(num_voto, Cargo(i)):
                     lista_votos.append(num_voto)
                     break

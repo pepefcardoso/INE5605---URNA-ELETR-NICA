@@ -37,4 +37,5 @@ class ControladorRelatorios():
                     return self.mostra_tela_inicial()
         except Exception as e:
             self.__tela_relatorios.mostra_mensagem('ERRO', e)
-            return False
+            self.__tela_relatorios.fecha()
+            return self.mostra_tela_inicial()

@@ -205,6 +205,8 @@ class ControladorUrna():
         for candidato in self.__urna.candidatos:
             if candidato.cpf == cpf:
                 raise CandidatoDuplicadoException
+            if candidato.numero == numero:
+                raise CandidatoDuplicadoException
         self.__urna.candidatos.append(Candidato(eleitor[0],eleitor[1],eleitor[2],numero,chapa,cargo))
         return True
 
@@ -419,7 +421,25 @@ class ControladorUrna():
                         nova_lista.append(i)
             nova_lista.sort(reverse=True)
             return nova_lista
-        raise 
+        raise ListaInvalidaException
 
-    def lista_candidatos_2t_cargo(self):
-        pass
+    def lista_candidatos_2t_cargo(self, cargo: Cargo):
+        lista = self.calcula_lista_resultados_cargo(1, cargo)
+        if lista[1][0] not in ('BRANCOS', 'NULO'):
+            if lista[0][2] > 0.5:
+                return False
+            candidatos = []
+            for c in self.__urna.candidatos:
+                if c.nome == lista[0][0] or c.name == lista[1][0]:
+                    candidatos.append(c)
+        return False
+
+    def checa_voto_2t(self, num: str, cargo: Cargo):
+        candidatos = self.lista_candidatos_2t_cargo(cargo)
+        for c in candidatos:
+            if c.numero == num:
+                return num
+        if num == '00':
+            return num
+        else:
+            return '99'
