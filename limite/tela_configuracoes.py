@@ -11,7 +11,8 @@ class TelaConfiguracoes():
                   [psg.Text('Nº MÁXIMO DE ELEITORES: '), psg.InputText(max_eleitores, key='ELEITORES')],
                   [psg.Text('Nº MÁXIMO DE CANDIDATOS: '), psg.InputText(max_candidatos, key='CANDIDATOS')],
                   [psg.Submit('ALTERAR'), psg.Cancel('VOLTAR')]]
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - CONFIGURAÇÕES', size=(1080,720)).Layout(layout)
+        layout = [[psg.Sizer(0, 200), psg.Column([[psg.Sizer(500, 0)]] + layout, element_justification='c', pad=(0, 0))]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - CONFIGURAÇÕES', layout, margins=(0, 0))
 
     def abre(self):
         button, values = self.__window.Read()
