@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="09bb252b-d1d5-4e32-ad30-c7dc54ef2583" name="Changes" comment="Realizado toda a estrutaração do controlador_cargo.py, junto com a sua tela e entidade, foram realizadas algumas alterações em algumas funções presentes em tela_cargos.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/limite/tela_sistema.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_sistema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/limite/tela_urna.py" beforeDir="false" afterPath="$PROJECT_DIR$/limite/tela_urna.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

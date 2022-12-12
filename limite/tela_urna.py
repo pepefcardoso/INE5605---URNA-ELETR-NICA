@@ -16,7 +16,9 @@ class TelaUrna():
                   [psg.Text('MÁXIMO DE ELEITORES'), psg.InputText('10', key='max_eleitores')],
                   [psg.Text('MÁXIMO DE CANDIDATOS'), psg.InputText('10', key='max_candidatos')],
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
-        self.__window = psg.Window('CONFIGURAÇÃO URNA', size=(1080,720)).Layout(layout)
+
+        layout = [[psg.Sizer(0, 300), psg.Column([[psg.Sizer(400, 0)]] + layout, pad=(0, 0))]]
+        self.__window = psg.Window('CONFIGURAÇÃO URNA', layout, margins=(0, 0))
 
     def abre(self):
         button, values = self.__window.Read()
