@@ -89,3 +89,11 @@ class TurnoInvalidoException(Exception):
 class VotosInvalidosException(Exception):
     def __init__(self):
         super().__init__("VOTOS INVÁLIDOS!")
+
+class SemVotosComputadosException(Exception):
+    def __init__(self):
+        super().__init__("SEM VOTOS COMPUTADOS!")
+
+class ListaInvalidaException(Exception):
+    def __init__(self):
+        super().__init__("LISTA INVÁLIDA COMPUTADOS!")
