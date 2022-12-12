@@ -53,6 +53,7 @@ class ControladorVotacao():
             self.__tela_votacao.mostra_mensagem('SUCESSO', 'VOTOS COMPUTADOS')
             return self.mostra_tela_inicial_votacao()
         except Exception as e:
+            self.__tela_votacao.mostra_mensagem('ERRO', e)
             self.__tela_votacao.mostra_mensagem('AVISO', 'VOTAÇÃO CANCELADA')
             return self.mostra_tela_inicial_votacao()
 
