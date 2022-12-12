@@ -320,12 +320,12 @@ class ControladorUrna():
                     return True
                 else:
                     eleitor.votou_2t = True
-                    self.__urna.votos.append(Voto(lista_votos[0],
+                    self.__urna.votos.append(lista_votos[0],
                                              lista_votos[1],
                                              lista_votos[2],
                                              lista_votos[3],
                                              eleitor.categoria,
-                                             turno))
+                                             turno)
                     return True
 
     def checa_lista_votos(self, lista_votos: list):
@@ -391,28 +391,3 @@ class ControladorUrna():
                         cont += 1
             return cont
         raise TurnoInvalidoException
-
-    def calcula_lista_resultados_cargo(self, turno:int, cargo:Cargo):
-        if len(self.__urna.votos) == 0:
-            raise SemVotosComputadosException
-        resultados = self.conta_votos_cargo(turno, cargo)
-        lista = []
-        for key in resultados:
-            lista.append([key, resultados[key], ((resultados[key]/len(self.__urna.votos))*100)])
-        lista = self.ordena_lista_resultados(lista)
-        return lista
-
-    def ordena_lista_resultados(self, lista: list):
-        if lista is not None:
-            dicionario = {}
-            for i in lista:
-                dicionario[i[0]] = i[1]
-            dicionario = {k: v for k, v in sorted(dicionario.items(), key=lambda item: item[1])}
-            nova_lista = []
-            for key in dicionario:
-                for i in lista:
-                    if key == i[0]:
-                        nova_lista.append(i)
-            nova_lista.sort(reverse=True)
-            return nova_lista
-        raise ListaInvalidaException
