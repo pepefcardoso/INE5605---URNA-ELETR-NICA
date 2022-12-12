@@ -13,14 +13,15 @@ class TelaEleitores():
                              key='LISTA',
                              vertical_scroll_only=True,
                              auto_size_columns=False,
-                             col_widths=(60,27,27),
-                             num_rows=38,
+                             col_widths=(27,27,27),
+                             num_rows=30,
                              enable_events=True)],
                   [psg.Button('ADICIONAR'),
                    psg.Button('ALTERAR'),
                    psg.Button('REMOVER'),
                    psg.Button('VOLTAR')]]
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ELEITORES', size=(1080,720)).Layout(layout)
+        layout = [[psg.Sizer(0, 500), psg.Column([[psg.Sizer(500, 0)]] + layout, element_justification='c', pad=(0, 0))]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ELEITORES', layout, margins=(0, 0))
 
     def tela_adiciona_eleitor(self, categorias: list):
         psg.ChangeLookAndFeel('Reddit')
@@ -28,7 +29,8 @@ class TelaEleitores():
                   [psg.Text('CPF'), psg.InputText(key='2')],
                   [psg.Text('CATEGORIA'), psg.Combo(categorias, key='3')],
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ADICIONAR ELEITOR', size=(1080,720)).Layout(layout)
+        layout = [[psg.Sizer(0, 200), psg.Column([[psg.Sizer(400, 0)]] + layout, element_justification='c', pad=(0, 0))]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ADICIONAR ELEITOR', layout, margins=(0, 0))
 
     def tela_remove_eleitor(self, cliente: list):
         psg.ChangeLookAndFeel('Reddit')
@@ -37,7 +39,8 @@ class TelaEleitores():
                   [psg.Text(f'CPF: {cliente[1]}')],
                   [psg.Text(f'CATEGORIA: {cliente[2]}')],
                   [psg.Submit('CONFIRMAR'), psg.Cancel('CANCELAR')]]
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - REMOVER ELEITOR', size=(1080,720)).Layout(layout)
+        layout = [[psg.Sizer(0, 200), psg.Column([[psg.Sizer(400, 0)]] + layout, element_justification='c', pad=(0, 0))]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - REMOVER ELEITOR', layout, margins=(0, 0))
 
     def tela_altera_eleitor(self, cliente:list, categorias:list):
         psg.ChangeLookAndFeel('Reddit')
@@ -46,7 +49,8 @@ class TelaEleitores():
                   [psg.Text(f'CPF: {cliente[1]}')],
                   [psg.Text('CATEGORIA'), psg.Combo(categorias, cliente[2], key='2')],
                   [psg.Submit('SALVAR'), psg.Cancel('CANCELAR')]]
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ALTERAR ELEITOR', size=(1080,720)).Layout(layout)
+        layout = [[psg.Sizer(0, 200), psg.Column([[psg.Sizer(400, 0)]] + layout, element_justification='c', pad=(0, 0))]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - ALTERAR ELEITOR', layout, margins=(0, 0))
 
     def abre(self):
         event, values = self.__window.Read()
