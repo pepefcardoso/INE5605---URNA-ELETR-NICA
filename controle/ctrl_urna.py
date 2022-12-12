@@ -301,7 +301,7 @@ class ControladorUrna():
                         return True
                     else:
                         return False
-            raise EleitorNaoEncontradoException
+        raise EleitorNaoEncontradoException
 
     def computa_voto(self, cpf: str, lista_votos: list):
         turno = self.__urna.turno
