@@ -320,12 +320,12 @@ class ControladorUrna():
                     return True
                 else:
                     eleitor.votou_2t = True
-                    self.__urna.votos.append(Voto(lista_votos[0],
+                    self.__urna.votos.append(lista_votos[0],
                                              lista_votos[1],
                                              lista_votos[2],
                                              lista_votos[3],
                                              eleitor.categoria,
-                                             turno))
+                                             turno)
                     return True
 
     def checa_lista_votos(self, lista_votos: list):
@@ -419,7 +419,7 @@ class ControladorUrna():
                         nova_lista.append(i)
             nova_lista.sort(reverse=True)
             return nova_lista
-        raise ListaInvalidaException
+        raise 
 
     def lista_candidatos_2t_cargo(self):
         pass
