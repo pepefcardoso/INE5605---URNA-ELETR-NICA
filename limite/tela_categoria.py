@@ -10,7 +10,9 @@ class TelaCategoria():
         layout = [[psg.Text('CATEGORIAS')],
                   [psg.Text(f"\n{x}") for x in categorias],
                   [psg.Button('SAIR')]]
-        self.__window = psg.Window('URNA ELETRÔNICA UFSC - CATEGORIAS', size=(1080,720)).Layout(layout)
+
+        layout = [[psg.Sizer(0, 200), psg.Column([[psg.Sizer(500, 0)]] + layout, element_justification='c', pad=(0, 0))]]
+        self.__window = psg.Window('URNA ELETRÔNICA UFSC - CATEGORIAS', layout, margins=(0,0))
 
     def abre(self):
         button, values = self.__window.Read()

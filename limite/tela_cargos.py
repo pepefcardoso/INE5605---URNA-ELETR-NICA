@@ -11,7 +11,7 @@ class TelaCargos():
                   [psg.Text(f"\n{x}") for x in cargos],
                   [psg.Button('SAIR')]]
 
-        layout = [[psg.Sizer(0, 300), psg.Column([[psg.Sizer(500, 0)]] + layout, element_justification='c', pad=(0, 0))]]
+        layout = [[psg.Sizer(0, 200), psg.Column([[psg.Sizer(500, 0)]] + layout, element_justification='c', pad=(0, 0))]]
         self.__window = psg.Window('URNA ELETRÔNICA UFSC - CARGOS', layout, margins=(0,0))
 
     def abre(self):
